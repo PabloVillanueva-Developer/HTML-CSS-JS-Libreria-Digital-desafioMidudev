@@ -32,18 +32,29 @@ for (const iterator of library) {
     
 
 }
-console.log (library)
+
 
 
 const botonAbrirZonaLectura = document.getElementById('botonAbrirZonaLectura')
-const zonaLectura = document.getElementById('zonaLectura')
-botonAbrirZonaLectura.addEventListener('click', evento => {
+botonAbrirZonaLectura.addEventListener('click', (event) => {
     zonaLectura.classList.add('main__section--zonaLectura--visible')
     zonaLectura.classList.remove('main__section--zonaLectura')
+    console.log(zonaLectura)
 })
 
+const botonCerrarZonaLectura = document.getElementById('cierreX')
+botonCerrarZonaLectura.addEventListener('click', event => {
+    zonaLectura.classList.remove('main__section--zonaLectura--visible')
+    zonaLectura.classList.add('main__section--zonaLectura')
+    console.log(zonaLectura)
+})
+  
+/* YA SE PUEDE TRABAJAR ESPECIFICAMENTE EN FUNCIONES Y LOGICA DE JS */
 
+/* CREAR FILTRO DE LIBROS POR GENERO */
+/* PASAR LIBROS A ZONA DE LECTURA */
+/* ELMINAR LIBROS DE ZONA DE LECTURA */
+/* ZONA DE LECTURA ARMARLA CON ESTETIA DE LIBROS CORREDIZO COMO SW */
+/* AGREGAR LOCALSTORAGE PARA MEMORIA DE SELECCION DE LIBROS */
+/* TERMINADAS LAS FUNCIONALIDADES MEJORAR ESTETICA */
 
-/* VER SI PUEDO HACER LEER LOS DATOS DIRECTOS DE UN .JSON */
-/* ACOMODAR LA ESTETICA DE LA WEB PARA QUE LAS TARJETAS SE VEAN BIEN, HAY ALGO CON LA DEFINICION DE LAS ALTURAS ME PARECE */
-/* SEGUIR AVANZANDO CON LAS CONSIGNAS */

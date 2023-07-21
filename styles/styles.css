@@ -38,7 +38,14 @@
     display: flex;
     gap: 3rem;
     font-family: fuente1;
+
 }
+
+.header__nav__u__a {
+    color: black;
+}
+
+
 
  .main__section { 
     display: grid;
@@ -157,6 +164,7 @@
     bottom: 0;
     overflow: auto;
     right: -100%;
+    transition: all 3s;
 }
 
 .main__section--zonaLectura--visible {
@@ -168,6 +176,13 @@
     right: 0;
     bottom: 0;
     overflow: auto;
+    transition: all 2s;
 }
 
-
+.cierreX {
+    color:rgb(0, 0, 0);
+    padding-left: 1rem;
+    padding-top: 5rem;
+    z-index: 4; 
+    font-family: fuente1;
+}
