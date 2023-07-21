@@ -1,0 +1,141 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: fuente1;
+    src: url(../assets/fonts/Experiencia.woff2)
+}
+
+body {
+  
+    display: grid;
+    grid-template-columns: 4fr;
+    grid-template-rows: 0.1fr 1fr;
+    width: 100vw;
+    
+}
+
+.header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    justify-items: start;
+    align-items: center;
+    margin-left: 3rem;
+   
+}
+
+.header__nav__ul {
+    display: flex;
+    gap: 3rem;
+    font-family: fuente1;
+}
+
+ .main__section { /* GRID CONTROL ESPACIO LIBROS */
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 0.1fr 1fr;
+    margin: 0 auto;
+    justify-items: center;
+ }
+
+ .main__section__div__card {
+   position: relative;
+   overflow: hidden;
+   margin: 2rem 0;
+ }
+
+.main__section__div__card__img {
+    height: 17rem;
+    border-radius: 1rem;
+    filter: blur(0);
+    transition: all 2s;
+ 
+}
+
+.main__section__div__card__back {
+    background-color: rgba(41, 37, 37, 0.384);
+    z-index: 2;
+    position: absolute;
+    height: 17rem;
+    width: 11.3rem;
+    transform: scale(0.5);
+    opacity: 0;
+    color: aliceblue;
+    font-family: fuente1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 0.8rem;
+    text-align: center;
+    border-radius: 1rem;
+    transition: all 0.5s;
+}
+
+.main__section__div__card:hover > .main__section__div__card__back:nth-child(1) {
+    opacity: 100%;
+    transform: scale(1);
+    border-radius: 1.5rem;
+}
+
+.main__section__div__card:hover > .main__section__div__card__img:nth-child(3) {
+    filter: blur(3px);
+    transition: all 0.2s;
+}
+
+.main__section__div__card__button {
+    position: absolute;
+    height: 1.8rem;
+    width: 11.3rem;
+    background-color: rgba(59, 51, 51, 0.603);
+    border-radius: 1rem 1rem 0 0;
+    z-index: 3;
+    
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+
+    
+}
+
+.main__section__div__card__button__a{
+    color: aliceblue;
+    text-decoration: none;
+    font-family: fuente1;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+
+
+
+
+
+
+
+.main__section__div__card__data {
+    height: 5rem;
+    width: 11.4rem;
+    border-radius: 1rem;
+    position: absolute;
+    font-family: fuente1;
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+.main__section__div__card__data__li {
+    font-family: fuente1;
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+}
+
+
