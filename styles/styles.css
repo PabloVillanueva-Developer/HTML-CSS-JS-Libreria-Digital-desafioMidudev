@@ -13,13 +13,15 @@
     src: url(../assets/fonts/Experiencia.woff2)
 }
 
-body {
-  
+
+.body {
     display: grid;
     grid-template-columns: 4fr;
-    grid-template-rows: 0.1fr 1fr;
+    grid-template-rows: 0.2fr 1fr;
     width: 100vw;
-    
+    height: 100%; 
+    position: relative;
+ 
 }
 
 .header {
@@ -38,18 +40,26 @@ body {
     font-family: fuente1;
 }
 
- .main__section { /* GRID CONTROL ESPACIO LIBROS */
+ .main__section { 
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: 0.1fr 1fr;
+    grid-template-rows: 1fr;
     margin: 0 auto;
     justify-items: center;
+ }
+
+ .main {
+    position: relative;
+ }
+
+ .main__section__div {
+    height: 27rem;
  }
 
  .main__section__div__card {
    position: relative;
    overflow: hidden;
-   margin: 2rem 0;
+
  }
 
 .main__section__div__card__img {
@@ -88,6 +98,7 @@ body {
 .main__section__div__card:hover > .main__section__div__card__img:nth-child(3) {
     filter: blur(3px);
     transition: all 0.2s;
+
 }
 
 .main__section__div__card__button {
@@ -97,14 +108,12 @@ body {
     background-color: rgba(59, 51, 51, 0.603);
     border-radius: 1rem 1rem 0 0;
     z-index: 3;
-    
     text-align: center;
     display: flex;
     align-items: center;
-    justify-content: center;
-    
-
-    
+    justify-content: center; 
+    text-decoration: none; 
+    color: black;
 }
 
 .main__section__div__card__button__a{
@@ -136,6 +145,29 @@ body {
     font-family: fuente1;
     font-size: 1.2rem;
     margin: 0.5rem 0;
+}
+
+.main__section--zonaLectura {
+    height: 100%;
+    width: 40vw;
+    background-color: rgb(232, 241, 241);
+    position: absolute;
+    z-index: 5;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+    right: -100%;
+}
+
+.main__section--zonaLectura--visible {
+    height: 100%;
+    width: 40vw;
+    background-color: rgb(232, 241, 241);
+    position: absolute;
+    z-index: 5;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
 }
 
 

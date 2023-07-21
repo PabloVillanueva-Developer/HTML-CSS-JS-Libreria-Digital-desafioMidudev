@@ -6,14 +6,18 @@
     <title>Document</title>
     <link rel="stylesheet" href="./styles/styles.css" />
 </head>
-<body>
+<body id="body" class="body">
+    <section id="zonaLectura" class="main__section--zonaLectura"> <!-- ZONA DE LECTURA -->
+        <div></div>
+    </section>
+
     <header class="header">
         <nav>
             <ul class="header__nav__ul">
-                <a>Inicio</a>
-                <a>Catalogo</>
-                <a>Nosotros</a>
-                <a>Contacto</a>
+                <a href="#">Inicio</a>
+                <a href="#">Catalogo</a>
+                <a href="#">Nosotros</a>
+                <a href="#" id="botonAbrirZonaLectura">Zona lectura</a>
             </ul>
         </nav>
         <section></section> <!-- ESPACIO DERECHA DEL NAV -->
@@ -22,9 +26,7 @@
     <main class="main">
         <section id="main__section" class="main__section">
             <!-- CARDS DINAMICAS MEDIANTE JS -->
-        </section>
-
-
+        </section>    
     </main>
     <script src="./catalogo.js"></script>
     <script src="./main.js"></script>

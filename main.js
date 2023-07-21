@@ -5,6 +5,7 @@ const containerCatalogo = document.getElementById('main__section');
 for (const iterator of library) {
 
     const cards = document.createElement('div')
+    cards.classList.add('main__section__div')
     cards.innerHTML = `
         <div class="main__section__div__card">
             <ul class="main__section__div__card__back"> 
@@ -22,9 +23,8 @@ for (const iterator of library) {
         </div>
 
         <ul class="main__section__div__card__data">
-            <li class="main__section__div__card__data__li">El Señor de los Anillos</li>
-            <li>ISBN:978-0618640157</li>
-            <li class="main__section__div__card__data__button">Agregar a Lista de Lectura</li>
+            <li class="main__section__div__card__data__li">${iterator.book.title}</li>
+            <li>${iterator.book.ISBN}</li>
         </ul>
     `
 
@@ -33,6 +33,16 @@ for (const iterator of library) {
 
 }
 console.log (library)
+
+
+const botonAbrirZonaLectura = document.getElementById('botonAbrirZonaLectura')
+const zonaLectura = document.getElementById('zonaLectura')
+botonAbrirZonaLectura.addEventListener('click', evento => {
+    zonaLectura.classList.add('main__section--zonaLectura--visible')
+    zonaLectura.classList.remove('main__section--zonaLectura')
+})
+
+
 
 /* VER SI PUEDO HACER LEER LOS DATOS DIRECTOS DE UN .JSON */
 /* ACOMODAR LA ESTETICA DE LA WEB PARA QUE LAS TARJETAS SE VEAN BIEN, HAY ALGO CON LA DEFINICION DE LAS ALTURAS ME PARECE */
