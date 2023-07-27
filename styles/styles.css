@@ -15,9 +15,10 @@
 
 
 .body {
+    background-color: black;
     display: grid;
     grid-template-columns: 4fr;
-    grid-template-rows: 0.2fr 1fr;
+    grid-template-rows: 0.1fr 0.1fr;
     width: 100vw;
     height: 100%; 
     position: relative;
@@ -26,11 +27,12 @@
 
 .header {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
     justify-items: start;
     align-items: center;
-    margin-left: 3rem;
+    margin: 2rem 3rem ;
+    row-gap: 1rem;
    
 }
 
@@ -39,43 +41,70 @@
     gap: 3rem;
     font-family: fuente1;
 
+   
+
 }
 
 .header__nav__u__a {
-    color: black;
+    color: aliceblue;
+}
+
+.header__sectionFilter__ul {
+    display: flex;
+    gap: 3rem;
+}
+
+.header__sectionFilter__ul__a {
+    text-decoration: none;
+    color: aliceblue;
+}
+
+.header__sectionFilter__ul__div {
+    display: flex;
+    gap: 3rem;
+}
+
+.header__sectionFilter__ul__div__a {
+   text-decoration: none;
+   color: aliceblue;
 }
 
 
-
  .main__section { 
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: 1fr;
     margin: 0 auto;
-    justify-items: center;
  }
 
  .main {
     position: relative;
+    margin: 0 auto;
+    padding: 1rem;
+ }
+
+ .main__section__carrouselContainer {
+    height: 20rem;
+    width: calc((11.3rem*5) + (8rem));
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    overflow-x: hidden;
  }
 
  .main__section__div {
-    height: 27rem;
+    height: 20rem;
  }
 
  .main__section__div__card {
    position: relative;
    overflow: hidden;
-
  }
 
 .main__section__div__card__img {
     height: 17rem;
     border-radius: 1rem;
     filter: blur(0);
-    transition: all 2s;
- 
+    transition: all 2s; 
 }
+
 
 .main__section__div__card__back {
     background-color: rgba(41, 37, 37, 0.384);
@@ -112,7 +141,7 @@
     position: absolute;
     height: 1.8rem;
     width: 11.3rem;
-    background-color: rgba(59, 51, 51, 0.603);
+    background-color: rgba(255, 255, 255, 0.848);
     border-radius: 1rem 1rem 0 0;
     z-index: 3;
     text-align: center;
@@ -124,18 +153,41 @@
 }
 
 .main__section__div__card__button__a{
-    color: aliceblue;
+    color: rgb(0, 0, 0);
     text-decoration: none;
     font-family: fuente1;
     font-size: 0.7rem;
     font-weight: 600;
 }
 
+.main__section__buttons {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+  
+    
+
+   
+   }
+
+.main__section__buttons__a {
+
+    
+}
 
 
+.main__section__buttons__a__img {
+   
+    width: 3rem;
+    border-radius: 70%;
+   
+}
 
+.main__section__buttons__a__img:hover {
+filter: brightness(0.7);
+}
 
-
+/* 
 
 
 .main__section__div__card__data {
@@ -152,7 +204,7 @@
     font-family: fuente1;
     font-size: 1.2rem;
     margin: 0.5rem 0;
-}
+} */
 
 .main__section--zonaLectura {
     height: 100%;

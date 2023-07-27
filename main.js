@@ -1,40 +1,54 @@
-const containerCatalogo = document.getElementById('main__section');
+
+let genre = ''
+const generosUnicos = []
+let generosFiltro = ''
+let ejecutarFiltro = ''
+let resetFiltros = ''
 
 
-    
+/* EJECUCION INICIAL DE CARDS EN BASE A ARRAY LIBRARY ORIGINAL */
+displayBooks (library)
+
+
+/* GENERACION DE FILTROS POR GENERO DINAMICOS (VERIFICA QUE SOLO HAYA UNO POR TIPO) */
 for (const iterator of library) {
-
-    const cards = document.createElement('div')
-    cards.classList.add('main__section__div')
-    cards.innerHTML = `
-        <div class="main__section__div__card">
-            <ul class="main__section__div__card__back"> 
-                <li>Genero: ${iterator.book.genre}</li>
-                <li>Paginas: ${iterator.book.pages}</li>
-                <li>Año: ${iterator.book.year}</li>
-                <li>Autor: ${iterator.book.author.name}</li>
-            </ul>
-
-            <div class="main__section__div__card__button">
-                <a href="#" class="main__section__div__card__button__a">Agrega a Lista de Lectura</a>
-            </div>
-            
-            <img class="main__section__div__card__img" src="${iterator.book.cover}" alt="">
-        </div>
-
-        <ul class="main__section__div__card__data">
-            <li class="main__section__div__card__data__li">${iterator.book.title}</li>
-            <li>${iterator.book.ISBN}</li>
-        </ul>
-    `
-
-    containerCatalogo.appendChild(cards);
-    
-
+    genre = iterator.book.genre
+    if(!generosUnicos.includes(genre) )
+        generosUnicos.push(genre)
 }
 
+/* FILTRO DINAMICO: SE AGREGAN FILTROS AL DOM SEGUN LOS GENEROS ENCONTRADOS EN BASE DE DATOS */
+generosFiltro = document.getElementById('filtrosDinamicos');
+    for (const iterator of generosUnicos) {
+        const filtrosDisponibles = document.createElement('a');
+        filtrosDisponibles.setAttribute('id', `${iterator}`)
+        filtrosDisponibles.setAttribute('class', 'header__sectionFilter__ul__div__a')
+        filtrosDisponibles.setAttribute('href', `#`)
+        filtrosDisponibles.textContent = `${iterator}`
+        generosFiltro.appendChild(filtrosDisponibles);
+    }
+
+/* DISPLAY DE CARDS SEGUN SELECCION DE FILTRO */
+ejecutarFiltro = document.getElementById('filtrosDinamicos')
+    ejecutarFiltro.addEventListener('click', (e) => {
+        /* CREACION DE ARRAY CON SELECCION = seleccionFiltro */
+        let seleccionFiltro = [];
+        seleccionFiltro = [] /* RESET DEL ARRAY PARA CADA CLICK INDIVIDUAL */
+        seleccionFiltro = library.filter((objeto) => e.target.id === objeto.book.genre)
+        borrarCardsAnteriores ()
+        displayBooks(seleccionFiltro)
+        } 
+    ) 
+
+/* RESET DE CARDS AL ELIMINAR FILTROS */
+resetFiltros = document.getElementById('eliminarFiltros')
+    resetFiltros.addEventListener('click', () => {
+        borrarCardsAnteriores ()
+        displayBooks (library)
+    })
 
 
+/* ZONA LECTURA EMERGENTE */
 const botonAbrirZonaLectura = document.getElementById('botonAbrirZonaLectura')
 botonAbrirZonaLectura.addEventListener('click', (event) => {
     zonaLectura.classList.add('main__section--zonaLectura--visible')
@@ -49,6 +63,16 @@ botonCerrarZonaLectura.addEventListener('click', event => {
     console.log(zonaLectura)
 })
   
+
+
+
+
+
+
+
+
+
+
 /* YA SE PUEDE TRABAJAR ESPECIFICAMENTE EN FUNCIONES Y LOGICA DE JS */
 
 /* CREAR FILTRO DE LIBROS POR GENERO */
@@ -57,4 +81,4 @@ botonCerrarZonaLectura.addEventListener('click', event => {
 /* ZONA DE LECTURA ARMARLA CON ESTETIA DE LIBROS CORREDIZO COMO SW */
 /* AGREGAR LOCALSTORAGE PARA MEMORIA DE SELECCION DE LIBROS */
 /* TERMINADAS LAS FUNCIONALIDADES MEJORAR ESTETICA */
-
+/* HACERLO RESPONSIVE */

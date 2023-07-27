@@ -7,9 +7,10 @@
     <link rel="stylesheet" href="./styles/styles.css" />
 </head>
 <body id="body" class="body">
-    <section id="zonaLectura" class="main__section--zonaLectura"> <!-- ZONA DE LECTURA -->
-        <a id="cierreX" href="#"> X </a>
-    </section>
+     <!-- ZONA DE LECTURA -->
+  <!--    <a id="cierreX" href="#"> X </a>
+    <section id="zonaLectura" class="main__section--zonaLectura">
+    </section> -->
 
     <header class="header">
         <nav>
@@ -18,17 +19,35 @@
                 <a class="header__nav__u__a" href="#">Catalogo</a>
                 <a class="header__nav__u__a" href="#">Nosotros</a>
                 <a class="header__nav__u__a" href="#" id="botonAbrirZonaLectura">Zona lectura</a>
+                <a class="header__nav__u__a" href="#">Filter</a>
             </ul>
         </nav>
-        <section></section> <!-- ESPACIO DERECHA DEL NAV -->
+        <section class="header__sectionFilter">
+            <ul class="header__sectionFilter__ul">
+                <a id="eliminarFiltros" class="header__sectionFilter__ul__a" href="#">Eliminar Filtros</a>
+                <div id="filtrosDinamicos" class="header__sectionFilter__ul__div" >
+                    <!-- AQUI: FILTROS DINAMICOS -->
+                </div>
+               
+            </ul>
+
+        </section> <!-- ESPACIO DERECHA DEL NAV -->
     </header>
 
     <main class="main">
         <section id="main__section" class="main__section">
-            <!-- CARDS DINAMICAS MEDIANTE JS -->
+            <div id="main__section__carrouselContainer" class="main__section__carrouselContainer">
+                <!-- CARDS DINAMICAS MEDIANTE JS -->
+            </div>
+            <div class="main__section__buttons">
+                <a class="main__section__buttons__a" href="#"><img class="main__section__buttons__a__img" src="./assets/imgs/botonIzqGris.png" alt=""></a>
+                <a class="main__section__buttons__a" href="#"><img class="main__section__buttons__a__img" src="./assets/imgs/botonDerGris.png" alt=""></a>
+            </div>
         </section>    
+
     </main>
     <script src="./catalogo.js"></script>
+    <script src="./funciones.js"></script>
     <script src="./main.js"></script>
    
    
