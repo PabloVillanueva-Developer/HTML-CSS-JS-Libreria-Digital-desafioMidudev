@@ -13,11 +13,11 @@ let displayBooks = (array) => {
                     <li>Genero: ${iterator.book.genre}</li>
                     <li>Paginas: ${iterator.book.pages}</li>
                     <li>Año: ${iterator.book.year}</li>
-                    <li>Autor: ${iterator.book.author.name}</li>
+                    <li>Autor: ${iterator.book.title}</li>
                 </ul>
     
                 <div class="main__section__div__card__button">
-                    <a href="#" class="main__section__div__card__button__a">Agregar a Lista de Lectura</a>
+                    <a id='${iterator.book.title}' href="#" class="main__section__div__card__button__a">Agregar a Lista de Lectura</a>
                 </div>
                 
                 <img class="main__section__div__card__img" src="${iterator.book.cover}" alt="">
@@ -65,4 +65,29 @@ let desactivacionCarrousel = () => {
     };
       
 
+/* CREAR CARDS DE ZONA DE LECTURA */
+
+let displayBooksZonaLectura = () => {
+const cardsZonaLectura = document.getElementById('zonaLecturaCardsContainer')
+for (const element of seleccionLectura) {
+ 
+    const card = document.createElement('div');
+    card.classList.add('zonaLectura__cardsContainer__div')
+    card.innerHTML = `
+        <div class="zonaLectura__cardsContainer__cardsLibros">
+            <img id='${element.book.title}' class="zonaLectura__cardsContainer__cardsLibros__img" src="${element.book.cover}" alt="">
+        </div>
+    `
+    cardsZonaLectura.appendChild(card)
+}
+}
+
+
+let borrarCardsAnterioresListaLectura = () => {
+    const eliminarCards = document.querySelectorAll('.zonaLectura__cardsContainer__div')
+    eliminarCards.forEach((card) => card.remove())
+    }
+
+
+    
 

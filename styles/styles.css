@@ -20,7 +20,7 @@
     grid-template-columns: 4fr;
     grid-template-rows: 0.1fr 0.1fr;
     width: 100vw;
-    height: 100%; 
+    height: 100vh; 
     position: relative;
  
 }
@@ -212,35 +212,132 @@ filter: brightness(0.7);
     margin: 0.5rem 0;
 } */
 
-.main__section--zonaLectura {
+/* .main__section--zonaLectura {
     height: 100%;
     width: 40vw;
-    background-color: rgb(232, 241, 241);
     position: absolute;
     z-index: 5;
     right: 0;
     bottom: 0;
-    overflow: auto;
-    right: -100%;
+    overflow: hidden;
     transition: all 3s;
+} */
+
+.zonaLectura--container {
+    z-index: 5;
+    height: 100vh;
+    width: 40vw;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    pointer-events: none;
 }
 
-.main__section--zonaLectura--visible {
-    height: 100%;
+.zonaLectura--hidden {
+    height: 100vh;
     width: 40vw;
-    background-color: rgb(232, 241, 241);
+    background-color:aliceblue;
     position: absolute;
-    z-index: 5;
+    z-index: 6;
     right: 0;
     bottom: 0;
-    overflow: auto;
+    transform: translateX(100%);
     transition: all 2s;
+   
+}
+
+.zonaLectura--desplegado {
+    height: 100vh;
+    width: 40vw;
+    background-color:aliceblue;
+    position: absolute;
+    z-index: 6;
+    right: 0;
+    bottom: 0;
+    transform: translateX(0);
+    transition: all 2s;
+    pointer-events: auto;
+}
+
+.zonaLectura--menu {
+    position: relative;
 }
 
 .cierreX {
+    position: absolute;
     color:rgb(0, 0, 0);
     padding-left: 1rem;
-    padding-top: 5rem;
-    z-index: 4; 
+    padding-top: 1rem;
+    z-index: 20; 
     font-family: fuente1;
+}
+
+.zonaLectura__cardsContainer {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 2fr 1fr;
+    align-items: center;
+    justify-items: center;
+    
+}
+
+.zonaLecturaCards__Container__flex {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.zonaLectura__cardsContainer__div {
+  
+    flex-direction: row;
+    justify-items: center;
+    align-items: center;
+}
+
+.zonaLectura__cardsContainer__cardsLibros {
+
+  width: 2rem;
+  overflow: hidden;
+  transition: all 1s;
+  display: flex;
+  justify-content: center;
+  border-radius: 1rem;
+ 
+
+}
+
+.zonaLectura__cardsContainer__cardsLibros:hover {
+    width: 15rem;
+    border-radius: 1rem;
+    transition: all 1s;
+  }
+  
+
+.zonaLectura__cardsContainer__cardsLibros__img {
+    
+    width: 12.5rem;
+    border-radius: 1rem;
+}
+
+.zonaLectura__cardsContainer__cardsLibros__info {
+    order: 2;
+    justify-self: start;
+}
+
+.zonaLectura__cardsContainer__cardsLibros__info__ul{
+    margin: 0 1rem;
+
+}
+
+.zonaLectura__cardsContainer__cardsLibros__info__ul li {
+    font-family: fuente1;
+    font-size: 0.9rem;
+}
+
+.zonaLectura__cardsContainer__cardsLibros__info__ul li p {
+    display: inline-block;
+    font-family: fuente1;
+    font-size: 0.8rem;
 }

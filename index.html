@@ -8,9 +8,39 @@
 </head>
 <body id="body" class="body">
      <!-- ZONA DE LECTURA -->
-  <!--    <a id="cierreX" href="#"> X </a>
-    <section id="zonaLectura" class="main__section--zonaLectura">
-    </section> -->
+     
+    <section  class="zonaLectura--container">
+        <div id="zonaLectura" class='zonaLectura--hidden'>
+            <div class="zonaLectura--menu">
+                <a id="cierreX" class="cierreX" href="#"> X </a>
+            </div>
+
+            <div id="zonaLecturaCards">
+                <div class="zonaLectura__cardsContainer">
+                    <div  id="zonaLecturaCardsContainer" class="zonaLecturaCards__Container__flex">
+
+                    </div>
+                  
+                    
+                    <div class="zonaLectura__cardsContainer__cardsLibros__info">
+                        <ul class="zonaLectura__cardsContainer__cardsLibros__info__ul">
+                            <li>Genero: <p id="zonaLecturaGenero"></p></li>
+                            <li>Paginas:<p id="zonaLecturaPaginas"></p></li>
+                            <li>Synopsis:<p id="zonaLecturaSynopsis"></p></li>
+                            <li>Año:<p id="zonaLecturaAnio"></p></li>
+                            <li>Nombre Autor: <p id="zonaLecturaAutor"></p></li>
+                            <li>Otros titulos de Autor <p id="zonaLecturaObras"></p></li>
+                            <li>ISBN<p id="zonaLecturaISBN"></p></li>
+                        </ul>
+                    </div>
+                </div>
+
+                
+
+            </div>
+        </div>
+    
+    </section>
 
     <header class="header">
         <nav>
@@ -28,7 +58,6 @@
                 <div id="filtrosDinamicos" class="header__sectionFilter__ul__div" >
                     <!-- AQUI: FILTROS DINAMICOS -->
                 </div>
-               
             </ul>
 
         </section> <!-- ESPACIO DERECHA DEL NAV -->

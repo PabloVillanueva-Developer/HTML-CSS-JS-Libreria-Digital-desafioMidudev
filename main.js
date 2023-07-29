@@ -71,12 +71,89 @@ resetFiltros = document.getElementById('eliminarFiltros')
         activacionCarrousel() 
     })
 
+/* DESPLIEGUE DE ZONA DE LECTURA */
+    let abrirZonaLectura = document.getElementById('botonAbrirZonaLectura')
+    let sectionZonaLectura = document.getElementById('zonaLectura')
+    let botonCierreXSection = document.getElementById('cierreX')
 
+    abrirZonaLectura.addEventListener('click', () => {
+        sectionZonaLectura.classList.remove('zonaLectura--hidden')
+        sectionZonaLectura.classList.add('zonaLectura--desplegado')
+    })
 
+    botonCierreXSection.addEventListener('click', () => { 
+        sectionZonaLectura.classList.remove('zonaLectura--desplegado')
+        sectionZonaLectura.classList.add('zonaLectura--hidden')
+    })
 
+/* AGREGAR LIBROS AL ARRAY seleccionLectura / Compara si no esta agregado, lo sube*/
 
+const listaLecturaButtons = document.getElementsByClassName('main__section__div__card__button')
+let seleccionLectura = []
+for (const element of listaLecturaButtons) {
+    element.addEventListener('click',(e) => {
+        borrarCardsAnterioresListaLectura()
+        const idDinamico = e.target.id
+        library.forEach((element) => {
+            if (idDinamico === element.book.title) {
+                if(!seleccionLectura.includes(element) )
+                seleccionLectura.push(element)
+                displayBooksZonaLectura(seleccionLectura)
+            }
+        });
+    })
+} 
 
     
+
+
+const zonaLecturaGenero = document.getElementById('zonaLecturaGenero')
+const zonaLecturaPaginas = document.getElementById('zonaLecturaPaginas')
+const zonaLecturaSynopsis = document.getElementById('zonaLecturaSynopsis')
+const zonaLecturaAnio = document.getElementById('zonaLecturaAnio')
+const zonaLecturaAutor = document.getElementById('zonaLecturaAutor')
+const zonaLecturaObras = document.getElementById('zonaLecturaObras')
+const zonaLecturaISBN = document.getElementById('zonaLecturaISBN')
+const infoLibrosDinamica = document.getElementsByClassName('zonaLecturaCards__Container__flex')
+
+
+for (const coleccionHTML of infoLibrosDinamica) {
+    coleccionHTML.addEventListener('mouseover', (e) => {
+        let nombreLibro = e.target.id
+        for (const element of library) {
+            if (nombreLibro === element.book.title) {
+                zonaLecturaGenero.innerText = `${element.book.title}` 
+                zonaLecturaPaginas.innerText = `${element.book.pages}`
+                zonaLecturaSynopsis.innerText = `${element.book.synopsis}`
+                zonaLecturaAnio.innerText = `${element.book.year}`
+                zonaLecturaAutor.innerText = `${element.book.author.name}`
+                zonaLecturaObras.innerText = `${element.book.author.otherBooks}`
+                zonaLecturaISBN.innerText = `${element.book.ISBN}`
+            }
+            
+        }
+     
+
+})
+
+}
+
+
+
+
+
+
+
+
+    // 1) Hacerdesaparecer info de libros si no hay nada en el array selecccionLectura
+    // 2)quitar libros de array y zona de lectura
+    // 3) Darle algo de estestica al section de lectura
+    // 4) Guardar libros de lectura en localStorage
+    // 5) Mejorar estetica general + Responsive
+    // 6) Armar .md file con documentacion general
+
+    // 7) Ver que mas pedia Midudev para mejorar (por ejemplo buscador)  
+    // 8) Agregar Carrito de compras  
 
 
 
