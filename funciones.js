@@ -82,6 +82,7 @@ for (const element of seleccionLectura) {
 }
 }
 
+/* FUNCION RESETEADORA DE CARDS ZONA LECTURA*/
 
 let borrarCardsAnterioresListaLectura = () => {
     const eliminarCards = document.querySelectorAll('.zonaLectura__cardsContainer__div')
@@ -89,5 +90,7 @@ let borrarCardsAnterioresListaLectura = () => {
     }
 
 
+
     
+
 

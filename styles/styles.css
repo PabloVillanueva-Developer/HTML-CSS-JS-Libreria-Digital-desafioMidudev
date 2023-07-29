@@ -258,6 +258,7 @@ filter: brightness(0.7);
     transform: translateX(0);
     transition: all 2s;
     pointer-events: auto;
+    
 }
 
 .zonaLectura--menu {
@@ -280,6 +281,7 @@ filter: brightness(0.7);
     grid-template-rows: 2fr 1fr;
     align-items: center;
     justify-items: center;
+   
     
 }
 
@@ -287,6 +289,7 @@ filter: brightness(0.7);
     display: flex;
     align-items: center;
     gap: 1rem;
+     overflow: hidden;
 }
 
 .zonaLectura__cardsContainer__div {
@@ -337,7 +340,7 @@ filter: brightness(0.7);
 }
 
 .zonaLectura__cardsContainer__cardsLibros__info__ul li p {
-    display: inline-block;
+    display: inline;
     font-family: fuente1;
     font-size: 0.8rem;
 }

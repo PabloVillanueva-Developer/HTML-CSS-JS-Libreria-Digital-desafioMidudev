@@ -9,6 +9,9 @@ let contadorPosiciones = 0
 const carrouselContainer = document.getElementById('carrouselContainer')
 const carrouselButtonIzq = document.getElementById('carrouselButtonIzq')
 const carrouselButtonDer = document.getElementById('carrouselButtonDer')
+let seleccionLectura = []
+
+
 
 
 /* EJECUCION INICIAL DE CARDS EN BASE A ARRAY LIBRARY ORIGINAL */
@@ -89,23 +92,39 @@ resetFiltros = document.getElementById('eliminarFiltros')
 /* AGREGAR LIBROS AL ARRAY seleccionLectura / Compara si no esta agregado, lo sube*/
 
 const listaLecturaButtons = document.getElementsByClassName('main__section__div__card__button')
-let seleccionLectura = []
+
+/* REVISION LOCAL STORAGE AL CARGAR SITIO WEB */
+
+document.addEventListener('DOMContentLoaded', () => {
+    seleccionLectura = JSON.parse(localStorage.getItem('seleccionLectura'))
+    if(seleccionLectura)
+        displayBooksZonaLectura(seleccionLectura)
+     
+
+/* seleccionLectura =[] */
 for (const element of listaLecturaButtons) {
     element.addEventListener('click',(e) => {
         borrarCardsAnterioresListaLectura()
         const idDinamico = e.target.id
+
         library.forEach((element) => {
-            if (idDinamico === element.book.title) {
-                if(!seleccionLectura.includes(element) )
+     
+            if (idDinamico === element.book.title) { 
+                if(!seleccionLectura.find(item => item.book.title === idDinamico)) /* NO LO ENTENDI BIEN/ */
                 seleccionLectura.push(element)
+                localStorage.setItem('seleccionLectura', JSON.stringify(seleccionLectura))
                 displayBooksZonaLectura(seleccionLectura)
             }
         });
     })
 } 
+} 
 
-    
 
+)
+
+
+/* GENERACION INFO DINAMICA DE LIBROS */
 
 const zonaLecturaGenero = document.getElementById('zonaLecturaGenero')
 const zonaLecturaPaginas = document.getElementById('zonaLecturaPaginas')
@@ -143,17 +162,21 @@ for (const coleccionHTML of infoLibrosDinamica) {
 
 
 
+//ENTREGA LUNES
+    // 2) Agregar boton para eliminacion de libros en zonaLectura
 
-
+//PROYECTO
     // 1) Hacerdesaparecer info de libros si no hay nada en el array selecccionLectura
     // 2)quitar libros de array y zona de lectura
     // 3) Darle algo de estestica al section de lectura
     // 4) Guardar libros de lectura en localStorage
     // 5) Mejorar estetica general + Responsive
     // 6) Armar .md file con documentacion general
+    // 7) Ver de poner limite al maximo de libros en zonaLectura    
 
     // 7) Ver que mas pedia Midudev para mejorar (por ejemplo buscador)  
     // 8) Agregar Carrito de compras  
+    // 9) Cuando tengo muchos libros en la zona de lectura se expande el contenedor
 
 
 
