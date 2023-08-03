@@ -42,7 +42,7 @@ generosFiltro = document.getElementById('filtrosDinamicos');
 
 
 
-/* DISPLAY DE CARDS SEGUN SELECCION DE FILTRO */
+/* DISPLAY DE CARDS EN SECTION PRINCIPAL SEGUN SELECCION DE FILTRO */
 ejecutarFiltro = document.getElementById('filtrosDinamicos')
     ejecutarFiltro.addEventListener('click', (e) => {
         /* CREACION DE ARRAY CON SELECCION = seleccionFiltro */
@@ -57,6 +57,7 @@ ejecutarFiltro = document.getElementById('filtrosDinamicos')
                 {carrouselContainer.style.justifyContent = 'center'; desactivacionCarrousel()} 
             if (seleccionFiltro.length >5)
                  { carrouselContainer.style.justifyContent = 'start'; activacionCarrousel(); } 
+         agregarLibrosSeleccionLectura()
     }) 
 
 
@@ -78,6 +79,8 @@ resetFiltros = document.getElementById('eliminarFiltros')
         displayBooks (seleccionFiltro)
         if (seleccionFiltro.length > 5)
         activacionCarrousel() 
+        agregarLibrosSeleccionLectura()
+
     })
 
 
@@ -112,27 +115,11 @@ document.addEventListener('DOMContentLoaded', () => {
     seleccionLectura = JSON.parse(localStorage.getItem('seleccionLectura'))
     if(seleccionLectura)
         displayBooksZonaLectura(seleccionLectura)
-     
+        
         /* seleccionLectura =[] */
-        for (const element of listaLecturaButtons) {
-            element.addEventListener('click',(e) => {
-                borrarCardsAnterioresListaLectura()
-                const idDinamico = e.target.id
+    agregarLibrosSeleccionLectura()
+})
 
-                library.forEach((element) => {
-            
-                    if (idDinamico === element.book.title) { 
-                        if(!seleccionLectura.find(item => item.book.title === idDinamico)) /* NO LO ENTENDI BIEN/ */
-                        seleccionLectura.push(element)
-                        localStorage.setItem('seleccionLectura', JSON.stringify(seleccionLectura))
-                        displayBooksZonaLectura(seleccionLectura)
-                        
-                    }
-                });
-            })
-        }   
-    } 
-)
 
 
 
@@ -167,7 +154,7 @@ for (const coleccionHTML of infoLibrosDinamica) {
 
 
 
-/* ELIMINAR SELECCION LECTURA */
+/* ELIMINAR SELECCION LECTURA COMPLETA */
 
 let eliminarSeleccionLectura = document.getElementById('eliminarSeleccionLectura')
 
@@ -177,7 +164,9 @@ eliminarSeleccionLectura.addEventListener('click', () =>{
     seleccionLectura = JSON.parse(localStorage.getItem('seleccionLectura'))
 })
 
- 
+
+
+
    
 
 
@@ -194,22 +183,21 @@ eliminarSeleccionLectura.addEventListener('click', () =>{
 
 
 
-//ENTREGA LUNES
-    // 2) Agregar boton para eliminacion de libros en zonaLectura
+
 
 //PROYECTO
-    // 1) Hacerdesaparecer info de libros si no hay nada en el array selecccionLectura
-    // 2)quitar libros de array y zona de lectura
-    // 3) Darle algo de estestica al section de lectura
-    // 4) Guardar libros de lectura en localStorage
-    // 5) Mejorar estetica general + Responsive
+   
+    // 4) Arreglar que con los filtros no se suman libros a la seleccionLectura
+    // 5) Mejorar estetica general (como las flechitas del carrousel) + Responsive
     // 6) Armar .md file con documentacion general
     // 7) Ver de poner limite al maximo de libros en zonaLectura   
     // 8 Agregar Sweet Alert para permitir no mas de x cantidad de libros en el array de libros.
+    // 9) Agregar filtos buscadores
+    // 9) Agregar section carrito de Compras
 
-    // 7) Ver que mas pedia Midudev para mejorar (por ejemplo buscador)  
-    // 8) Agregar Carrito de compras  
-    // 9) Cuando tengo muchos libros en la zona de lectura se expande el contenedor
+
+
+  
 
 
 

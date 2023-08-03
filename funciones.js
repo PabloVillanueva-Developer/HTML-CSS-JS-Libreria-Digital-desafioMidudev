@@ -71,32 +71,56 @@ let desactivacionCarrousel = () => {
     };
       
 
+/* AGREGA LIBROS A SELECCION LECTURA + FUNCION ACTIVA LISTENER PARA BOTONES DE AGREGAR LIBRO // PERMITE REACTIVAR LOS LISTENERS CADA VEZ QUE SE ACTUALIZAN LOS FILTROS */
+
+let agregarLibrosSeleccionLectura = () => {
+    for (const element of listaLecturaButtons) {
+        
+        element.addEventListener('click',(e) => {
+            borrarCardsAnterioresListaLectura()
+            const idDinamico = e.target.id
+            library.forEach((element) => { 
+        
+                if (idDinamico === element.book.title) { 
+                    if(!seleccionLectura.find(item => item.book.title === idDinamico)) 
+                    seleccionLectura.push(element)
+                    localStorage.setItem('seleccionLectura', JSON.stringify(seleccionLectura))
+                    displayBooksZonaLectura(seleccionLectura) 
+                }
+            });
+        })
+    }   
+} 
+    
+
 
 /* CREAR CARDS DE ZONA DE LECTURA */
 
 let displayBooksZonaLectura = () => {
 const cardsZonaLectura = document.getElementById('zonaLecturaCardsContainer')
 for (const element of seleccionLectura) {
+    
  
     const card = document.createElement('div');
     card.classList.add('zonaLectura__cardsContainer__div')
     card.setAttribute('id', `${element.book.cover}`)
     card.innerHTML = `
-        <div id='mouseHover' class="zonaLectura__cardsContainer__cardsLibros">
+        <div id='divLibrosSeleccionados' class="zonaLectura__cardsContainer__cardsLibros">
             <img id='${element.book.title}' class="zonaLectura__cardsContainer__cardsLibros__img" src="${element.book.cover}" alt="">
             <div id='${element.book.title + '--Buttons' }' class='zonaLectura__cardsContainer__cardsLibros__div'>
                 <a href='#'> 
-                    <img class='zonaLectura__cardsContainer__cardsLibros__div__carritoCompras' src='./assets/imgs/carritoCompras.png'/>
+                    <img  class='zonaLectura__cardsContainer__cardsLibros__div__carritoCompras' src='./assets/imgs/carritoCompras.png'/>
                 </a>
                 <a href='#'> 
-                    <img class='zonaLectura__cardsContainer__cardsLibros__div__butEliminar' src='./assets/imgs/botonEliminar.png' href='#'/>
+                    <img id='${element.book.title}' class='zonaLectura__cardsContainer__cardsLibros__div__butEliminar' src='./assets/imgs/botonEliminar.png' href='#'/>
                 </a>
             </div>
         </div>
     `
     cardsZonaLectura.appendChild(card)
-}
-}
+    eliminarLibrosUnicos()
+}}
+
 
 
 /* FUNCION RESETEADORA DE CARDS ZONA LECTURA*/
@@ -107,5 +131,16 @@ let borrarCardsAnterioresListaLectura = () => {
     }
 
 
-
-
+let eliminarLibrosUnicos = () => {
+    const butElimninarLibroUnico = document.getElementsByClassName('zonaLectura__cardsContainer__cardsLibros__div__butEliminar')
+    for (const element of butElimninarLibroUnico){
+    element.addEventListener('click',(e) => { /* CAPTURA ID DINAMICO */
+        const idDinamico = e.target.id
+  
+        seleccionLectura = seleccionLectura.filter((element) => element.book.title !== idDinamico)
+         localStorage.setItem('seleccionLectura', JSON.stringify(seleccionLectura))
+        borrarCardsAnterioresListaLectura()
+        displayBooksZonaLectura()
+        })
+    }
+}
