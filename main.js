@@ -13,11 +13,11 @@ let seleccionLectura = []
 
 
 
-
 /* EJECUCION INICIAL DE CARDS EN BASE A ARRAY LIBRARY ORIGINAL */
 displayBooks (seleccionFiltro)
   if (seleccionFiltro.length > 5)
         {activacionCarrousel() }
+
 
 
 /* GENERACION DE FILTROS POR GENERO DINAMICOS (VERIFICA QUE SOLO HAYA UNO POR TIPO) */
@@ -26,6 +26,8 @@ for (const iterator of library) {
     if(!generosUnicos.includes(genre) )
         generosUnicos.push(genre)
 }
+
+
 
 /* FILTRO DINAMICO: SE AGREGAN FILTROS AL DOM SEGUN LOS GENEROS ENCONTRADOS EN BASE DE DATOS */
 generosFiltro = document.getElementById('filtrosDinamicos');
@@ -37,6 +39,8 @@ generosFiltro = document.getElementById('filtrosDinamicos');
         filtrosDisponibles.textContent = `${iterator}`
         generosFiltro.appendChild(filtrosDisponibles);
     }
+
+
 
 /* DISPLAY DE CARDS SEGUN SELECCION DE FILTRO */
 ejecutarFiltro = document.getElementById('filtrosDinamicos')
@@ -54,6 +58,8 @@ ejecutarFiltro = document.getElementById('filtrosDinamicos')
             if (seleccionFiltro.length >5)
                  { carrouselContainer.style.justifyContent = 'start'; activacionCarrousel(); } 
     }) 
+
+
 
 /* ELIMINAR FILTROS/MOSTRAR TODOS LOS LIBROS*/
 resetFiltros = document.getElementById('eliminarFiltros')
@@ -74,10 +80,13 @@ resetFiltros = document.getElementById('eliminarFiltros')
         activacionCarrousel() 
     })
 
+
+
 /* DESPLIEGUE DE ZONA DE LECTURA */
-    let abrirZonaLectura = document.getElementById('botonAbrirZonaLectura')
-    let sectionZonaLectura = document.getElementById('zonaLectura')
-    let botonCierreXSection = document.getElementById('cierreX')
+
+    let abrirZonaLectura = document.getElementById('botonAbrirZonaLectura') /* BOTON ACTIVA EVENTO */
+    let sectionZonaLectura = document.getElementById('zonaLectura') /* ELEMENTO DEL DOM QUE SE MODIFICA */
+    let botonCierreXSection = document.getElementById('cierreX') /* BOTON DESACTIVA EVENTO */
 
     abrirZonaLectura.addEventListener('click', () => {
         sectionZonaLectura.classList.remove('zonaLectura--hidden')
@@ -89,39 +98,42 @@ resetFiltros = document.getElementById('eliminarFiltros')
         sectionZonaLectura.classList.add('zonaLectura--hidden')
     })
 
+
+
 /* AGREGAR LIBROS AL ARRAY seleccionLectura / Compara si no esta agregado, lo sube*/
 
-const listaLecturaButtons = document.getElementsByClassName('main__section__div__card__button')
+const listaLecturaButtons = document.getElementsByClassName('main__section__div__card__img--botonAgregarLibro')
 
-/* REVISION LOCAL STORAGE AL CARGAR SITIO WEB */
+
+
+/* Revision seleccionLectura en localStorage al cargar pagina*/
 
 document.addEventListener('DOMContentLoaded', () => {
     seleccionLectura = JSON.parse(localStorage.getItem('seleccionLectura'))
     if(seleccionLectura)
         displayBooksZonaLectura(seleccionLectura)
      
+        /* seleccionLectura =[] */
+        for (const element of listaLecturaButtons) {
+            element.addEventListener('click',(e) => {
+                borrarCardsAnterioresListaLectura()
+                const idDinamico = e.target.id
 
-/* seleccionLectura =[] */
-for (const element of listaLecturaButtons) {
-    element.addEventListener('click',(e) => {
-        borrarCardsAnterioresListaLectura()
-        const idDinamico = e.target.id
-
-        library.forEach((element) => {
-     
-            if (idDinamico === element.book.title) { 
-                if(!seleccionLectura.find(item => item.book.title === idDinamico)) /* NO LO ENTENDI BIEN/ */
-                seleccionLectura.push(element)
-                localStorage.setItem('seleccionLectura', JSON.stringify(seleccionLectura))
-                displayBooksZonaLectura(seleccionLectura)
-            }
-        });
-    })
-} 
-} 
-
-
+                library.forEach((element) => {
+            
+                    if (idDinamico === element.book.title) { 
+                        if(!seleccionLectura.find(item => item.book.title === idDinamico)) /* NO LO ENTENDI BIEN/ */
+                        seleccionLectura.push(element)
+                        localStorage.setItem('seleccionLectura', JSON.stringify(seleccionLectura))
+                        displayBooksZonaLectura(seleccionLectura)
+                        
+                    }
+                });
+            })
+        }   
+    } 
 )
+
 
 
 /* GENERACION INFO DINAMICA DE LIBROS */
@@ -149,13 +161,33 @@ for (const coleccionHTML of infoLibrosDinamica) {
                 zonaLecturaObras.innerText = `${element.book.author.otherBooks}`
                 zonaLecturaISBN.innerText = `${element.book.ISBN}`
             }
-            
         }
-     
+    })  
+}
 
+
+
+/* ELIMINAR SELECCION LECTURA */
+
+let eliminarSeleccionLectura = document.getElementById('eliminarSeleccionLectura')
+
+eliminarSeleccionLectura.addEventListener('click', () =>{
+    borrarCardsAnterioresListaLectura(seleccionLectura)
+    localStorage.setItem('seleccionLectura', JSON.stringify(seleccionLectura = []))
+    seleccionLectura = JSON.parse(localStorage.getItem('seleccionLectura'))
 })
 
-}
+ 
+   
+
+
+  
+  
+  
+
+
+
+
 
 
 
@@ -172,7 +204,8 @@ for (const coleccionHTML of infoLibrosDinamica) {
     // 4) Guardar libros de lectura en localStorage
     // 5) Mejorar estetica general + Responsive
     // 6) Armar .md file con documentacion general
-    // 7) Ver de poner limite al maximo de libros en zonaLectura    
+    // 7) Ver de poner limite al maximo de libros en zonaLectura   
+    // 8 Agregar Sweet Alert para permitir no mas de x cantidad de libros en el array de libros.
 
     // 7) Ver que mas pedia Midudev para mejorar (por ejemplo buscador)  
     // 8) Agregar Carrito de compras  

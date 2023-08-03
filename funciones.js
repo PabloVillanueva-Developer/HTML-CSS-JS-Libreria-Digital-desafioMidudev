@@ -8,25 +8,27 @@ let displayBooks = (array) => {
         cards.classList.add('main__section__div')
         cards.innerHTML = `
             <div id='${iterator.book.genre}' class="main__section__div__card">
-            
-                <ul class="main__section__div__card__back"> 
-                    <li>Genero: ${iterator.book.genre}</li>
-                    <li>Paginas: ${iterator.book.pages}</li>
-                    <li>Año: ${iterator.book.year}</li>
-                    <li>Autor: ${iterator.book.title}</li>
-                </ul>
-    
-                <div class="main__section__div__card__button">
-                    <a id='${iterator.book.title}' href="#" class="main__section__div__card__button__a">Agregar a Lista de Lectura</a>
+
+                <a class='main__section__div__card__a' href="#" > 
+                    <img id='${iterator.book.title}' class="main__section__div__card__img--botonAgregarLibro" src='./assets/imgs/agregarLibro.png' alt="">
+                </a>
+     
+                <div class="main__section__div__card__container">
+                    <a href="#" class="main__section__div__card__button"> 
+                        <img class='main__section__div__card__button__a__carritoCompras' src='./assets/imgs/carritoCompras.png' />
+                    </a>
                 </div>
                 
                 <img class="main__section__div__card__img" src="${iterator.book.cover}" alt="">
+             
                 
             </div>
         `
         containerCatalogo.appendChild(cards);
     }
 }
+
+
 
 /* FUNCION RESETEADORA DE CARDS */
 
@@ -35,12 +37,16 @@ const eliminarCards = document.querySelectorAll('.main__section__div')
 eliminarCards.forEach((card) => card.remove())
 }
 
+
+
 /* FUNCION RESETEADOR DE POSICION DEL CONTENEDOR DEL CARROUSEL PARA QUE EN CADA CAMBIO DE FILTRO APAREZCA CENTRADO */
 
 const resetPosicionCarrousel = () => {
     carrouselContainer.style.transform = `translateX(0)`
 }
    
+
+
 /* ACTIVACION Y DESACTIVACION DE BOTONES DEL CARROUSEL SEGUN CANTIDAD DE CARDS */
 let agregarBotonDer = () => {  
     if (contadorPosiciones === (seleccionFiltro.length-5))
@@ -65,6 +71,7 @@ let desactivacionCarrousel = () => {
     };
       
 
+
 /* CREAR CARDS DE ZONA DE LECTURA */
 
 let displayBooksZonaLectura = () => {
@@ -73,14 +80,24 @@ for (const element of seleccionLectura) {
  
     const card = document.createElement('div');
     card.classList.add('zonaLectura__cardsContainer__div')
+    card.setAttribute('id', `${element.book.cover}`)
     card.innerHTML = `
-        <div class="zonaLectura__cardsContainer__cardsLibros">
+        <div id='mouseHover' class="zonaLectura__cardsContainer__cardsLibros">
             <img id='${element.book.title}' class="zonaLectura__cardsContainer__cardsLibros__img" src="${element.book.cover}" alt="">
+            <div id='${element.book.title + '--Buttons' }' class='zonaLectura__cardsContainer__cardsLibros__div'>
+                <a href='#'> 
+                    <img class='zonaLectura__cardsContainer__cardsLibros__div__carritoCompras' src='./assets/imgs/carritoCompras.png'/>
+                </a>
+                <a href='#'> 
+                    <img class='zonaLectura__cardsContainer__cardsLibros__div__butEliminar' src='./assets/imgs/botonEliminar.png' href='#'/>
+                </a>
+            </div>
         </div>
     `
     cardsZonaLectura.appendChild(card)
 }
 }
+
 
 /* FUNCION RESETEADORA DE CARDS ZONA LECTURA*/
 
@@ -90,7 +107,5 @@ let borrarCardsAnterioresListaLectura = () => {
     }
 
 
-
-    
 
 
