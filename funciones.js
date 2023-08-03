@@ -118,7 +118,8 @@ for (const element of seleccionLectura) {
         </div>
     `
     cardsZonaLectura.appendChild(card)
-    eliminarLibrosUnicos()
+    eliminarLibrosUnicos() /* SE AGREGAN LISTENERS DESPUES DE GENERAR CARDS SELECCION LECTURA PARA EVITAR DESINCRONIZACION CON LOS ELEMENTOS HTML DOM DINAMICOS DE ESTA FUNCION */
+                            /* QUE SE DEBEN GENERAR ANTES DE LA ASIGNACION DE LOS LISTENERS */
 }}
 
 

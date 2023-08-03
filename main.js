@@ -62,7 +62,7 @@ ejecutarFiltro = document.getElementById('filtrosDinamicos')
 
 
 
-/* ELIMINAR FILTROS/MOSTRAR TODOS LOS LIBROS*/
+/* ELIMINAR FILTROS/MOSTRAR TODOS LOS LIBROS ZONA PRINCIPAL*/
 resetFiltros = document.getElementById('eliminarFiltros')
     resetFiltros.addEventListener('click', () => {
         borrarCardsAnteriores ()
@@ -104,13 +104,11 @@ resetFiltros = document.getElementById('eliminarFiltros')
 
 
 /* AGREGAR LIBROS AL ARRAY seleccionLectura / Compara si no esta agregado, lo sube*/
-
 const listaLecturaButtons = document.getElementsByClassName('main__section__div__card__img--botonAgregarLibro')
 
 
 
 /* Revision seleccionLectura en localStorage al cargar pagina*/
-
 document.addEventListener('DOMContentLoaded', () => {
     seleccionLectura = JSON.parse(localStorage.getItem('seleccionLectura'))
     if(seleccionLectura)
@@ -122,9 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-
 /* GENERACION INFO DINAMICA DE LIBROS */
-
 const zonaLecturaGenero = document.getElementById('zonaLecturaGenero')
 const zonaLecturaPaginas = document.getElementById('zonaLecturaPaginas')
 const zonaLecturaSynopsis = document.getElementById('zonaLecturaSynopsis')
@@ -155,7 +151,6 @@ for (const coleccionHTML of infoLibrosDinamica) {
 
 
 /* ELIMINAR SELECCION LECTURA COMPLETA */
-
 let eliminarSeleccionLectura = document.getElementById('eliminarSeleccionLectura')
 
 eliminarSeleccionLectura.addEventListener('click', () =>{
