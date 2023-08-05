@@ -59,7 +59,7 @@ let agregarBotonIzq = () => {
         {carrouselContainer.style.transform += `translateX(0)`;contadorPosiciones = 0}
     else {carrouselContainer.style.transform += `translateX(13.3rem)`}}
 
-
+/* 
 let activacionCarrousel = () => {
     carrouselButtonIzq.addEventListener('click', agregarBotonIzq);
     carrouselButtonDer.addEventListener('click', agregarBotonDer);
@@ -69,7 +69,7 @@ let desactivacionCarrousel = () => {
     carrouselButtonIzq.removeEventListener('click', agregarBotonIzq);
     carrouselButtonDer.removeEventListener('click', agregarBotonDer);
     };
-      
+       */
 
 /* AGREGA LIBROS A SECTION LECTURA DESDE PRINCIPAL AL APRETAR BOTONES DE AGREGAR LIBRO
  + FUNCION ACTIVA LISTENER PARA BOTONES DE AGREGAR LIBRO // PERMITE REACTIVAR LOS LISTENERS CADA VEZ QUE SE ACTUALIZAN LOS FILTROS */

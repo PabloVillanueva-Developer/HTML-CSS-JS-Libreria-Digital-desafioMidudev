@@ -15,8 +15,7 @@ let seleccionLectura = []
 
 /* EJECUCION INICIAL DE CARDS EN BASE A ARRAY LIBRARY ORIGINAL */
 displayBooks (seleccionFiltro)
-  if (seleccionFiltro.length > 5)
-        {activacionCarrousel() }
+
 
 
 
