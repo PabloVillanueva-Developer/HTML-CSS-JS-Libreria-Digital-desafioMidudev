@@ -15,7 +15,7 @@
 
 
 .body {
-    background-image: url(../assets/imgs/pexels-rafael-cosquiere-2041540-min.jpg);
+    background-image: url(../assets/imgs/Sin\ título-1.png);
     background-repeat: no-repeat;
     background-size: cover;
     display: grid;
@@ -99,7 +99,7 @@
 
  .main {
     position: relative;
-    margin: 0 auto;
+    margin-left: 9rem;
     padding: 1rem;
     
  }
@@ -111,11 +111,11 @@
  }
 
  .main__section__carrouselContainer {
-    height: 20rem;
-    width: calc((11.3rem*5) + (7.7rem));
-    display: flex;
-    justify-content: start;
-    gap: 2rem;
+    height: 30rem;
+    width: 30rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
   
  }
 
@@ -126,7 +126,8 @@
  
 
  .main__section__div {
-    height: 22rem;
+    height: 13rem;
+   
  }
 
  .main__section__div__card {
@@ -140,7 +141,7 @@
 
 .main__section__div__card__img {
 
-    height: 17rem;
+    height: 10rem;
     border-radius: 1rem;
     filter: blur(0);
     transition: all 2s; 
@@ -438,9 +439,7 @@ filter: brightness(0.7);
 
 
 .select {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
+  
     background-color: rgba(0, 0, 0, 0.807);
     color: aliceblue;
 }
