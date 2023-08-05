@@ -30,15 +30,15 @@ for (const iterator of library) {
 
 
 /* FILTRO DINAMICO: SE AGREGAN FILTROS AL DOM SEGUN LOS GENEROS ENCONTRADOS EN BASE DE DATOS */
-generosFiltro = document.getElementById('filtrosDinamicos');
+/* generosFiltro = document.getElementById('filtrosDinamicos');
     for (const iterator of generosUnicos) {
-        const filtrosDisponibles = document.createElement('a');
+        const filtrosDisponibles = document.createElement('option');
         filtrosDisponibles.setAttribute('id', `${iterator}`)
         filtrosDisponibles.setAttribute('class', 'header__sectionFilter__ul__div__a')
         filtrosDisponibles.setAttribute('href', `#`)
         filtrosDisponibles.textContent = `${iterator}`
         generosFiltro.appendChild(filtrosDisponibles);
-    }
+    } */
 
 
 
@@ -47,41 +47,49 @@ ejecutarFiltro = document.getElementById('filtrosDinamicos')
     ejecutarFiltro.addEventListener('click', (e) => {
         /* CREACION DE ARRAY CON SELECCION = seleccionFiltro */
         seleccionFiltro = [] /* RESET DEL ARRAY PARA CADA CLICK INDIVIDUAL */
-        seleccionFiltro = library.filter((objeto) => e.target.id === objeto.book.genre)
+        seleccionFiltro = library.filter((objeto) => e.target.value === objeto.book.genre)
+   
         borrarCardsAnteriores ()
         resetPosicionCarrousel()
         contadorPosiciones = 0
-      
+    console.log(seleccionFiltro)
         displayBooks(seleccionFiltro)
             if(seleccionFiltro.length >= 1 && seleccionFiltro.length <= 5) 
                 {carrouselContainer.style.justifyContent = 'center'; desactivacionCarrousel()} 
             if (seleccionFiltro.length >5)
                  { carrouselContainer.style.justifyContent = 'start'; activacionCarrousel(); } 
          agregarLibrosSeleccionLectura()
+    
+    
     }) 
 
+    /* ARREGLAR FILTROS */
 
 
 /* ELIMINAR FILTROS/MOSTRAR TODOS LOS LIBROS ZONA PRINCIPAL*/
-resetFiltros = document.getElementById('eliminarFiltros')
-    resetFiltros.addEventListener('click', () => {
+resetFiltros = document.getElementById('filtrosDinamicos')
+
+    resetFiltros.addEventListener('click', (e) => {
+        if (e.target.value === 'eliminarFiltros')
+        seleccionFiltro = library.map((objetosInternos) => {return objetosInternos}) 
         borrarCardsAnteriores ()
         resetPosicionCarrousel()
-        
-        {
-        seleccionFiltro = library.map((objetosInternos) => {return objetosInternos}) // Restauramos seleccionFiltro con el total de los libros
-        contadorPosiciones = 0 /* RESET DE POSICIONES */
-        if(seleccionFiltro.length >= 1 && seleccionFiltro.length <= 4) 
-            {carrouselContainer.style.justifyContent = 'center'} // ALINEACION DE CARDS SEGUN CANTIDAD VISIBLE
-        else {carrouselContainer.style.justifyContent = 'start'} // ALINEACION DE CARDS SEGUN CANTIDAD VISIBLE
-        }
-        
         displayBooks (seleccionFiltro)
+        {
+           
+        
+        contadorPosiciones = 0 
+        if(seleccionFiltro.length >= 1 && seleccionFiltro.length <= 4) 
+            {carrouselContainer.style.justifyContent = 'center'} 
+        else {carrouselContainer.style.justifyContent = 'start'} 
+        }
+       
         if (seleccionFiltro.length > 5)
         activacionCarrousel() 
         agregarLibrosSeleccionLectura()
 
     })
+
 
 
 
@@ -113,9 +121,12 @@ document.addEventListener('DOMContentLoaded', () => {
     seleccionLectura = JSON.parse(localStorage.getItem('seleccionLectura'))
     if(seleccionLectura)
         displayBooksZonaLectura(seleccionLectura)
+   
         
         /* seleccionLectura =[] */
     agregarLibrosSeleccionLectura()
+    if(seleccionLectura.length > 0)
+    activarButEliminarZonaLectura() 
 })
 
 
@@ -157,6 +168,8 @@ eliminarSeleccionLectura.addEventListener('click', () =>{
     borrarCardsAnterioresListaLectura(seleccionLectura)
     localStorage.setItem('seleccionLectura', JSON.stringify(seleccionLectura = []))
     seleccionLectura = JSON.parse(localStorage.getItem('seleccionLectura'))
+    resetDescripcionesZonaLectura()
+    desactivarButEliminarZonaLectura()
 })
 
 

@@ -15,7 +15,9 @@
 
 
 .body {
-    background-color: black;
+    background-image: url(../assets/imgs/pexels-rafael-cosquiere-2041540-min.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
     display: grid;
     grid-template-columns: 4fr;
     grid-template-rows: 0.1fr 0.1fr;
@@ -28,11 +30,11 @@
 .header {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 0.01fr 1fr ;
     justify-items: start;
     align-items: center;
-    margin: 2rem 3rem ;
     row-gap: 1rem;
+    background-color: rgba(142, 142, 143, 0.707);
    
 }
 
@@ -40,28 +42,52 @@
     display: flex;
     gap: 3rem;
     font-family: fuente1;
-
-   
-
+  
 }
 
 .header__nav__u__a {
     color: aliceblue;
+    position: relative;
+}
+
+.header__sectionFilter {
+    position: absolute;
+    left: 1rem;
+    top: 4rem;
+    background-color: rgba(0, 0, 0, 0.863);
+    width: 9rem;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+  
 }
 
 .header__sectionFilter__ul {
+    width: 9rem;
+    height: 14rem;
     display: flex;
-    gap: 3rem;
+    align-items: center;
+    gap: 1rem;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.737);
+    position: absolute;
+    left: 0.5rem;
+    top: 4rem;
+    
 }
 
 .header__sectionFilter__ul__a {
     text-decoration: none;
     color: aliceblue;
+    padding-top: 0.5rem;
+    
 }
 
 .header__sectionFilter__ul__div {
     display: flex;
-    gap: 3rem;
+    align-items: center;
+    gap: 1rem;
+    flex-direction: column;
 }
 
 .header__sectionFilter__ul__div__a {
@@ -223,7 +249,7 @@ filter: brightness(0.7);
 .zonaLectura--hidden {
     height: 100vh;
     width: 40vw;
-    background-color:aliceblue;
+    background-color:rgba(175, 180, 184, 0.761);
     position: absolute;
     z-index: 6;
     right: 0;
@@ -236,7 +262,7 @@ filter: brightness(0.7);
 .zonaLectura--desplegado {
     height: 100vh;
     width: 40vw;
-    background-color:aliceblue;
+    background-color:rgba(218, 225, 231, 0.9);
     position: absolute;
     z-index: 6;
     right: 0;
@@ -278,14 +304,32 @@ filter: brightness(0.7);
      overflow: hidden;
 }
 
-.zonaLecturaCards__Container__flex__a {
+.zonaLecturaCards__Container__flex__a--invisible {
     border-radius: 50%;
+    pointer-events: none;
+    opacity: 0;
+    transition: all 2s;
+    pointer-events: none;
 }
+
+.zonaLecturaCards__Container__flex__a--visible {
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 100%;
+    transition: all 2s;
+    pointer-events: all;
+}
+
+
+
 
 .zonaLecturaCards__Container__flex__a__img {
     width: 4rem;
     border-radius: 50%;
+   
 }
+
+
 
 .zonaLectura__cardsContainer__div {
   
@@ -390,4 +434,13 @@ filter: brightness(0.7);
     display: inline;
     font-family: fuente1;
     font-size: 0.8rem;
+}
+
+
+.select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: rgba(0, 0, 0, 0.807);
+    color: aliceblue;
 }

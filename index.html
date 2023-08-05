@@ -20,7 +20,9 @@
                     <div  id="zonaLecturaCardsContainer" class="zonaLecturaCards__Container__flex">
                     
                     </div>
-                    <a class="zonaLecturaCards__Container__flex__a" href="#"><img id='eliminarSeleccionLectura'  class="zonaLecturaCards__Container__flex__a__img" src="./assets/imgs/eliminarSeleccionLectura.png" alt=""></a>
+                    <a class="zonaLecturaCards__Container__flex__a--invisible" href="#">
+                        <img id='eliminarSeleccionLectura'  class="zonaLecturaCards__Container__flex__a__img" src="./assets/imgs/eliminarSeleccionLectura.png" alt="">
+                    </a>
                   
                     
                     <div class="zonaLectura__cardsContainer__cardsLibros__info">
@@ -55,15 +57,31 @@
                 <a class="header__nav__u__a" href="#">Filter</a>
             </ul>
         </nav>
-        <section class="header__sectionFilter">
-            <ul class="header__sectionFilter__ul">
-                <a id="eliminarFiltros" class="header__sectionFilter__ul__a" href="#">Eliminar Filtros</a>
+
+        <section >
+            <label  for="filtro">
+                <select class="select" name="Filtro por Genero" id="filtrosDinamicos">
+                    <option value="eliminarFiltros">Filtro por Genero</option>
+                    <option id='eliminarFiltros' value="eliminarFiltros" value="">Eliminar Filtro</option>
+                    <option value='Fantasía'value="">Fantasía</option>
+                    <option value="Ciencia ficción" value="">Ciencia Ficción</option>
+                    <option value="Zombies" value="">Zombies</option>
+                    <option value="Terror" value="">Terror</option>
+                </select>
+            </label>
+        </section>
+
+
+       <!--  <section >
+            <ul >
+                <a class="header__sectionFilter__ul__a" href="#">Seleccionar Filtro</a>
+                <a  class="header__sectionFilter__ul__a" href="#">Eliminar Filtros</a>
                 <div id="filtrosDinamicos" class="header__sectionFilter__ul__div" >
-                    <!-- AQUI: FILTROS DINAMICOS -->
+                
                 </div>
             </ul>
 
-        </section> <!-- ESPACIO DERECHA DEL NAV -->
+        </section>  --><!-- ESPACIO DERECHA DEL NAV -->
     </header>
 
     <main class="main">

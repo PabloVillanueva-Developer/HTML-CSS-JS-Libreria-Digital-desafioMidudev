@@ -71,7 +71,8 @@ let desactivacionCarrousel = () => {
     };
       
 
-/* AGREGA LIBROS A SELECCION LECTURA + FUNCION ACTIVA LISTENER PARA BOTONES DE AGREGAR LIBRO // PERMITE REACTIVAR LOS LISTENERS CADA VEZ QUE SE ACTUALIZAN LOS FILTROS */
+/* AGREGA LIBROS A SECTION LECTURA DESDE PRINCIPAL AL APRETAR BOTONES DE AGREGAR LIBRO
+ + FUNCION ACTIVA LISTENER PARA BOTONES DE AGREGAR LIBRO // PERMITE REACTIVAR LOS LISTENERS CADA VEZ QUE SE ACTUALIZAN LOS FILTROS */
 
 let agregarLibrosSeleccionLectura = () => {
     for (const element of listaLecturaButtons) {
@@ -86,6 +87,9 @@ let agregarLibrosSeleccionLectura = () => {
                     seleccionLectura.push(element)
                     localStorage.setItem('seleccionLectura', JSON.stringify(seleccionLectura))
                     displayBooksZonaLectura(seleccionLectura) 
+                    if(seleccionLectura.length > 0)
+                        activarButEliminarZonaLectura() 
+                  
                 }
             });
         })
@@ -118,7 +122,8 @@ for (const element of seleccionLectura) {
         </div>
     `
     cardsZonaLectura.appendChild(card)
-    eliminarLibrosUnicos() /* SE AGREGAN LISTENERS DESPUES DE GENERAR CARDS SELECCION LECTURA PARA EVITAR DESINCRONIZACION CON LOS ELEMENTOS HTML DOM DINAMICOS DE ESTA FUNCION */
+    eliminarLibrosUnicos()
+     /* SE AGREGAN LISTENERS DESPUES DE GENERAR CARDS SELECCION LECTURA PARA EVITAR DESINCRONIZACION CON LOS ELEMENTOS HTML DOM DINAMICOS DE ESTA FUNCION */
                             /* QUE SE DEBEN GENERAR ANTES DE LA ASIGNACION DE LOS LISTENERS */
 }}
 
@@ -140,8 +145,47 @@ let eliminarLibrosUnicos = () => {
   
         seleccionLectura = seleccionLectura.filter((element) => element.book.title !== idDinamico)
          localStorage.setItem('seleccionLectura', JSON.stringify(seleccionLectura))
+        if(seleccionLectura.length == 0)
+            {resetDescripcionesZonaLectura()}
         borrarCardsAnterioresListaLectura()
         displayBooksZonaLectura()
+        if(seleccionLectura.length == 0)
+            desactivarButEliminarZonaLectura()
         })
     }
+  
 }
+
+
+/* RESET DESCRIPCION LIBROS ZONA LECTURA */
+const resetDescripcionesZonaLectura = () => {
+
+    zonaLecturaGenero.innerText = `` 
+    zonaLecturaPaginas.innerText = ``
+    zonaLecturaSynopsis.innerText = ``
+    zonaLecturaAnio.innerText = ``
+    zonaLecturaAutor.innerText = ``
+    zonaLecturaObras.innerText = ``
+    zonaLecturaISBN.innerText = ``
+
+}
+
+/* DESAPARECER BOTON ELIMINAR */
+
+    const activarButEliminarZonaLectura = () => {
+    const catchCestaEliminar = document.querySelector('.zonaLecturaCards__Container__flex__a--invisible') //Captura elemento en DOM
+    
+    catchCestaEliminar.classList.add('zonaLecturaCards__Container__flex__a--visible')
+    catchCestaEliminar.classList.remove('zonaLecturaCards__Container__flex__a--invisible')     
+    }
+
+    const desactivarButEliminarZonaLectura = () => {
+        const catchCestaEliminar = document.querySelector('.zonaLecturaCards__Container__flex__a--visible') //Captura elemento en DOM
+        
+     
+        catchCestaEliminar.classList.add('zonaLecturaCards__Container__flex__a--invisible')
+           catchCestaEliminar.classList.remove('zonaLecturaCards__Container__flex__a--visible')     
+        }
+    
+    
+
