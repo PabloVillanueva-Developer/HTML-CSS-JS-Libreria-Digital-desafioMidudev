@@ -7,6 +7,7 @@ let seleccionFiltro =  library.map((objetosInternos) => {return objetosInternos;
 let contadorLibros = ''
 let contadorPosiciones = 0
 let seleccionLectura = []
+let seleccionCarrito = []
 
 
 
@@ -114,9 +115,25 @@ document.addEventListener('DOMContentLoaded', () => {
         /* seleccionLectura =[] */
     agregarLibrosSeleccionLectura()
    
-
-    
 })
+
+
+/* AGREGAR LIBROS AL ARRAY seleccionCarrito / Compara si no esta agregado, lo sube*/
+
+/* Revision seleccionLectura en localStorage al cargar pagina*/
+document.addEventListener('DOMContentLoaded', () => {
+    seleccionCarrito = JSON.parse(localStorage.getItem('seleccionCarrito'))
+    if(seleccionCarrito)
+        displayBooksCarrito()
+    if(seleccionCarrito.length > 0) 
+     /*    activarButEliminarZonaLectura() */
+ 
+        
+        /* seleccionLectura =[] */
+        agregarLibrosCarrito()
+   
+})
+
 
 
 
@@ -154,13 +171,74 @@ for (const coleccionHTML of infoLibrosDinamica) {
 let eliminarSeleccionLectura = document.getElementById('eliminarSeleccionLectura')
 
 eliminarSeleccionLectura.addEventListener('click', () =>{
-    borrarCardsAnterioresListaLectura(seleccionLectura)
+    borrarCardsAnterioresListaLectura()
     localStorage.setItem('seleccionLectura', JSON.stringify(seleccionLectura = []))
     seleccionLectura = JSON.parse(localStorage.getItem('seleccionLectura'))
     resetDescripcionesZonaLectura()
     desactivarButEliminarZonaLectura()
 
 })
+
+
+/* ELIMINAR SELECCION CARRITO COMPLETA */
+let eliminarSeleccionCarrito = document.getElementById('eliminarSeleccionCarrito')
+
+
+eliminarSeleccionCarrito.addEventListener('click', (e) =>{
+    
+    borrarCardsAnterioresCarrito()
+    localStorage.setItem('seleccionCarrito', JSON.stringify(seleccionCarrito = []))
+    seleccionCarrito = JSON.parse(localStorage.getItem('seleccionCarrito'))
+/*     desactivarButEliminarZonaLectura() */
+
+})
+
+
+
+
+
+
+/* ARRASTRE LIBROS A ZONA DE LECTURA */  
+let agregarLibrosSeleccionLectura = () => {
+
+    setTimeout(() => {
+        const coleccionLibros = document.querySelectorAll('.main__section__div__card__img')
+        const contenedorDragZonaLectura = document.getElementById('contenedorDragZonaLectura')
+        const contenedorDragZonaLecturaDirecto = document.getElementById('zonaLectura--container')
+  
+        
+        for (const element of coleccionLibros) {
+            element.addEventListener('dragstart', (e) => {
+                idDinamicoB = e.target.id + ' B '
+                idDinamicoA = e.target.id
+            })
+                    /* ARRASTRE A CONTENEDOR DE ENVIO PARA ZONA LECTURA */
+            contenedorDragZonaLectura.addEventListener ('drop', dropZonaLectura) 
+            
+            contenedorDragZonaLectura.addEventListener ('dragover', (e) => {
+                e.preventDefault();
+            }) 
+
+
+
+                /* ARRASTRE DIRECTO A ZONA LECTURA */
+            contenedorDragZonaLecturaDirecto.addEventListener ('drop', dropZonaLectura) 
+
+            contenedorDragZonaLecturaDirecto.addEventListener ('dragover', (e) => {
+                e.preventDefault();
+            }) 
+
+
+        }   
+    }, 1);
+}
+    
+
+/* EJECUCION DE FUNCION QUE AGREGA LIBROS AL CARRITO */
+agregarLibrosCarrito()
+
+
+
 
 
 

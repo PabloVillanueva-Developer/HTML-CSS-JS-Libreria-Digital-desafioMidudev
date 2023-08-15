@@ -63,6 +63,41 @@ for (const element of seleccionLectura) {
 }
 
 
+/* DISPLAY BOOKS CARRITO COMPRAS */
+
+let displayBooksCarrito = () => {
+    const cardsZonaLectura = document.getElementById('carritoComprasGrillaLibros')
+    
+    for (const element of seleccionCarrito) {     
+        const card = document.createElement('div');
+        card.classList.add('carritoCompras__divs')
+        card.setAttribute('id', `${element.book.cover}`)
+        card.innerHTML = `
+            <div id='divLibrosSeleccionados' class="carritoCompras_divs--imgContainer">
+                 
+                <a class='carritoCompras__divs__imgContainer__butEliminar' href='#'> 
+                    <img id='${element.book.title}' class='carritoCompras__divs__imgContainer__butEliminar--img' src='./assets/imgs/botonEliminar.png' href='#'/>
+                </a>
+                
+                <img id='${element.book.title}' class="carritoCompras__divs__img" src="${element.book.cover}" alt="">
+                <div id='${element.book.title + '--Buttons' }' class=''>   
+                </div>
+            </div>
+        `
+        cardsZonaLectura.appendChild(card)
+        eliminarLibrosUnicosCarrito()
+        
+         /* SE AGREGAN LISTENERS DESPUES DE GENERAR CARDS SELECCION LECTURA PARA EVITAR DESINCRONIZACION CON LOS ELEMENTOS HTML DOM DINAMICOS DE ESTA FUNCION */
+                                /* QUE SE DEBEN GENERAR ANTES DE LA ASIGNACION DE LOS LISTENERS */
+    }  
+    }
+
+
+
+
+
+
+
 
 /* FUNCION RESETEADORA DE CARDS ZONA LECTURA*/
 
@@ -71,6 +106,14 @@ let borrarCardsAnterioresListaLectura = () => {
     eliminarCards.forEach((card) => card.remove())
     }
 
+let borrarCardsAnterioresCarrito = () => {
+    const eliminarCards = document.querySelectorAll('.carritoCompras__divs')
+    eliminarCards.forEach((card) => card.remove())
+    }
+
+
+
+/* ELIMINAR CARDS ZONA LECTURA INDIVIDUALMENTE */
 
 let eliminarLibrosUnicos = () => {
     const butElimninarLibroUnico = document.getElementsByClassName('zonaLectura__cardsContainer__cardsLibros__div__butEliminar')
@@ -86,12 +129,53 @@ let eliminarLibrosUnicos = () => {
         displayBooksZonaLectura()
         if(seleccionLectura.length == 0)
             desactivarButEliminarZonaLectura()
+        })
+    }
+  
+}
+
+
+
+/* ELIMINAR CARDS CARRITO INDIVIDUALMENTE */
+
+let eliminarLibrosUnicosCarrito = () => {
+    const butElimninarLibroUnico = document.getElementsByClassName('carritoCompras__divs__imgContainer__butEliminar--img')
+ 
+    for (const element of butElimninarLibroUnico){
+    element.addEventListener('click',(e) => { /* CAPTURA ID DINAMICO */
+        const idDinamico = e.target.id
+  
+        seleccionCarrito = seleccionCarrito.filter((element) => element.book.title !== idDinamico)
+         localStorage.setItem('seleccionCarrito', JSON.stringify(seleccionCarrito))
+
+        borrarCardsAnterioresCarrito()
+        displayBooksCarrito()
+       /*  if(seleccionCarrito.length == 0)
+            desactivarButEliminarZonaLectura() */
         
            
         })
     }
   
 }
+
+
+/* ACTIVAR/DESACTIVAR CESTA ZONA LECTURA */
+const activarButEliminarZonaLectura = () => {   
+    const activarCestaEliminar = document.querySelector('.zonaLecturaCards__Container__flex__a--invisible') //Captura elemento en DOM
+   
+    if (activarCestaEliminar !== null)
+        {activarCestaEliminar.classList.add('zonaLecturaCards__Container__flex__a--visible'), 
+        activarCestaEliminar.classList.remove('zonaLecturaCards__Container__flex__a--invisible')}
+    }
+   
+    const desactivarButEliminarZonaLectura = () => {
+        const desactivarCestaEliminar = document.querySelector('.zonaLecturaCards__Container__flex__a--visible') //Captura elemento en DOM
+        
+    desactivarCestaEliminar.classList.add('zonaLecturaCards__Container__flex__a--invisible')
+    desactivarCestaEliminar.classList.remove('zonaLecturaCards__Container__flex__a--visible')     
+        }
+    
 
 
 /* RESET DESCRIPCION LIBROS ZONA LECTURA */
@@ -108,77 +192,70 @@ const resetDescripcionesZonaLectura = () => {
 }
 
 
-    
-/* ARRASTRE LIBROS A ZONA DE LECTURA */  
-let agregarLibrosSeleccionLectura = () => {
+/* FUNCION REUTILIZADA CON LOGICA PARA DROPS DE LIBROS DESDE DISTINTOS CONTENEDORES */
+let idDinamicoB = '' 
+let idDinamicoA = '' 
+
+const dropZonaLectura = (e) => {
+    borrarCardsAnterioresListaLectura()
+    library.forEach((element) => { 
+        if (idDinamicoB === element.book.title + ' B ') {
+            if(!seleccionLectura.find(item => item.book.title === idDinamicoA))
+            
+            seleccionLectura.push(element)
+            localStorage.setItem('seleccionLectura', JSON.stringify(seleccionLectura))
+            displayBooksZonaLectura(seleccionLectura) 
+            if(seleccionLectura.length > 0) 
+                activarButEliminarZonaLectura()  
+        }
+    })}
+
+
+
+
+
+/* AGREGAR LIBROS POR ARRASTRE A CARRITO */  
+let agregarLibrosCarrito = () => {
 
     setTimeout(() => {
         const coleccionLibros = document.querySelectorAll('.main__section__div__card__img')
-        const contenedorDragZonaLectura = document.getElementById('contenedorDragZonaLectura')
+        const contenedorCarrito = document.getElementById('carritoCompras')
         let idDinamicoB = '' 
         let idDinamicoA = '' 
-
-
-
+       
         
         for (const element of coleccionLibros) {
             element.addEventListener('dragstart', (e) => {
                 idDinamicoB = e.target.id + ' B '
                 idDinamicoA = e.target.id
-              
             })
-           
-            contenedorDragZonaLectura.addEventListener ('drop', (e) => {
-          
-               
-                borrarCardsAnterioresListaLectura()
+    
+            contenedorCarrito.addEventListener ('drop', (e) => {
+                borrarCardsAnterioresCarrito()
                 library.forEach((element) => { 
                     if (idDinamicoB === element.book.title + ' B ') {
-                        if(!seleccionLectura.find(item => item.book.title === idDinamicoA))
+                        if(!seleccionCarrito.find(item => item.book.title === idDinamicoA))
                         
-                        seleccionLectura.push(element)
-                        localStorage.setItem('seleccionLectura', JSON.stringify(seleccionLectura))
-                        displayBooksZonaLectura(seleccionLectura) 
-                        if(seleccionLectura.length > 0) 
-                            activarButEliminarZonaLectura()  
-                       
+                        seleccionCarrito.push(element)
+                        localStorage.setItem('seleccionCarrito', JSON.stringify(seleccionCarrito))
+                        displayBooksCarrito(seleccionCarrito) 
+                        if(seleccionCarrito.length > 0) 
+                            activarButEliminarZonaLectura()         
                     }
                 }) 
-                   
-              
             })
-
-            contenedorDragZonaLectura.addEventListener ('dragover', (e) => {
+          
+            contenedorCarrito.addEventListener ('dragover', (e) => {
                 e.preventDefault();
-              
-                
             }) 
 
-
         }   
-    }, 1);
+    }, 1);   
 }
-    
-/* DESAPARECER BOTON ELIMINAR */
-
-const activarButEliminarZonaLectura = () => {   
-    const activarCestaEliminar = document.querySelector('.zonaLecturaCards__Container__flex__a--invisible') //Captura elemento en DOM
-   
-    if (activarCestaEliminar !== null)
-        {activarCestaEliminar.classList.add('zonaLecturaCards__Container__flex__a--visible'), 
-        activarCestaEliminar.classList.remove('zonaLecturaCards__Container__flex__a--invisible')}
-    }
-   
 
 
 
-    const desactivarButEliminarZonaLectura = () => {
-        const desactivarCestaEliminar = document.querySelector('.zonaLecturaCards__Container__flex__a--visible') //Captura elemento en DOM
-        
-    desactivarCestaEliminar.classList.add('zonaLecturaCards__Container__flex__a--invisible')
-    desactivarCestaEliminar.classList.remove('zonaLecturaCards__Container__flex__a--visible')     
-        }
-    
+
 
 
 
@@ -194,4 +271,5 @@ const activarButEliminarZonaLectura = () => {
 9) Hacer Responsive 
 10) Agregar titulo y favicon
 11) Completar etiquetas alt
+12) Ver si puedo eficientizar codigo
  */
