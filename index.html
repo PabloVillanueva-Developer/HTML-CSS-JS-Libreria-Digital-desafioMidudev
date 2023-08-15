@@ -48,19 +48,19 @@
     </section>
 
     <header class="header">
-        <nav>
+        <nav class="nav">
             <ul class="header__nav__ul">
                 <a class="header__nav__u__a" href="#">Inicio</a>
                 <a class="header__nav__u__a" href="#">Catalogo</a>
                 <a class="header__nav__u__a" href="#">Nosotros</a>
                 <a class="header__nav__u__a" href="#" id="botonAbrirZonaLectura">Zona lectura</a>
-                <a class="header__nav__u__a" href="#">Filter</a>
+                <a class="header__nav__u__a" href="#">Filtro</a>
             </ul>
         </nav>
 
         <section >
-            <label  for="filtro">
-                <select class="select" name="Filtro por Genero" id="filtrosDinamicos">
+            <label  class="filtroLibros__contenedor" for="filtro">
+                <select class="filtroLibros__contenedor__select" name="Filtro por Genero" id="filtrosDinamicos">
                     <option id='eliminarFiltros' value="eliminarFiltros" value="">Sin Filtro Genero </option>
                     <option value='Fantasía'value="">Fantasía </option>
                     <option value="Ciencia ficción" value="">Ciencia Ficción </option>
@@ -85,11 +85,23 @@
 
     <main class="main">
         <section id="main__section" class="main__section">
-            <div id="carrouselContainer" class="main__section__carrouselContainer main__section__carrouselContainerTranlate">
+            <div id="carrouselContainer" class="main__section__carrouselContainer">
                 <!-- CARDS DINAMICAS MEDIANTE JS -->
             </div>
            
         </section>    
+
+        <section class="sectionBotonZonaLectura">
+            <a id="contenedorDragZonaLectura" class="sectionBotonZonaLectura--a" id="botonAbrirZonaLectura2" href="#">
+                <img class="sectionBotonZonaLectura--img" src="./assets/imgs/botonZonaLectura.png" alt="">
+            </a>
+
+        </section>
+            
+        <section id="carritoCompras" class="carritoCompras">
+           
+
+        </section>
 
     </main>
     <script src="./catalogo.js"></script>

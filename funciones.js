@@ -1,26 +1,19 @@
-/* FUNCION GENERADORA DE CARDS */
+/* FUNCION GENERADORA DE CARDS ZONA PRINCIPAL */
 
 let displayBooks = (array) => {
     const containerCatalogo = document.getElementById('carrouselContainer');
+    let contador = 0
     for (const iterator of array) {
-    
+       
         const cards = document.createElement('div')
         cards.classList.add('main__section__div')
-        cards.innerHTML = `
-            <div id='${iterator.book.genre}' class="main__section__div__card">
 
-                <a class='main__section__div__card__a' href="#" > 
-                    <img id='${iterator.book.title}' class="main__section__div__card__img--botonAgregarLibro" src='./assets/imgs/agregarLibro.png' alt="">
-                </a>
+        cards.innerHTML = `
+            <div id='${iterator.book.genre}' class="main__section__div__card"
      
-                <div class="main__section__div__card__container">
-                    <a href="#" class="main__section__div__card__button"> 
-                        <img class='main__section__div__card__button__a__carritoCompras' src='./assets/imgs/carritoCompras.png' />
-                    </a>
-                </div>
-                
-                <img class="main__section__div__card__img" src="${iterator.book.cover}" alt="">
-             
+                <a href="#"> 
+                    <img class="main__section__div__card__img" id='${iterator.book.title}' src="${iterator.book.cover}" alt="">
+                </a>
                 
             </div>
         `
@@ -38,70 +31,11 @@ eliminarCards.forEach((card) => card.remove())
 }
 
 
-
-/* FUNCION RESETEADOR DE POSICION DEL CONTENEDOR DEL CARROUSEL PARA QUE EN CADA CAMBIO DE FILTRO APAREZCA CENTRADO */
-
-const resetPosicionCarrousel = () => {
-    carrouselContainer.style.transform = `translateX(0)`
-}
-   
-
-
-/* ACTIVACION Y DESACTIVACION DE BOTONES DEL CARROUSEL SEGUN CANTIDAD DE CARDS */
-let agregarBotonDer = () => {  
-    if (contadorPosiciones === (seleccionFiltro.length-5))
-        {carrouselContainer.style.transform += `translateX(0)`;contadorPosiciones = seleccionFiltro.length-5}
-    else {carrouselContainer.style.transform += `translateX(-13.3rem)`;contadorPosiciones++}}
-
-let agregarBotonIzq = () => {
-     contadorPosiciones--
-    if (contadorPosiciones === -1)
-        {carrouselContainer.style.transform += `translateX(0)`;contadorPosiciones = 0}
-    else {carrouselContainer.style.transform += `translateX(13.3rem)`}}
-
-/* 
-let activacionCarrousel = () => {
-    carrouselButtonIzq.addEventListener('click', agregarBotonIzq);
-    carrouselButtonDer.addEventListener('click', agregarBotonDer);
-}
-  
-let desactivacionCarrousel = () => {
-    carrouselButtonIzq.removeEventListener('click', agregarBotonIzq);
-    carrouselButtonDer.removeEventListener('click', agregarBotonDer);
-    };
-       */
-
-/* AGREGA LIBROS A SECTION LECTURA DESDE PRINCIPAL AL APRETAR BOTONES DE AGREGAR LIBRO
- + FUNCION ACTIVA LISTENER PARA BOTONES DE AGREGAR LIBRO // PERMITE REACTIVAR LOS LISTENERS CADA VEZ QUE SE ACTUALIZAN LOS FILTROS */
-
-let agregarLibrosSeleccionLectura = () => {
-    for (const element of listaLecturaButtons) {
-        
-        element.addEventListener('click',(e) => {
-            borrarCardsAnterioresListaLectura()
-            const idDinamico = e.target.id
-            library.forEach((element) => { 
-        
-                if (idDinamico === element.book.title) { 
-                    if(!seleccionLectura.find(item => item.book.title === idDinamico)) 
-                    seleccionLectura.push(element)
-                    localStorage.setItem('seleccionLectura', JSON.stringify(seleccionLectura))
-                    displayBooksZonaLectura(seleccionLectura) 
-                    if(seleccionLectura.length > 0)
-                        activarButEliminarZonaLectura() 
-                  
-                }
-            });
-        })
-    }   
-} 
-    
-
-
 /* CREAR CARDS DE ZONA DE LECTURA */
 
 let displayBooksZonaLectura = () => {
 const cardsZonaLectura = document.getElementById('zonaLecturaCardsContainer')
+
 for (const element of seleccionLectura) {
     
  
@@ -123,9 +57,11 @@ for (const element of seleccionLectura) {
     `
     cardsZonaLectura.appendChild(card)
     eliminarLibrosUnicos()
+    
      /* SE AGREGAN LISTENERS DESPUES DE GENERAR CARDS SELECCION LECTURA PARA EVITAR DESINCRONIZACION CON LOS ELEMENTOS HTML DOM DINAMICOS DE ESTA FUNCION */
                             /* QUE SE DEBEN GENERAR ANTES DE LA ASIGNACION DE LOS LISTENERS */
-}}
+}  
+}
 
 
 
@@ -151,6 +87,8 @@ let eliminarLibrosUnicos = () => {
         displayBooksZonaLectura()
         if(seleccionLectura.length == 0)
             desactivarButEliminarZonaLectura()
+        
+           
         })
     }
   
@@ -170,22 +108,91 @@ const resetDescripcionesZonaLectura = () => {
 
 }
 
+
+    
+/* ARRASTRE LIBROS A ZONA DE LECTURA */  
+let agregarLibrosSeleccionLectura = () => {
+
+    setTimeout(() => {
+        const coleccionLibros = document.querySelectorAll('.main__section__div__card__img')
+        const contenedorDragZonaLectura = document.getElementById('contenedorDragZonaLectura')
+        let idDinamicoB = '' 
+        let idDinamicoA = '' 
+
+
+
+        
+        for (const element of coleccionLibros) {
+            element.addEventListener('dragstart', (e) => {
+                idDinamicoB = e.target.id + ' B '
+                idDinamicoA = e.target.id
+              
+            })
+           
+            contenedorDragZonaLectura.addEventListener ('drop', (e) => {
+          
+               
+                borrarCardsAnterioresListaLectura()
+                library.forEach((element) => { 
+                    if (idDinamicoB === element.book.title + ' B ') {
+                        if(!seleccionLectura.find(item => item.book.title === idDinamicoA))
+                        
+                        seleccionLectura.push(element)
+                        localStorage.setItem('seleccionLectura', JSON.stringify(seleccionLectura))
+                        displayBooksZonaLectura(seleccionLectura) 
+                        if(seleccionLectura.length > 0) 
+                            activarButEliminarZonaLectura()  
+                       
+                    }
+                }) 
+                   
+              
+            })
+
+            contenedorDragZonaLectura.addEventListener ('dragover', (e) => {
+                e.preventDefault();
+              
+                
+            }) 
+
+
+        }   
+    }, 1);
+}
+    
 /* DESAPARECER BOTON ELIMINAR */
 
-    const activarButEliminarZonaLectura = () => {
-    const catchCestaEliminar = document.querySelector('.zonaLecturaCards__Container__flex__a--invisible') //Captura elemento en DOM
-    
-    catchCestaEliminar.classList.add('zonaLecturaCards__Container__flex__a--visible')
-    catchCestaEliminar.classList.remove('zonaLecturaCards__Container__flex__a--invisible')     
+const activarButEliminarZonaLectura = () => {   
+    const activarCestaEliminar = document.querySelector('.zonaLecturaCards__Container__flex__a--invisible') //Captura elemento en DOM
+   
+    if (activarCestaEliminar !== null)
+        {activarCestaEliminar.classList.add('zonaLecturaCards__Container__flex__a--visible'), 
+        activarCestaEliminar.classList.remove('zonaLecturaCards__Container__flex__a--invisible')}
     }
+   
+
+
 
     const desactivarButEliminarZonaLectura = () => {
-        const catchCestaEliminar = document.querySelector('.zonaLecturaCards__Container__flex__a--visible') //Captura elemento en DOM
+        const desactivarCestaEliminar = document.querySelector('.zonaLecturaCards__Container__flex__a--visible') //Captura elemento en DOM
         
-     
-        catchCestaEliminar.classList.add('zonaLecturaCards__Container__flex__a--invisible')
-           catchCestaEliminar.classList.remove('zonaLecturaCards__Container__flex__a--visible')     
+    desactivarCestaEliminar.classList.add('zonaLecturaCards__Container__flex__a--invisible')
+    desactivarCestaEliminar.classList.remove('zonaLecturaCards__Container__flex__a--visible')     
         }
     
-    
 
+
+
+/* 
+1) Agregar Logica de drop para carrito
+2) Agregar carrito al carrito desde ZonaLectura
+3) Agregar contador numerico visual en zona lectura y carrito
+4) Agregar sweetalert para agregado a Zona Lectura y Carrito
+5) Abrir zona lectura cada vez que se agrega un libro
+6) Agregar promesa para .json 
+7) Agregar boton de comprar a carrito 
+8) Agregar pantalla de sitio en construccion para todos los links muertos (al filtro hacer que se destaque el select)
+9) Hacer Responsive 
+10) Agregar titulo y favicon
+11) Completar etiquetas alt
+ */

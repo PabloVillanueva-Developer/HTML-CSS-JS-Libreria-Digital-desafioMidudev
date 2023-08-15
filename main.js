@@ -6,15 +6,13 @@ let resetFiltros = ''
 let seleccionFiltro =  library.map((objetosInternos) => {return objetosInternos;}); /* COPIA DEL ARRAY.JSON PARA HACERLO MAS DINAMICO */
 let contadorLibros = ''
 let contadorPosiciones = 0
-const carrouselContainer = document.getElementById('carrouselContainer')
-const carrouselButtonIzq = document.getElementById('carrouselButtonIzq')
-const carrouselButtonDer = document.getElementById('carrouselButtonDer')
 let seleccionLectura = []
 
 
 
 /* EJECUCION INICIAL DE CARDS EN BASE A ARRAY LIBRARY ORIGINAL */
 displayBooks (seleccionFiltro)
+
 
 
 
@@ -27,20 +25,6 @@ for (const iterator of library) {
 }
 
 
-
-/* FILTRO DINAMICO: SE AGREGAN FILTROS AL DOM SEGUN LOS GENEROS ENCONTRADOS EN BASE DE DATOS */
-/* generosFiltro = document.getElementById('filtrosDinamicos');
-    for (const iterator of generosUnicos) {
-        const filtrosDisponibles = document.createElement('option');
-        filtrosDisponibles.setAttribute('id', `${iterator}`)
-        filtrosDisponibles.setAttribute('class', 'header__sectionFilter__ul__div__a')
-        filtrosDisponibles.setAttribute('href', `#`)
-        filtrosDisponibles.textContent = `${iterator}`
-        generosFiltro.appendChild(filtrosDisponibles);
-    } */
-
-
-
 /* DISPLAY DE CARDS EN SECTION PRINCIPAL SEGUN SELECCION DE FILTRO */
 ejecutarFiltro = document.getElementById('filtrosDinamicos')
     ejecutarFiltro.addEventListener('click', (e) => {
@@ -49,16 +33,8 @@ ejecutarFiltro = document.getElementById('filtrosDinamicos')
         seleccionFiltro = library.filter((objeto) => e.target.value === objeto.book.genre)
    
         borrarCardsAnteriores ()
-        resetPosicionCarrousel()
-        contadorPosiciones = 0
-    console.log(seleccionFiltro)
         displayBooks(seleccionFiltro)
-            if(seleccionFiltro.length >= 1 && seleccionFiltro.length <= 5) 
-                {carrouselContainer.style.justifyContent = 'center'; desactivacionCarrousel()} 
-            if (seleccionFiltro.length >5)
-                 { carrouselContainer.style.justifyContent = 'start'; activacionCarrousel(); } 
-         agregarLibrosSeleccionLectura()
-    
+      
     
     }) 
 
@@ -72,21 +48,8 @@ resetFiltros = document.getElementById('filtrosDinamicos')
         if (e.target.value === 'eliminarFiltros')
         seleccionFiltro = library.map((objetosInternos) => {return objetosInternos}) 
         borrarCardsAnteriores ()
-        resetPosicionCarrousel()
-        displayBooks (seleccionFiltro)
-        {
-           
-        
-        contadorPosiciones = 0 
-        if(seleccionFiltro.length >= 1 && seleccionFiltro.length <= 4) 
-            {carrouselContainer.style.justifyContent = 'center'} 
-        else {carrouselContainer.style.justifyContent = 'start'} 
-        }
-       
-        if (seleccionFiltro.length > 5)
-        activacionCarrousel() 
-        agregarLibrosSeleccionLectura()
-
+        displayBooks (seleccionFiltro)    
+      
     })
 
 
@@ -94,13 +57,26 @@ resetFiltros = document.getElementById('filtrosDinamicos')
 
 /* DESPLIEGUE DE ZONA DE LECTURA */
 
-    let abrirZonaLectura = document.getElementById('botonAbrirZonaLectura') /* BOTON ACTIVA EVENTO */
+    let abrirZonaLectura = document.getElementById('botonAbrirZonaLectura') /* APERTURA ZONA LECTURA DESDE MENU HEADER */
+    let contenedorDragZonaLectura = document.getElementById('contenedorDragZonaLectura') /* APERTURA ZONA LECTURA DESDE BOTON GRANDE*/
     let sectionZonaLectura = document.getElementById('zonaLectura') /* ELEMENTO DEL DOM QUE SE MODIFICA */
     let botonCierreXSection = document.getElementById('cierreX') /* BOTON DESACTIVA EVENTO */
 
     abrirZonaLectura.addEventListener('click', () => {
-        sectionZonaLectura.classList.remove('zonaLectura--hidden')
-        sectionZonaLectura.classList.add('zonaLectura--desplegado')
+        if(sectionZonaLectura.classList.contains('zonaLectura--hidden'))
+            {sectionZonaLectura.classList.remove('zonaLectura--hidden'),
+            sectionZonaLectura.classList.add('zonaLectura--desplegado')} 
+        else {sectionZonaLectura.classList.add('zonaLectura--hidden'),
+            sectionZonaLectura.classList.remove('zonaLectura--desplegado')} 
+        
+    })
+
+    contenedorDragZonaLectura.addEventListener('click', () => {
+        if(sectionZonaLectura.classList.contains('zonaLectura--hidden'))
+            {sectionZonaLectura.classList.remove('zonaLectura--hidden'),
+            sectionZonaLectura.classList.add('zonaLectura--desplegado')}
+        else { sectionZonaLectura.classList.remove('zonaLectura--desplegado'),
+        sectionZonaLectura.classList.add('zonaLectura--hidden')}
     })
 
     botonCierreXSection.addEventListener('click', () => { 
@@ -108,11 +84,20 @@ resetFiltros = document.getElementById('filtrosDinamicos')
         sectionZonaLectura.classList.add('zonaLectura--hidden')
     })
 
+    contenedorDragZonaLectura.addEventListener('drop', () => {
+        sectionZonaLectura.classList.remove('zonaLectura--hidden')
+        sectionZonaLectura.classList.add('zonaLectura--desplegado')
+    })
+
+    
+
+    
+
+    
+
 
 
 /* AGREGAR LIBROS AL ARRAY seleccionLectura / Compara si no esta agregado, lo sube*/
-const listaLecturaButtons = document.getElementsByClassName('main__section__div__card__img--botonAgregarLibro')
-
 
 
 /* Revision seleccionLectura en localStorage al cargar pagina*/
@@ -120,12 +105,15 @@ document.addEventListener('DOMContentLoaded', () => {
     seleccionLectura = JSON.parse(localStorage.getItem('seleccionLectura'))
     if(seleccionLectura)
         displayBooksZonaLectura(seleccionLectura)
-   
+    if(seleccionLectura.length > 0) 
+        activarButEliminarZonaLectura()
+ 
         
         /* seleccionLectura =[] */
     agregarLibrosSeleccionLectura()
-    if(seleccionLectura.length > 0)
-    activarButEliminarZonaLectura() 
+   
+
+    
 })
 
 
@@ -169,50 +157,16 @@ eliminarSeleccionLectura.addEventListener('click', () =>{
     seleccionLectura = JSON.parse(localStorage.getItem('seleccionLectura'))
     resetDescripcionesZonaLectura()
     desactivarButEliminarZonaLectura()
+
 })
 
 
 
-
-   
-
-
-  
-  
-  
-
-
-
-
-
-
-
-
-
-
-
-
-//PROYECTO
-   
-    // 4) Arreglar que con los filtros no se suman libros a la seleccionLectura
-    // 5) Mejorar estetica general (como las flechitas del carrousel) + Responsive
-    // 6) Armar .md file con documentacion general
-    // 7) Ver de poner limite al maximo de libros en zonaLectura   
-    // 8 Agregar Sweet Alert para permitir no mas de x cantidad de libros en el array de libros.
-    // 9) Agregar filtos buscadores
-    // 9) Agregar section carrito de Compras
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
+const agrandarImagenes = document.querySelectorAll('.main__section__div')
+for (const element of agrandarImagenes) {
+    
+element.addEventListener('click', (e) => {
+const id = e.target.id
+/* YA TENGO CAPTURADO EL TARGET ID DE LAS IMAGENES/ME FALTA LOGRAR QUE LUEGO SE AGRANDEN PARA QUE SE VEAN BIEN */
+})
+}
