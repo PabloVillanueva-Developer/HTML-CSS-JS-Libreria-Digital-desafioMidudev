@@ -45,10 +45,12 @@ ejecutarFiltro = document.getElementById('filtrosDinamicos')
 resetFiltros = document.getElementById('filtrosDinamicos')
 
     resetFiltros.addEventListener('click', (e) => {
+     
         if (e.target.value === 'eliminarFiltros')
         seleccionFiltro = library.map((objetosInternos) => {return objetosInternos}) 
         borrarCardsAnteriores ()
-        displayBooks (seleccionFiltro)    
+        displayBooks(seleccionFiltro) 
+        agregarLibrosSeleccionLectura()  
       
     })
 

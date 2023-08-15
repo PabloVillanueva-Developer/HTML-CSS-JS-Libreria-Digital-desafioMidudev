@@ -2,7 +2,6 @@
 
 let displayBooks = (array) => {
     const containerCatalogo = document.getElementById('carrouselContainer');
-    let contador = 0
     for (const iterator of array) {
        
         const cards = document.createElement('div')
