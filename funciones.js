@@ -202,7 +202,8 @@ const resetDescripcionesZonaLectura = () => {
 }
 
 
-/* FUNCION REUTILIZADA CON LOGICA PARA DROPS DE LIBROS A ZONA LECTURA DESDE DISTINTOS CONTENEDORES */
+/* FUNCION CON LOGICA PARA DESPLEGAR SELECCION LECTURA EN ZONA LECTURA. 
+ES UTILIZADA POR LOS EVENTOS DE DESPLAZAMIENTO PARA EJECUTRA UNA VEZ QUE EL ARRASTRE LLEGA A LOS CONTENEDORES */
 let idDinamicoB = '' 
 let idDinamicoA = '' 
 
@@ -295,6 +296,62 @@ for (const element of carritoComprasZonaLectura) {
     })}}
 
 
+/* ARRASTRE LIBROS A ZONA DE LECTURA */  
+let agregarLibrosSeleccionLectura = () => {
+
+    setTimeout(() => {
+        const coleccionLibros = document.querySelectorAll('.main__section__div__card__img')
+        const contenedorDragZonaLectura = document.getElementById('contenedorDragZonaLectura')
+        const contenedorDragZonaLecturaDirecto = document.getElementById('zonaLectura--container')
+  
+        
+        for (const element of coleccionLibros) {
+            element.addEventListener('dragstart', (e) => {
+                idDinamicoB = e.target.id + ' B '
+                idDinamicoA = e.target.id
+            })
+
+
+            element.addEventListener('touchstart', (e) => {
+                idDinamicoB = e.target.id + ' B '
+                idDinamicoA = e.target.id
+            });
+
+
+             // ARRASTRE A CONTENEDOR DE ENVIO PARA ZONA LECTURA (Evento de ratón)
+            contenedorDragZonaLectura.addEventListener ('drop', dropZonaLectura) 
+            // ARRASTRE A CONTENEDOR DE ENVIO PARA ZONA LECTURA (Evento táctil)
+            contenedorDragZonaLectura.addEventListener('touchend', dropZonaLectura);
+               // Permitir soltar en el área (Evento de ratón)
+            contenedorDragZonaLectura.addEventListener ('dragover', (e) => { e.preventDefault()}) 
+            // Permitir soltar en el área (Evento táctil)
+            contenedorDragZonaLectura.addEventListener('touchmove', (e) => { e.preventDefault();});
+
+
+
+            // ARRASTRE DIRECTO A ZONA LECTURA (Evento de ratón)
+            contenedorDragZonaLecturaDirecto.addEventListener('drop', dropZonaLectura);
+            // ARRASTRE DIRECTO A ZONA LECTURA (Evento táctil)
+            contenedorDragZonaLecturaDirecto.addEventListener('touchend', dropZonaLectura);
+            
+            // Permitir soltar en el área (Evento de ratón)
+             contenedorDragZonaLecturaDirecto.addEventListener('dragover', (e) => {e.preventDefault();});
+            // Permitir soltar en el área (Evento táctil)
+            contenedorDragZonaLecturaDirecto.addEventListener('touchmove', (e) => {e.preventDefault();});
+
+
+            
+
+
+        }   
+    }, 1);
+}
+    
+
+
+
+
+
     /* CONTADOR DE CARRITO */
 const actualizarContadorLibrosCarrito = () => {
 const carritoComprasContadorNumerico = document.getElementById('carritoComprasContadorNumerico')
@@ -316,10 +373,12 @@ const actualizarContadorLibrosZonaLectura = () => {
 /* 
 4) Agregar promesa para .json 
 6) Agregar sweetalert para agregado a Zona Lectura y Carrito
+7) Sino es complicado que los libros tengan el dedito de clickeable
+8) Agregar accion que agnande la imagen de los libros al clikearlos
 8) Agregar pantalla de sitio en construccion para todos los links muertos (al filtro hacer que se destaque el select)
 10) Agregar titulo y favicon
 11) Completar etiquetas alt
 11) Pasar imagenes por un optimizador de peso
 12) Ver si puedo eficientizar codigo
 13) Hacer Responsive 
- */
+14) Agregar eventos tuch para las mismas interacciones*/

@@ -205,43 +205,7 @@ eliminarSeleccionCarrito.addEventListener('click', (e) =>{
 
 
 
-/* ARRASTRE LIBROS A ZONA DE LECTURA */  
-let agregarLibrosSeleccionLectura = () => {
 
-    setTimeout(() => {
-        const coleccionLibros = document.querySelectorAll('.main__section__div__card__img')
-        const contenedorDragZonaLectura = document.getElementById('contenedorDragZonaLectura')
-        const contenedorDragZonaLecturaDirecto = document.getElementById('zonaLectura--container')
-  
-        
-        for (const element of coleccionLibros) {
-            element.addEventListener('dragstart', (e) => {
-                idDinamicoB = e.target.id + ' B '
-                idDinamicoA = e.target.id
-            })
-                    /* ARRASTRE A CONTENEDOR DE ENVIO PARA ZONA LECTURA */
-            contenedorDragZonaLectura.addEventListener ('drop', dropZonaLectura) 
-            
-            contenedorDragZonaLectura.addEventListener ('dragover', (e) => {
-                e.preventDefault();
-            }) 
-
-
-
-                /* ARRASTRE DIRECTO A ZONA LECTURA */
-            contenedorDragZonaLecturaDirecto.addEventListener ('drop', dropZonaLectura) 
-
-            contenedorDragZonaLecturaDirecto.addEventListener ('dragover', (e) => {
-                e.preventDefault();
-            }) 
-
-            
-
-
-        }   
-    }, 1);
-}
-    
 
 
 
