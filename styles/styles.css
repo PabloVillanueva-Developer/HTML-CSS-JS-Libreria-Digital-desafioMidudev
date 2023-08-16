@@ -156,7 +156,7 @@
  }
 
 .main__section__div__card__img {
-
+    position: relative;
     height: 10rem;
     border-radius: 1rem;
   

@@ -11,7 +11,7 @@ let displayBooks = (array) => {
             <div id='${iterator.book.genre}' class="main__section__div__card"
      
                 <a href="#"> 
-                    <img class="main__section__div__card__img" id='${iterator.book.title}' src="${iterator.book.cover}" alt="">
+                    <img class="main__section__div__card__img" id='${iterator.book.title}' src="${iterator.book.cover}" draggable="true">
                 </a>
                 
             </div>
@@ -315,6 +315,7 @@ let agregarLibrosSeleccionLectura = () => {
             element.addEventListener('touchstart', (e) => {
                 idDinamicoB = e.target.id + ' B '
                 idDinamicoA = e.target.id
+   
             });
 
 
@@ -337,20 +338,11 @@ let agregarLibrosSeleccionLectura = () => {
             // Permitir soltar en el área (Evento de ratón)
              contenedorDragZonaLecturaDirecto.addEventListener('dragover', (e) => {e.preventDefault();});
             // Permitir soltar en el área (Evento táctil)
-            contenedorDragZonaLecturaDirecto.addEventListener('touchmove', (e) => {e.preventDefault();});
-
-
-            
-
-
+            contenedorDragZonaLecturaDirecto.addEventListener('touchmove', (e) => {e.preventDefault(); console.log('elTouchfunciona')});
         }   
     }, 1);
 }
     
-
-
-
-
 
     /* CONTADOR DE CARRITO */
 const actualizarContadorLibrosCarrito = () => {
