@@ -176,6 +176,7 @@ eliminarSeleccionLectura.addEventListener('click', () =>{
     seleccionLectura = JSON.parse(localStorage.getItem('seleccionLectura'))
     resetDescripcionesZonaLectura()
     desactivarButEliminarZonaLectura()
+    sectionBotonZonaLecturaContador.innerText = seleccionLectura.length    
 
 })
 
@@ -189,6 +190,7 @@ eliminarSeleccionCarrito.addEventListener('click', (e) =>{
     borrarCardsAnterioresCarrito()
     localStorage.setItem('seleccionCarrito', JSON.stringify(seleccionCarrito = []))
     seleccionCarrito = JSON.parse(localStorage.getItem('seleccionCarrito'))
+    carritoComprasContadorNumerico.innerText = seleccionCarrito.length  
 /*     desactivarButEliminarZonaLectura() */
 
 })

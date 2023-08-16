@@ -34,6 +34,8 @@ eliminarCards.forEach((card) => card.remove())
 
 let displayBooksZonaLectura = () => {
 const cardsZonaLectura = document.getElementById('zonaLecturaCardsContainer')
+const sectionBotonZonaLecturaContador = document.getElementById('sectionBotonZonaLecturaContador')
+
 
 for (const element of seleccionLectura) {
     
@@ -46,7 +48,7 @@ for (const element of seleccionLectura) {
             <img id='${element.book.title}' class="zonaLectura__cardsContainer__cardsLibros__img" src="${element.book.cover}" alt="">
             <div id='${element.book.title + '--Buttons' }' class='zonaLectura__cardsContainer__cardsLibros__div'>
                 <a href='#'> 
-                    <img  class='zonaLectura__cardsContainer__cardsLibros__div__carritoCompras' src='./assets/imgs/carritoCompras.png'/>
+                    <img  class='zonaLectura__cardsContainer__cardsLibros__div__carritoCompras' id='${element.book.ISBN}' src='./assets/imgs/carritoCompras.png'/>
                 </a>
                 <a href='#'> 
                     <img id='${element.book.title}' class='zonaLectura__cardsContainer__cardsLibros__div__butEliminar' src='./assets/imgs/botonEliminar.png' href='#'/>
@@ -56,7 +58,7 @@ for (const element of seleccionLectura) {
     `
     cardsZonaLectura.appendChild(card)
     eliminarLibrosUnicos()
-    
+    sectionBotonZonaLecturaContador.innerText = seleccionLectura.length    
      /* SE AGREGAN LISTENERS DESPUES DE GENERAR CARDS SELECCION LECTURA PARA EVITAR DESINCRONIZACION CON LOS ELEMENTOS HTML DOM DINAMICOS DE ESTA FUNCION */
                             /* QUE SE DEBEN GENERAR ANTES DE LA ASIGNACION DE LOS LISTENERS */
 }  
@@ -67,7 +69,9 @@ for (const element of seleccionLectura) {
 
 let displayBooksCarrito = () => {
     const cardsZonaLectura = document.getElementById('carritoComprasGrillaLibros')
-    
+    const carritoComprasContadorNumerico = document.getElementById('carritoComprasContadorNumerico')
+
+
     for (const element of seleccionCarrito) {     
         const card = document.createElement('div');
         card.classList.add('carritoCompras__divs')
@@ -86,6 +90,9 @@ let displayBooksCarrito = () => {
         `
         cardsZonaLectura.appendChild(card)
         eliminarLibrosUnicosCarrito()
+        carritoComprasContadorNumerico.innerText = seleccionCarrito.length
+
+
         
          /* SE AGREGAN LISTENERS DESPUES DE GENERAR CARDS SELECCION LECTURA PARA EVITAR DESINCRONIZACION CON LOS ELEMENTOS HTML DOM DINAMICOS DE ESTA FUNCION */
                                 /* QUE SE DEBEN GENERAR ANTES DE LA ASIGNACION DE LOS LISTENERS */
@@ -127,6 +134,7 @@ let eliminarLibrosUnicos = () => {
             {resetDescripcionesZonaLectura()}
         borrarCardsAnterioresListaLectura()
         displayBooksZonaLectura()
+        sectionBotonZonaLecturaContador.innerText = seleccionLectura.length    
         if(seleccionLectura.length == 0)
             desactivarButEliminarZonaLectura()
         })
@@ -192,7 +200,7 @@ const resetDescripcionesZonaLectura = () => {
 }
 
 
-/* FUNCION REUTILIZADA CON LOGICA PARA DROPS DE LIBROS DESDE DISTINTOS CONTENEDORES */
+/* FUNCION REUTILIZADA CON LOGICA PARA DROPS DE LIBROS A ZONA LECTURA DESDE DISTINTOS CONTENEDORES */
 let idDinamicoB = '' 
 let idDinamicoA = '' 
 
@@ -209,8 +217,6 @@ const dropZonaLectura = (e) => {
                 activarButEliminarZonaLectura()  
         }
     })}
-
-
 
 
 
@@ -255,17 +261,43 @@ let agregarLibrosCarrito = () => {
 
 
 
+/* AGREGAR LIBROS AL CARRITO DESDE ZONA DE LECTURA */
+setTimeout(() => {
+    
+
+const carritoComprasZonaLectura = document.querySelectorAll('.zonaLectura__cardsContainer__cardsLibros__div__carritoCompras')
+
+for (const element of carritoComprasZonaLectura) {
+    element.addEventListener('click', (e) => {
+        const idDinamico = e.target.id
+       library.forEach((element) => {
+        if (idDinamico === element.book.ISBN)
+            if(!seleccionCarrito.find(item => item.book.ISBN === idDinamico))
+           
+                        
+                        seleccionCarrito.push(element)
+                        localStorage.setItem('seleccionCarrito', JSON.stringify(seleccionCarrito))
+                        borrarCardsAnterioresCarrito()
+                        displayBooksCarrito(seleccionCarrito) 
+                     
+       })
+
+})}
+
+}, 1000);
+
+
 
 
 
 
 /* 
-1) Agregar Logica de drop para carrito
-2) Agregar carrito al carrito desde ZonaLectura
+
 3) Agregar contador numerico visual en zona lectura y carrito
 4) Agregar sweetalert para agregado a Zona Lectura y Carrito
 5) Abrir zona lectura cada vez que se agrega un libro
 6) Agregar promesa para .json 
+6) Arreglar en incognito para ver que falla al cargar 
 7) Agregar boton de comprar a carrito 
 8) Agregar pantalla de sitio en construccion para todos los links muertos (al filtro hacer que se destaque el select)
 9) Hacer Responsive 
