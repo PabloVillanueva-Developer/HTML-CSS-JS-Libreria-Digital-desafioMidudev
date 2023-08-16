@@ -280,6 +280,8 @@ filter: brightness(0.7);
     left: 5.5rem;
 }
 
+
+
 .sectionBotonZonaLectura--a {
     width: 7rem;
     
@@ -294,31 +296,11 @@ filter: brightness(0.7);
 }
 
 
-.carritoCompras { 
-    width: 20rem;
-    margin: 1rem;
-    justify-self: center;
-    background:
-         url(../assets/imgs/carritoComprasGrande.png),
-         rgba(172, 169, 169, 0.879);
-    background-position: 
-        center, center;
-    background-size: 
-        50%, 
-        auto 20%;
-    background-repeat: 
-        no-repeat;
-    opacity: 75%;
-    border-radius: 1rem;
-    border-style: dashed;
-    border-color: rgb(128, 123, 123);
-  
- }
 
 
 
 .zonaLectura--container {
-    z-index: 5;
+    z-index: 50;
     height: 100vh;
     width: 30vw;
     position: absolute;
@@ -376,6 +358,7 @@ filter: brightness(0.7);
     grid-template-rows: 2fr 0.01fr 1fr;
     align-items: center;
     justify-items: center;
+    z-index: 60;
    
     
 }
@@ -536,14 +519,34 @@ filter: brightness(0.7);
     justify-content: center;
 }
 
-.carritoCompras {
+
+.carritoCompras { 
+    width: 20rem;
+    margin: 1rem;
+    justify-self: center;
+    background:
+         url(../assets/imgs/carritoComprasGrande.png),
+         rgba(172, 169, 169, 0.705);
+    background-position: 
+        center, center;
+    background-size: 
+        50%, 
+        auto 20%;
+    background-repeat: 
+        no-repeat;
+    opacity: 100%;
+    border-radius: 1rem;
+    border-style: dashed;
+    border-color: rgb(128, 123, 123);
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 4fr;
     overflow-x: hidden; 
     height: 30rem;
+  
+ }
 
-}
+
 
 
 .carritoCompras--grillaButtons{
@@ -560,7 +563,7 @@ filter: brightness(0.7);
     top: 0.01rem;
     background-color: rgb(231, 234, 237);
     border-radius: 1rem;
-    z-index: 20;
+    z-index: 5;
 
     }
 
@@ -570,19 +573,24 @@ filter: brightness(0.7);
 
  .carritoCompras--buttonComprar {
     position: relative;
+    display: flex;
+    justify-content: center;
+    width: 100%;
 
  }
 
  .carritoCompras--contadorNumerico {
     position: absolute;
-    left: 2.85rem;
-    top: 0.3rem;
+    
+    top: 0.4rem;
     font-weight: 1000;
     z-index: 100;
-    font-size: 1.7rem;
+    font-size: 1.3rem;
     text-decoration: none;
     color: black;
     transition: all 1s;
+   
+   
     
     }
 
@@ -591,6 +599,8 @@ filter: brightness(0.7);
 
 
 .carritoCompras--buttonComprar-img {
+    position: relative;
+    right: 0.3rem;
     width: 6rem;
     transition: all 1s;
     z-index: 40;
@@ -634,6 +644,7 @@ filter: brightness(0.7);
 .carritoCompras__divs__img {
     width: 4.8rem;
     border-radius: 1rem;
+    opacity: 100%;
 }
 
 .carritoCompras__divs__imgContainer__butEliminar{

@@ -14,16 +14,13 @@ let seleccionCarrito = []
 /* EJECUCION INICIAL DE CARDS EN BASE A ARRAY LIBRARY ORIGINAL */
 displayBooks (seleccionFiltro)
 
+/* EJECUCION DE FUNCION QUE AGREGA LIBROS AL CARRITO */
+agregarLibrosCarritoArrastre()
+
+/* EJECUCION INICIAL DE ENVIO LIBROS DE ZONA LECTURA A CARRITO */
+agregarLibrosZonaCarritodeZonaLectura()
 
 
-
-
-/* GENERACION DE FILTROS POR GENERO DINAMICOS (VERIFICA QUE SOLO HAYA UNO POR TIPO) */
-for (const iterator of library) {
-    genre = iterator.book.genre
-    if(!generosUnicos.includes(genre) )
-        generosUnicos.push(genre)
-}
 
 
 /* DISPLAY DE CARDS EN SECTION PRINCIPAL SEGUN SELECCION DE FILTRO */
@@ -35,6 +32,8 @@ ejecutarFiltro = document.getElementById('filtrosDinamicos')
    
         borrarCardsAnteriores ()
         displayBooks(seleccionFiltro)
+        agregarLibrosCarritoArrastre()
+     
       
     
     }) 
@@ -52,6 +51,7 @@ resetFiltros = document.getElementById('filtrosDinamicos')
         borrarCardsAnteriores ()
         displayBooks(seleccionFiltro) 
         agregarLibrosSeleccionLectura()  
+        
       
     })
 
@@ -105,39 +105,44 @@ resetFiltros = document.getElementById('filtrosDinamicos')
 
 /* Revision seleccionLectura en localStorage al cargar pagina*/
 document.addEventListener('DOMContentLoaded', () => {
+    
+   
     seleccionLectura = JSON.parse(localStorage.getItem('seleccionLectura'))
+    if(seleccionLectura === null) {seleccionLectura = []} /* MANEJA ERROR SI NO ENCUENTRA ARCHIVO EN LOCAL*/
     if(seleccionLectura)
         displayBooksZonaLectura(seleccionLectura)
     if(seleccionLectura.length > 0) 
         activarButEliminarZonaLectura()
+    
  
         
         /* seleccionLectura =[] */
     agregarLibrosSeleccionLectura()
+    agregarLibrosCarritoArrastre()
+    agregarLibrosZonaCarritodeZonaLectura()
+ 
    
 })
 
 
 /* AGREGAR LIBROS AL ARRAY seleccionCarrito / Compara si no esta agregado, lo sube*/
 
-/* Revision seleccionLectura en localStorage al cargar pagina*/
+/* Revision Carrito en localStorage al cargar pagina*/
 document.addEventListener('DOMContentLoaded', () => {
     seleccionCarrito = JSON.parse(localStorage.getItem('seleccionCarrito'))
+    if(seleccionCarrito === null) {seleccionCarrito = []} /* MANEJA ERROR SI NO ENCUENTRA ARCHIVO EN LOCAL*/
     if(seleccionCarrito)
         displayBooksCarrito()
-    if(seleccionCarrito.length > 0) 
-     /*    activarButEliminarZonaLectura() */
  
-        
-        /* seleccionLectura =[] */
-        agregarLibrosCarrito()
+      
    
+      
 })
 
 
 
 
-/* GENERACION INFO DINAMICA DE LIBROS */
+/* GENERACION INFO DINAMICA DE LIBROS ZONA LECTURA */
 const zonaLecturaGenero = document.getElementById('zonaLecturaGenero')
 const zonaLecturaPaginas = document.getElementById('zonaLecturaPaginas')
 const zonaLecturaSynopsis = document.getElementById('zonaLecturaSynopsis')
@@ -176,7 +181,7 @@ eliminarSeleccionLectura.addEventListener('click', () =>{
     seleccionLectura = JSON.parse(localStorage.getItem('seleccionLectura'))
     resetDescripcionesZonaLectura()
     desactivarButEliminarZonaLectura()
-    sectionBotonZonaLecturaContador.innerText = seleccionLectura.length    
+    actualizarContadorLibrosZonaLectura()
 
 })
 
@@ -230,14 +235,15 @@ let agregarLibrosSeleccionLectura = () => {
                 e.preventDefault();
             }) 
 
+            
+
 
         }   
     }, 1);
 }
     
 
-/* EJECUCION DE FUNCION QUE AGREGA LIBROS AL CARRITO */
-agregarLibrosCarrito()
+
 
 
 

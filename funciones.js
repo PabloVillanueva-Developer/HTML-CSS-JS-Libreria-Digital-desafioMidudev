@@ -34,7 +34,7 @@ eliminarCards.forEach((card) => card.remove())
 
 let displayBooksZonaLectura = () => {
 const cardsZonaLectura = document.getElementById('zonaLecturaCardsContainer')
-const sectionBotonZonaLecturaContador = document.getElementById('sectionBotonZonaLecturaContador')
+
 
 
 for (const element of seleccionLectura) {
@@ -58,7 +58,8 @@ for (const element of seleccionLectura) {
     `
     cardsZonaLectura.appendChild(card)
     eliminarLibrosUnicos()
-    sectionBotonZonaLecturaContador.innerText = seleccionLectura.length    
+    actualizarContadorLibrosZonaLectura()
+    
      /* SE AGREGAN LISTENERS DESPUES DE GENERAR CARDS SELECCION LECTURA PARA EVITAR DESINCRONIZACION CON LOS ELEMENTOS HTML DOM DINAMICOS DE ESTA FUNCION */
                             /* QUE SE DEBEN GENERAR ANTES DE LA ASIGNACION DE LOS LISTENERS */
 }  
@@ -69,7 +70,7 @@ for (const element of seleccionLectura) {
 
 let displayBooksCarrito = () => {
     const cardsZonaLectura = document.getElementById('carritoComprasGrillaLibros')
-    const carritoComprasContadorNumerico = document.getElementById('carritoComprasContadorNumerico')
+    
 
 
     for (const element of seleccionCarrito) {     
@@ -90,7 +91,8 @@ let displayBooksCarrito = () => {
         `
         cardsZonaLectura.appendChild(card)
         eliminarLibrosUnicosCarrito()
-        carritoComprasContadorNumerico.innerText = seleccionCarrito.length
+        actualizarContadorLibrosCarrito()
+      
 
 
         
@@ -134,7 +136,7 @@ let eliminarLibrosUnicos = () => {
             {resetDescripcionesZonaLectura()}
         borrarCardsAnterioresListaLectura()
         displayBooksZonaLectura()
-        sectionBotonZonaLecturaContador.innerText = seleccionLectura.length    
+        actualizarContadorLibrosZonaLectura() 
         if(seleccionLectura.length == 0)
             desactivarButEliminarZonaLectura()
         })
@@ -158,8 +160,8 @@ let eliminarLibrosUnicosCarrito = () => {
 
         borrarCardsAnterioresCarrito()
         displayBooksCarrito()
-       /*  if(seleccionCarrito.length == 0)
-            desactivarButEliminarZonaLectura() */
+        actualizarContadorLibrosCarrito  ()
+    
         
            
         })
@@ -213,6 +215,8 @@ const dropZonaLectura = (e) => {
             seleccionLectura.push(element)
             localStorage.setItem('seleccionLectura', JSON.stringify(seleccionLectura))
             displayBooksZonaLectura(seleccionLectura) 
+            agregarLibrosCarritoArrastre()
+            agregarLibrosZonaCarritodeZonaLectura()
             if(seleccionLectura.length > 0) 
                 activarButEliminarZonaLectura()  
         }
@@ -221,7 +225,7 @@ const dropZonaLectura = (e) => {
 
 
 /* AGREGAR LIBROS POR ARRASTRE A CARRITO */  
-let agregarLibrosCarrito = () => {
+let agregarLibrosCarritoArrastre = () => {
 
     setTimeout(() => {
         const coleccionLibros = document.querySelectorAll('.main__section__div__card__img')
@@ -257,23 +261,29 @@ let agregarLibrosCarrito = () => {
 
         }   
     }, 1);   
+
+    agregarLibrosZonaCarritodeZonaLectura()
+
 }
 
 
 
 /* AGREGAR LIBROS AL CARRITO DESDE ZONA DE LECTURA */
-setTimeout(() => {
-    
+
+const agregarLibrosZonaCarritodeZonaLectura = () => {
+  
 
 const carritoComprasZonaLectura = document.querySelectorAll('.zonaLectura__cardsContainer__cardsLibros__div__carritoCompras')
 
 for (const element of carritoComprasZonaLectura) {
     element.addEventListener('click', (e) => {
+        console.log('el click funciona')
+    
         const idDinamico = e.target.id
        library.forEach((element) => {
         if (idDinamico === element.book.ISBN)
             if(!seleccionCarrito.find(item => item.book.ISBN === idDinamico))
-           
+          
                         
                         seleccionCarrito.push(element)
                         localStorage.setItem('seleccionCarrito', JSON.stringify(seleccionCarrito))
@@ -282,26 +292,34 @@ for (const element of carritoComprasZonaLectura) {
                      
        })
 
-})}
-
-}, 1000);
+    })}}
 
 
+    /* CONTADOR DE CARRITO */
+const actualizarContadorLibrosCarrito = () => {
+const carritoComprasContadorNumerico = document.getElementById('carritoComprasContadorNumerico')
+carritoComprasContadorNumerico.innerText = seleccionCarrito.length
+}
+
+/* CONTADOR ZONA LECTURA */
+const actualizarContadorLibrosZonaLectura = () => {
+    const sectionBotonZonaLecturaContador = document.getElementById('sectionBotonZonaLecturaContador')
+    sectionBotonZonaLecturaContador.innerText = seleccionLectura.length   
+    }
+    
 
 
 
+
+/* NO AGREGA DE ZONA LECTURA A CARRITO */
 
 /* 
-
-3) Agregar contador numerico visual en zona lectura y carrito
-4) Agregar sweetalert para agregado a Zona Lectura y Carrito
-5) Abrir zona lectura cada vez que se agrega un libro
-6) Agregar promesa para .json 
-6) Arreglar en incognito para ver que falla al cargar 
-7) Agregar boton de comprar a carrito 
+4) Agregar promesa para .json 
+6) Agregar sweetalert para agregado a Zona Lectura y Carrito
 8) Agregar pantalla de sitio en construccion para todos los links muertos (al filtro hacer que se destaque el select)
-9) Hacer Responsive 
 10) Agregar titulo y favicon
 11) Completar etiquetas alt
+11) Pasar imagenes por un optimizador de peso
 12) Ver si puedo eficientizar codigo
+13) Hacer Responsive 
  */
