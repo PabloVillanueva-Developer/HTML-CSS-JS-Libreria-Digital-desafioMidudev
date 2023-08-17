@@ -11,7 +11,7 @@ let displayBooks = (array) => {
             <div id='${iterator.book.genre}' class="main__section__div__card"
      
                 <a href="#"> 
-                    <img class="main__section__div__card__img" id='${iterator.book.title}' src="${iterator.book.cover}" draggable="true">
+                    <img class="main__section__div__card__img" id='${iterator.book.title}' src="${iterator.book.cover}">
                 </a>
                 
             </div>
@@ -28,6 +28,9 @@ let borrarCardsAnteriores = () => {
 const eliminarCards = document.querySelectorAll('.main__section__div')
 eliminarCards.forEach((card) => card.remove())
 }
+
+
+
 
 
 /* CREAR CARDS DE ZONA DE LECTURA */
@@ -118,6 +121,7 @@ let borrarCardsAnterioresListaLectura = () => {
 let borrarCardsAnterioresCarrito = () => {
     const eliminarCards = document.querySelectorAll('.carritoCompras__divs')
     eliminarCards.forEach((card) => card.remove())
+    
     }
 
 
@@ -128,17 +132,28 @@ let eliminarLibrosUnicos = () => {
     const butElimninarLibroUnico = document.getElementsByClassName('zonaLectura__cardsContainer__cardsLibros__div__butEliminar')
     for (const element of butElimninarLibroUnico){
     element.addEventListener('click',(e) => { /* CAPTURA ID DINAMICO */
-        const idDinamico = e.target.id
-  
-        seleccionLectura = seleccionLectura.filter((element) => element.book.title !== idDinamico)
-         localStorage.setItem('seleccionLectura', JSON.stringify(seleccionLectura))
-        if(seleccionLectura.length == 0)
-            {resetDescripcionesZonaLectura()}
-        borrarCardsAnterioresListaLectura()
-        displayBooksZonaLectura()
-        actualizarContadorLibrosZonaLectura() 
-        if(seleccionLectura.length == 0)
-            desactivarButEliminarZonaLectura()
+    const idDinamico = e.target.id
+        if (seleccionLectura.some((element) => element.book.title == idDinamico))
+                {{ Toastify({
+                    text: "¡Libro(s) eliminado(s) del Carrito",
+                    duration: 3000,
+                    gravity: "top",
+                    style: {
+                        background: "linear-gradient(147deg, #FFE53B 0%, #FF2525 38%)"},
+                    stopOnFocus: true,
+                }).showToast()}
+                seleccionLectura = seleccionLectura.filter((element) => element.book.title !== idDinamico)
+                localStorage.setItem('seleccionLectura', JSON.stringify(seleccionLectura))
+               if(seleccionLectura.length == 0)
+                   {resetDescripcionesZonaLectura()}
+               borrarCardsAnterioresListaLectura()
+               displayBooksZonaLectura()
+               actualizarContadorLibrosZonaLectura() 
+               if(seleccionLectura.length == 0)
+                   desactivarButEliminarZonaLectura()}
+
+      
+        
         })
     }
   
@@ -150,23 +165,43 @@ let eliminarLibrosUnicos = () => {
 
 let eliminarLibrosUnicosCarrito = () => {
     const butElimninarLibroUnico = document.getElementsByClassName('carritoCompras__divs__imgContainer__butEliminar--img')
+
  
     for (const element of butElimninarLibroUnico){
     element.addEventListener('click',(e) => { /* CAPTURA ID DINAMICO */
-        const idDinamico = e.target.id
-  
-        seleccionCarrito = seleccionCarrito.filter((element) => element.book.title !== idDinamico)
-         localStorage.setItem('seleccionCarrito', JSON.stringify(seleccionCarrito))
+    e.stopPropagation();
 
-        borrarCardsAnterioresCarrito()
-        displayBooksCarrito()
-        actualizarContadorLibrosCarrito  ()
-    
-        
-           
-        })
+     
+
+        const idDinamico = e.target.id  
+        const libroAEliminar = seleccionCarrito.find((element) => element.book.title === idDinamico);
+        if (libroAEliminar) {
+            Toastify({
+                text: "¡Libro(s) eliminado(s) del Carrito",
+                duration: 3000,
+                gravity: "top",
+                style: {
+                    background: "linear-gradient(147deg, #FFE53B 0%, #FF2525 38%)"},
+                stopOnFocus: true,
+            }).showToast();
+
+        seleccionCarrito = seleccionCarrito.filter((element) => element.book.title !== idDinamico) 
+       
     }
-  
+            
+        
+        localStorage.setItem('seleccionCarrito', JSON.stringify(seleccionCarrito))
+        borrarCardsAnterioresCarrito()
+        actualizarContadorLibrosCarrito  ()
+        displayBooksCarrito()
+        
+      
+        
+
+
+    })
+    }  
+   
 }
 
 
@@ -209,14 +244,25 @@ let idDinamicoA = ''
 
 const dropZonaLectura = (e) => {
     borrarCardsAnterioresListaLectura()
+    borrarCardsAnterioresCarrito()
     library.forEach((element) => { 
         if (idDinamicoB === element.book.title + ' B ') {
             if(!seleccionLectura.find(item => item.book.title === idDinamicoA))
             
-            seleccionLectura.push(element)
+            {seleccionLectura.push(element);
+                    Toastify({
+                        text: "¡Libro(s) añadido(s) a Zona de Lectura!",
+                        duration: 3000,
+                        gravity: "top",
+                        style: {
+                            background: "linear-gradient(132deg, #F4D03F 0%, #16A085 100%)"},
+                        stopOnFocus: true,
+                    }).showToast();}
             localStorage.setItem('seleccionLectura', JSON.stringify(seleccionLectura))
             displayBooksZonaLectura(seleccionLectura) 
+        
             agregarLibrosCarritoArrastre()
+            
             agregarLibrosZonaCarritodeZonaLectura()
             if(seleccionLectura.length > 0) 
                 activarButEliminarZonaLectura()  
@@ -225,48 +271,66 @@ const dropZonaLectura = (e) => {
 
 
 
+
+
 /* AGREGAR LIBROS POR ARRASTRE A CARRITO */  
 let agregarLibrosCarritoArrastre = () => {
-
-    setTimeout(() => {
-        const coleccionLibros = document.querySelectorAll('.main__section__div__card__img')
-        const contenedorCarrito = document.getElementById('carritoCompras')
-        let idDinamicoB = '' 
-        let idDinamicoA = '' 
-       
-        
-        for (const element of coleccionLibros) {
-            element.addEventListener('dragstart', (e) => {
-                idDinamicoB = e.target.id + ' B '
-                idDinamicoA = e.target.id
-            })
+    const coleccionLibros = document.querySelectorAll('.main__section__div__card__img');
+    const contenedorCarrito = document.getElementById('carritoCompras');
     
-            contenedorCarrito.addEventListener ('drop', (e) => {
-                borrarCardsAnterioresCarrito()
-                library.forEach((element) => { 
-                    if (idDinamicoB === element.book.title + ' B ') {
-                        if(!seleccionCarrito.find(item => item.book.title === idDinamicoA))
-                        
-                        seleccionCarrito.push(element)
-                        localStorage.setItem('seleccionCarrito', JSON.stringify(seleccionCarrito))
-                        displayBooksCarrito(seleccionCarrito) 
-                        if(seleccionCarrito.length > 0) 
-                            activarButEliminarZonaLectura()         
-                    }
-                }) 
-            })
-          
-            contenedorCarrito.addEventListener ('dragover', (e) => {
-                e.preventDefault();
-            }) 
+    let idDinamicoB = '';
+    let idDinamicoA = '';
 
-        }   
-    }, 1);   
+    for (const element of coleccionLibros) {
+        element.addEventListener('dragstart', (e) => {
+            idDinamicoB = e.target.id + ' B ';
+            idDinamicoA = e.target.id;
+        });
+    }
 
-    agregarLibrosZonaCarritodeZonaLectura()
+    contenedorCarrito.addEventListener('dragover', (e) => {
+        e.preventDefault();
+    });
 
-}
 
+
+    contenedorCarrito.addEventListener('drop', (e) => {
+        e.preventDefault();
+
+        if (idDinamicoB && idDinamicoA) {
+            const elementToAdd = library.find(element => idDinamicoB === element.book.title + ' B ');
+
+            if (elementToAdd && !seleccionCarrito.some(item => item.book.title === idDinamicoA)) {
+                seleccionCarrito.push(elementToAdd);
+                
+                Toastify({
+                    text: "¡Libro(s) añadido(s) a Carrito!",
+                    duration: 3000,
+                    gravity: "top",
+                    style: {
+                        background: "linear-gradient(132deg, #F4D03F 0%, #16A085 100%)"
+                    },
+                    stopOnFocus: true,
+                }).showToast();
+                
+                localStorage.setItem('seleccionCarrito', JSON.stringify(seleccionCarrito));
+                borrarCardsAnterioresCarrito();
+                displayBooksCarrito(seleccionCarrito);
+                
+                if (seleccionCarrito.length > 0) {
+                    activarButEliminarZonaLectura();
+                }
+            }
+        }
+
+        idDinamicoB = '';
+        idDinamicoA = '';
+    });
+
+   
+
+    agregarLibrosZonaCarritodeZonaLectura();
+};
 
 
 /* AGREGAR LIBROS AL CARRITO DESDE ZONA DE LECTURA */
@@ -278,8 +342,7 @@ const carritoComprasZonaLectura = document.querySelectorAll('.zonaLectura__cards
 
 for (const element of carritoComprasZonaLectura) {
     element.addEventListener('click', (e) => {
-        console.log('el click funciona')
-    
+
         const idDinamico = e.target.id
        library.forEach((element) => {
         if (idDinamico === element.book.ISBN)
@@ -321,26 +384,27 @@ let agregarLibrosSeleccionLectura = () => {
 
              // ARRASTRE A CONTENEDOR DE ENVIO PARA ZONA LECTURA (Evento de ratón)
             contenedorDragZonaLectura.addEventListener ('drop', dropZonaLectura) 
-            // ARRASTRE A CONTENEDOR DE ENVIO PARA ZONA LECTURA (Evento táctil)
-            contenedorDragZonaLectura.addEventListener('touchend', dropZonaLectura);
+        
                // Permitir soltar en el área (Evento de ratón)
             contenedorDragZonaLectura.addEventListener ('dragover', (e) => { e.preventDefault()}) 
-            // Permitir soltar en el área (Evento táctil)
-            contenedorDragZonaLectura.addEventListener('touchmove', (e) => { e.preventDefault();});
+          
 
 
 
             // ARRASTRE DIRECTO A ZONA LECTURA (Evento de ratón)
             contenedorDragZonaLecturaDirecto.addEventListener('drop', dropZonaLectura);
-            // ARRASTRE DIRECTO A ZONA LECTURA (Evento táctil)
-            contenedorDragZonaLecturaDirecto.addEventListener('touchend', dropZonaLectura);
+     
             
             // Permitir soltar en el área (Evento de ratón)
              contenedorDragZonaLecturaDirecto.addEventListener('dragover', (e) => {e.preventDefault();});
-            // Permitir soltar en el área (Evento táctil)
-            contenedorDragZonaLecturaDirecto.addEventListener('touchmove', (e) => {e.preventDefault(); console.log('elTouchfunciona')});
+           
         }   
+
+      
     }, 1);
+
+   
+
 }
     
 
@@ -348,29 +412,183 @@ let agregarLibrosSeleccionLectura = () => {
 const actualizarContadorLibrosCarrito = () => {
 const carritoComprasContadorNumerico = document.getElementById('carritoComprasContadorNumerico')
 carritoComprasContadorNumerico.innerText = seleccionCarrito.length
+
+
+
+
+
+
+
 }
 
 /* CONTADOR ZONA LECTURA */
 const actualizarContadorLibrosZonaLectura = () => {
     const sectionBotonZonaLecturaContador = document.getElementById('sectionBotonZonaLecturaContador')
-    sectionBotonZonaLecturaContador.innerText = seleccionLectura.length   
+    sectionBotonZonaLecturaContador.innerText = seleccionLectura.length  
+
     }
+
+
+
+
+/* DISPLAY DE CARDS EN SECTION PRINCIPAL SEGUN SELECCION DE FILTRO */
+const displayCardsSegunFilto = () => {ejecutarFiltro = document.getElementById('filtrosDinamicos')
+    ejecutarFiltro.addEventListener('click', (e) => {
+        
+        /* CREACION DE ARRAY CON SELECCION = seleccionFiltro */
+         /* RESET DEL ARRAY PARA CADA CLICK INDIVIDUAL */
+        seleccionFiltro = library.filter((objeto) => e.target.value === objeto.book.genre)
+   
+        borrarCardsAnteriores ()
+       
+        displayBooks(seleccionFiltro)
+        agregarLibrosCarritoArrastre()
+     
+    
+    }) 
+}
+
+
+
+/* ELIMINAR FILTROS/MOSTRAR TODOS LOS LIBROS ZONA PRINCIPAL*/
+const eliminarFiltros = () => {resetFiltros = document.getElementById('filtrosDinamicos')
+
+    resetFiltros.addEventListener('click', (e) => {
+     
+        if (e.target.value === 'eliminarFiltros')
+        seleccionFiltro = library.map((objetosInternos) => {return objetosInternos}) 
+        borrarCardsAnteriores()
+        displayBooks(seleccionFiltro) 
+        agregarLibrosSeleccionLectura() 
+        agregarLibrosCarritoArrastre() 
+        
+       
+        
+      
+    })
+}
     
 
+
+
+/* AGREGAR LIBROS AL ARRAY seleccionLectura / Compara si no esta agregado, lo sube*/
+
+
+/* Revision seleccionLectura en localStorage al cargar pagina*/
+const pushSeleccionLecturaVerificaNoRepetido = () => {document.addEventListener('DOMContentLoaded', () => {
+    
+   
+    seleccionLectura = JSON.parse(localStorage.getItem('seleccionLectura'))
+    if(seleccionLectura === null) {seleccionLectura = []} /* MANEJA ERROR SI NO ENCUENTRA ARCHIVO EN LOCAL*/
+    if(seleccionLectura)
+        displayBooksZonaLectura(seleccionLectura)
+    if(seleccionLectura.length > 0) 
+        activarButEliminarZonaLectura()
+    
+ 
+        
+        /* seleccionLectura =[] */
+    agregarLibrosSeleccionLectura()
+    agregarLibrosCarritoArrastre()
+    agregarLibrosZonaCarritodeZonaLectura()
+
+  
+
+   
+})
+}
+
+
+/* Revision Carrito en localStorage al cargar pagina*/
+const pushSeleccionCarritoVerificaNoRepetido = () => { document.addEventListener('DOMContentLoaded', () => {
+    seleccionCarrito = JSON.parse(localStorage.getItem('seleccionCarrito'))
+    if(seleccionCarrito === null) {seleccionCarrito = []} /* MANEJA ERROR SI NO ENCUENTRA ARCHIVO EN LOCAL*/
+    if(seleccionCarrito)
+        displayBooksCarrito()
+
+ 
+    
+ 
+      
+   
+      
+})
+}
+
+
+
+/* ELIMINAR SELECCION LECTURA COMPLETA */
+
+const eliminarSeleccionLecturaCompleto = () => {
+let eliminarSeleccionLectura = document.getElementById('eliminarSeleccionLectura')
+
+eliminarSeleccionLectura.addEventListener('click', () =>{
+    borrarCardsAnterioresListaLectura()
+
+        Toastify({
+            text: "¡Libro(s) eliminado(s) de Zona de Lectura",
+            duration: 3000,
+            gravity: "top",
+            style: {
+                background: "linear-gradient(147deg, #FFE53B 0%, #FF2525 38%)"},
+            stopOnFocus: true,
+        }).showToast()
+
+    localStorage.setItem('seleccionLectura', JSON.stringify(seleccionLectura = []))
+    seleccionLectura = JSON.parse(localStorage.getItem('seleccionLectura'))
+    resetDescripcionesZonaLectura()
+    desactivarButEliminarZonaLectura()
+    actualizarContadorLibrosZonaLectura()
+
+})
+}
+
+
+/* ELIMINAR SELECCION CARRITO COMPLETA */
+const eliminarSeleccionCarritoCompleto = () => {
+let eliminarSeleccionCarrito = document.getElementById('eliminarSeleccionCarrito')
+
+
+eliminarSeleccionCarrito.addEventListener('click', (e) =>{
+    
+    borrarCardsAnterioresCarrito()
+
+        Toastify({
+            text: "¡Libro(s) eliminado(s) de Zona de Lectura",
+            duration: 3000,
+            gravity: "top",
+            style: {
+                background: "linear-gradient(147deg, #FFE53B 0%, #FF2525 38%)"},
+            stopOnFocus: true,
+        }).showToast()
+
+    localStorage.setItem('seleccionCarrito', JSON.stringify(seleccionCarrito = []))
+    seleccionCarrito = JSON.parse(localStorage.getItem('seleccionCarrito'))
+    carritoComprasContadorNumerico.innerText = seleccionCarrito.length  
+/*     desactivarButEliminarZonaLectura() */
+
+})
+}
+
+/* Toastify({
+    text: "¡Libro(s) eliminado(s) de Zona de Lectura",
+    duration: 3000,
+    gravity: "top",
+    style: {
+        background: "linear-gradient(147deg, #FFE53B 0%, #FF2525 38%)"},
+    stopOnFocus: true,
+}).showToast() */
 
 
 
 /* NO AGREGA DE ZONA LECTURA A CARRITO */
 
 /* 
-4) Agregar promesa para .json 
-6) Agregar sweetalert para agregado a Zona Lectura y Carrito
+
 7) Sino es complicado que los libros tengan el dedito de clickeable
-8) Agregar accion que agnande la imagen de los libros al clikearlos
-8) Agregar pantalla de sitio en construccion para todos los links muertos (al filtro hacer que se destaque el select)
 10) Agregar titulo y favicon
 11) Completar etiquetas alt
 11) Pasar imagenes por un optimizador de peso
 12) Ver si puedo eficientizar codigo
-13) Hacer Responsive 
+13) Hacer Responsive (sencillo)     
 14) Agregar eventos tuch para las mismas interacciones*/

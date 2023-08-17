@@ -1,3 +1,4 @@
+let library = []
 let genre = ''
 const generosUnicos = []
 let generosFiltro = ''
@@ -10,51 +11,68 @@ let seleccionLectura = []
 let seleccionCarrito = []
 
 
+/* SOLICITUD INFO A API (.JSON LOCAL) */
 
+pushSeleccionLecturaVerificaNoRepetido()
+
+pushSeleccionCarritoVerificaNoRepetido()
+
+const fetchData = async () => {
+try {const response = await fetch('https://raw.githubusercontent.com/PabloVillanueva-Developer/simuladorAPIsRepoJSONs/main/books.json')
+
+
+
+
+    library = await response.json()
+   /* EJECUCION INICIAL DE CARDS EN BASE A ARRAY LIBRARY ORIGINAL */
+    displayBooks (library)
 /* EJECUCION INICIAL DE CARDS EN BASE A ARRAY LIBRARY ORIGINAL */
-displayBooks (seleccionFiltro)
+    displayBooks (seleccionFiltro)
 
 /* EJECUCION DE FUNCION QUE AGREGA LIBROS AL CARRITO */
 agregarLibrosCarritoArrastre()
+ 
 
 /* EJECUCION INICIAL DE ENVIO LIBROS DE ZONA LECTURA A CARRITO */
 agregarLibrosZonaCarritodeZonaLectura()
 
+agregarLibrosSeleccionLectura()
+
+displayCardsSegunFilto()
+
+eliminarFiltros()
+
+eliminarSeleccionCarritoCompleto()
+
+eliminarSeleccionLecturaCompleto()
+
+
+eliminarLibrosUnicosCarrito()
+
+eliminarLibrosUnicos()
+
+borrarCardsAnterioresCarrito()
+
+borrarCardsAnterioresListaLectura()
+
+displayBooksCarrito()
 
 
 
-/* DISPLAY DE CARDS EN SECTION PRINCIPAL SEGUN SELECCION DE FILTRO */
-ejecutarFiltro = document.getElementById('filtrosDinamicos')
-    ejecutarFiltro.addEventListener('click', (e) => {
-        /* CREACION DE ARRAY CON SELECCION = seleccionFiltro */
-        seleccionFiltro = [] /* RESET DEL ARRAY PARA CADA CLICK INDIVIDUAL */
-        seleccionFiltro = library.filter((objeto) => e.target.value === objeto.book.genre)
-   
-        borrarCardsAnteriores ()
-        displayBooks(seleccionFiltro)
-        agregarLibrosCarritoArrastre()
-     
-      
-    
-    }) 
-
-    /* ARREGLAR FILTROS */
 
 
-/* ELIMINAR FILTROS/MOSTRAR TODOS LOS LIBROS ZONA PRINCIPAL*/
-resetFiltros = document.getElementById('filtrosDinamicos')
 
-    resetFiltros.addEventListener('click', (e) => {
-     
-        if (e.target.value === 'eliminarFiltros')
-        seleccionFiltro = library.map((objetosInternos) => {return objetosInternos}) 
-        borrarCardsAnteriores ()
-        displayBooks(seleccionFiltro) 
-        agregarLibrosSeleccionLectura()  
-        
-      
-    })
 
+
+
+}
+
+catch (error) {
+    console.error('Error al cargar los datos:', error);
+  }
+
+}
+fetchData()
 
 
 
@@ -94,51 +112,6 @@ resetFiltros = document.getElementById('filtrosDinamicos')
 
     
 
-    
-
-    
-
-
-
-/* AGREGAR LIBROS AL ARRAY seleccionLectura / Compara si no esta agregado, lo sube*/
-
-
-/* Revision seleccionLectura en localStorage al cargar pagina*/
-document.addEventListener('DOMContentLoaded', () => {
-    
-   
-    seleccionLectura = JSON.parse(localStorage.getItem('seleccionLectura'))
-    if(seleccionLectura === null) {seleccionLectura = []} /* MANEJA ERROR SI NO ENCUENTRA ARCHIVO EN LOCAL*/
-    if(seleccionLectura)
-        displayBooksZonaLectura(seleccionLectura)
-    if(seleccionLectura.length > 0) 
-        activarButEliminarZonaLectura()
-    
- 
-        
-        /* seleccionLectura =[] */
-    agregarLibrosSeleccionLectura()
-    agregarLibrosCarritoArrastre()
-    agregarLibrosZonaCarritodeZonaLectura()
- 
-   
-})
-
-
-/* AGREGAR LIBROS AL ARRAY seleccionCarrito / Compara si no esta agregado, lo sube*/
-
-/* Revision Carrito en localStorage al cargar pagina*/
-document.addEventListener('DOMContentLoaded', () => {
-    seleccionCarrito = JSON.parse(localStorage.getItem('seleccionCarrito'))
-    if(seleccionCarrito === null) {seleccionCarrito = []} /* MANEJA ERROR SI NO ENCUENTRA ARCHIVO EN LOCAL*/
-    if(seleccionCarrito)
-        displayBooksCarrito()
- 
-      
-   
-      
-})
-
 
 
 
@@ -172,33 +145,6 @@ for (const coleccionHTML of infoLibrosDinamica) {
 
 
 
-/* ELIMINAR SELECCION LECTURA COMPLETA */
-let eliminarSeleccionLectura = document.getElementById('eliminarSeleccionLectura')
-
-eliminarSeleccionLectura.addEventListener('click', () =>{
-    borrarCardsAnterioresListaLectura()
-    localStorage.setItem('seleccionLectura', JSON.stringify(seleccionLectura = []))
-    seleccionLectura = JSON.parse(localStorage.getItem('seleccionLectura'))
-    resetDescripcionesZonaLectura()
-    desactivarButEliminarZonaLectura()
-    actualizarContadorLibrosZonaLectura()
-
-})
-
-
-/* ELIMINAR SELECCION CARRITO COMPLETA */
-let eliminarSeleccionCarrito = document.getElementById('eliminarSeleccionCarrito')
-
-
-eliminarSeleccionCarrito.addEventListener('click', (e) =>{
-    
-    borrarCardsAnterioresCarrito()
-    localStorage.setItem('seleccionCarrito', JSON.stringify(seleccionCarrito = []))
-    seleccionCarrito = JSON.parse(localStorage.getItem('seleccionCarrito'))
-    carritoComprasContadorNumerico.innerText = seleccionCarrito.length  
-/*     desactivarButEliminarZonaLectura() */
-
-})
 
 
 
@@ -206,19 +152,3 @@ eliminarSeleccionCarrito.addEventListener('click', (e) =>{
 
 
 
-
-
-
-
-
-
-
-
-const agrandarImagenes = document.querySelectorAll('.main__section__div')
-for (const element of agrandarImagenes) {
-    
-element.addEventListener('click', (e) => {
-const id = e.target.id
-/* YA TENGO CAPTURADO EL TARGET ID DE LAS IMAGENES/ME FALTA LOGRAR QUE LUEGO SE AGRANDEN PARA QUE SE VEAN BIEN */
-})
-}
