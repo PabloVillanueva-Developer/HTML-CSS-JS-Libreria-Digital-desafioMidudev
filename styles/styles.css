@@ -692,6 +692,7 @@
         grid-template-rows: 0.01fr 5fr 0.3fr ;
         height: 100vh;
         width: 100vw;
+        background-size: cover;
     }
 
     .main {
@@ -794,12 +795,18 @@
 
 @media (max-width: 550px) {
 
+    
+
 .main__section__carrouselContainer {
     grid-template-columns: repeat(3, 1fr);
  }
 
 .carritoCompras__grillaLibros {
     grid-template-columns: repeat(2, 1fr)
+}
+
+.header__nav__ul {
+    gap: 1rem;
 }
 
 }
