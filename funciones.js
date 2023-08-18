@@ -388,7 +388,8 @@ let agregarLibrosSeleccionLectura = () => {
 
              // ARRASTRE A CONTENEDOR DE ENVIO PARA ZONA LECTURA (Evento de ratón)
             contenedorDragZonaLectura.addEventListener ('drop', dropZonaLectura) 
-            contenedorDragZonaLectura.addEventListener ('tuchend', dropZonaLectura) 
+            contenedorDragZonaLectura.addEventListener ('tuchstart', dropZonaLectura) 
+      
         
                // Permitir soltar en el área (Evento de ratón)
             contenedorDragZonaLectura.addEventListener ('dragover', (e) => { e.preventDefault()})
