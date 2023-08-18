@@ -682,6 +682,10 @@
 
 @media (max-width: 1199px) {
 
+    .header {
+        width: 100vw;
+    }
+
     .body {
         display: grid;
         grid-template-columns: 1fr;
@@ -692,8 +696,8 @@
 
     .main {
         display: grid;
-        grid-template-columns: 0.1fr 1fr;
-        grid-template-rows: 1fr 1fr;
+        grid-template-columns: 1fr 0.3fr;
+        grid-template-rows: 0.5fr 1fr;
 
     }
 
@@ -706,40 +710,56 @@
     .sectionBotonZonaLectura {
         order: 2;
         align-self: center;
-        justify-self: start;
-        padding-top: 1rem;
-        margin:1rem;
+        justify-self: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 20rem;
+        width: 95%;
+        border-radius: 1rem;
+        background-color: rgba(176, 181, 185, 0.883);
+     
+        border-style: dashed;
+        border-color: rgb(128, 123, 123);
+       
+       
         
        
     }
 
     .sectionBotonZonaLectura--img {
-        width: 9rem;
+        width: 7rem;
+        border-radius: 0;
+        border-style: none;
+        background-color: rgba(176, 181, 185, 0);
     }
 
     .sectionBotonZonaLecturaContador {
-        left: 4.2rem;
-        top: 7.9rem;
+        width: 3;
+       justify-content: end;
         font-size: 1.5rem;
+        margin: 0 auto;
 
     }
 
     .carritoCompras {
         order:1;
-        grid-column: span 2;
-        height: 30rem;
-        width: 50rem;
+    
+        height: 20rem;
+        width: 95%;
+        padding-left: 0;
         background-size: 
             30%, 
             auto 20%;
             background-position: 
-            bottom, center;
+            center, center;
        
     }
 
 
     .main__section {
         order: 3;
+        grid-column: span 2;
         height: 30rem;
         
       
@@ -747,6 +767,7 @@
 
     .carritoCompras__grillaLibros {
         grid-template-columns: repeat(6, 1fr);
+
     }
 
     .main__section__carrouselContainer {
@@ -759,5 +780,19 @@
 
   
 
+
+}
+
+
+
+@media (max-width: 550px) {
+
+.main__section__carrouselContainer {
+    grid-template-columns: repeat(3, 1fr);
+ }
+
+ .header__nav__ul {
+    gap: 1rem;
+ }
 
 }
