@@ -130,9 +130,14 @@ let borrarCardsAnterioresCarrito = () => {
 
 let eliminarLibrosUnicosZonaLectura = () => {
     const butElimninarLibroUnico = document.getElementsByClassName('zonaLectura__cardsContainer__cardsLibros__div__butEliminar')
+    let idDinamico = ''
+    
+     
+    
+       
     for (const element of butElimninarLibroUnico){
-    element.addEventListener('click',(e) => { /* CAPTURA ID DINAMICO */
-    const idDinamico = e.target.id
+    const eliminarLibrosZLecturaIndividual = (e) => { /* CAPTURA ID DINAMICO */
+    idDinamico = e.target.id
         if (seleccionLectura.some((element) => element.book.title == idDinamico))
                 {{ Toastify({
                     text: "¡Libro(s) eliminado(s) del Carrito",
@@ -152,13 +157,17 @@ let eliminarLibrosUnicosZonaLectura = () => {
                actualizarContadorLibrosZonaLectura() 
                if(seleccionLectura.length == 0)
                    desactivarButEliminarZonaLectura()}
-
+            }
+        
+          
+            element.addEventListener('touchstart', (e) => { eliminarLibrosZLecturaIndividual(e); e.preventDefault(); })
+             element.addEventListener('click', eliminarLibrosZLecturaIndividual)
       
         
-        })
-    }
+      
+    }}
   
-}
+
 
 
 
@@ -294,10 +303,13 @@ let agregarLibrosCarritoArrastre = () => {
         e.preventDefault();
     });
 
+    contenedorCarrito.addEventListener('touchstart', (e) => {
+
+    });
 
 
-    contenedorCarrito.addEventListener('drop', (e) => {
-        e.preventDefault();
+    const dropLibroZonaLectura = (e) => {
+      
 
         if (idDinamicoB && idDinamicoA) {
             const elementToAdd = library.find(element => idDinamicoB === element.book.title + ' B ');
@@ -318,8 +330,7 @@ let agregarLibrosCarritoArrastre = () => {
                 
                 localStorage.setItem('seleccionCarrito', JSON.stringify(seleccionCarrito));
                 borrarCardsAnterioresCarrito();
-                displayBooksCarrito(seleccionCarrito);
-                
+                displayBooksCarrito(seleccionCarrito);                
                 if (seleccionCarrito.length > 0) {
                     activarButEliminarZonaLectura();
                 }
@@ -328,12 +339,23 @@ let agregarLibrosCarritoArrastre = () => {
 
         idDinamicoB = '';
         idDinamicoA = '';
-    });
+    };
+                
+    contenedorCarrito.addEventListener('drop', dropLibroZonaLectura)
+    contenedorCarrito.addEventListener('touchend', dropLibroZonaLectura)
 
-   
+    contenedorCarrito.addEventListener('dragover', (e) => {e.preventDefault();});
+    contenedorCarrito.addEventListener('touchmove', (e) => { e.preventDefault()})  
+
+     
 
     agregarLibrosZonaCarritodeZonaLectura();
-};
+            }
+    
+
+
+ 
+
 
 
 /* AGREGAR LIBROS AL CARRITO DESDE ZONA DE LECTURA */
@@ -477,8 +499,6 @@ const eliminarFiltros = () => {resetFiltros = document.getElementById('filtrosDi
 }
     
 
-
-
 /* AGREGAR LIBROS AL ARRAY seleccionLectura / Compara si no esta agregado, lo sube*/
 
 
@@ -530,7 +550,10 @@ const pushSeleccionCarritoVerificaNoRepetido = () => { document.addEventListener
 const eliminarSeleccionLecturaCompleto = () => {
 let eliminarSeleccionLectura = document.getElementById('eliminarSeleccionLectura')
 
-eliminarSeleccionLectura.addEventListener('click', () =>{
+
+
+
+const eliminarSeleccioLectura  = () =>{
     borrarCardsAnterioresListaLectura()
 
         Toastify({
@@ -549,7 +572,10 @@ eliminarSeleccionLectura.addEventListener('click', () =>{
     desactivarButEliminarZonaLectura()
     actualizarContadorLibrosZonaLectura()
 
-})
+}
+
+eliminarSeleccionLectura.addEventListener('click', eliminarSeleccioLectura)
+eliminarSeleccionLectura.addEventListener('touchstart', eliminarSeleccioLectura)
 }
 
 
@@ -558,7 +584,10 @@ const eliminarSeleccionCarritoCompleto = () => {
 let eliminarSeleccionCarrito = document.getElementById('eliminarSeleccionCarrito')
 
 
-eliminarSeleccionCarrito.addEventListener('click', (e) =>{
+
+
+
+const eliminarSeleccionCarritoEvento = (e) =>{
     
     borrarCardsAnterioresCarrito()
 
@@ -576,9 +605,13 @@ eliminarSeleccionCarrito.addEventListener('click', (e) =>{
     seleccionCarrito = JSON.parse(localStorage.getItem('seleccionCarrito'))
     carritoComprasContadorNumerico.innerText = seleccionCarrito.length  
 /*     desactivarButEliminarZonaLectura() */
+    }
 
-})
+    eliminarSeleccionCarrito.addEventListener('click', eliminarSeleccionCarritoEvento)
+eliminarSeleccionCarrito.addEventListener('touchstart', eliminarSeleccionCarritoEvento)
+
 }
+
 
 /* ALERT CUANDO SE SELECCIONA EL BOTON DE CARRITO PARA CERRAR COMPRA */
   
@@ -628,10 +661,8 @@ const butCerrarCompraCarrito = () => {
 
 
 
-12) hacer una verificacion en las eliminacion de libro que si el array esta vacio, indique que esta vacio
-   
 12) Ver si puedo eficientizar codigo y emprolijar
-13) Ver si puedo agregar algun evento touch para el mouse (probar con el celu)
+Y ENVIAR (NO MAS POR FAVOR
 
-11) Pasar imagenes por un optimizador de peso
-14) Agregar eventos tuch para las mismas interacciones*/
+/* TOUCH FALTA ARREGLAR LA ELIMINACION DE LIBROS INDIVIDUAL A ZONA LECTURA*/
+/* TOUCH FALTA ARREGLAR LA CARGA INDIVIDUAL DE LIBROS AL CARRITO */
