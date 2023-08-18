@@ -8,13 +8,13 @@ let displayBooks = (array) => {
         cards.classList.add('main__section__div')
 
         cards.innerHTML = `
-            <div id='${iterator.book.genre}' class="main__section__div__card"
+            <a href='#' id='${iterator.book.genre}' class="main__section__div__card"
      
                 <a href="#"> 
-                    <img class="main__section__div__card__img" id='${iterator.book.title}' src="${iterator.book.cover}">
+                    <img class="main__section__div__card__img" id='${iterator.book.title}' src="${iterator.book.cover}" alt='Tapa Libro'>
                 </a>
                 
-            </div>
+            </a>
         `
         containerCatalogo.appendChild(cards);
     }
@@ -51,16 +51,16 @@ for (const element of seleccionLectura) {
             <img id='${element.book.title}' class="zonaLectura__cardsContainer__cardsLibros__img" src="${element.book.cover}" alt="">
             <div id='${element.book.title + '--Buttons' }' class='zonaLectura__cardsContainer__cardsLibros__div'>
                 <a href='#'> 
-                    <img  class='zonaLectura__cardsContainer__cardsLibros__div__carritoCompras' id='${element.book.ISBN}' src='./assets/imgs/carritoCompras.png'/>
+                    <img  class='zonaLectura__cardsContainer__cardsLibros__div__carritoCompras' id='${element.book.ISBN}' src='./assets/imgs/carritoCompras.png' alt='Imagen Portada'/>
                 </a>
                 <a href='#'> 
-                    <img id='${element.book.title}' class='zonaLectura__cardsContainer__cardsLibros__div__butEliminar' src='./assets/imgs/botonEliminar.png' href='#'/>
+                    <img id='${element.book.title}' class='zonaLectura__cardsContainer__cardsLibros__div__butEliminar' src='./assets/imgs/botonEliminar.png' href='#' alt='Boton Eliminar'/>
                 </a>
             </div>
         </div>
     `
     cardsZonaLectura.appendChild(card)
-    eliminarLibrosUnicos()
+    eliminarLibrosUnicosZonaLectura()
     actualizarContadorLibrosZonaLectura()
     
      /* SE AGREGAN LISTENERS DESPUES DE GENERAR CARDS SELECCION LECTURA PARA EVITAR DESINCRONIZACION CON LOS ELEMENTOS HTML DOM DINAMICOS DE ESTA FUNCION */
@@ -84,10 +84,10 @@ let displayBooksCarrito = () => {
             <div id='divLibrosSeleccionados' class="carritoCompras_divs--imgContainer">
                  
                 <a class='carritoCompras__divs__imgContainer__butEliminar' href='#'> 
-                    <img id='${element.book.title}' class='carritoCompras__divs__imgContainer__butEliminar--img' src='./assets/imgs/botonEliminar.png' href='#'/>
+                    <img id='${element.book.title}' class='carritoCompras__divs__imgContainer__butEliminar--img' src='./assets/imgs/botonEliminar.png' href='#' alt='Boton Eliminar'/>
                 </a>
                 
-                <img id='${element.book.title}' class="carritoCompras__divs__img" src="${element.book.cover}" alt="">
+                <img id='${element.book.title}' class="carritoCompras__divs__img" src="${element.book.cover}" alt="Portada Libro">
                 <div id='${element.book.title + '--Buttons' }' class=''>   
                 </div>
             </div>
@@ -128,7 +128,7 @@ let borrarCardsAnterioresCarrito = () => {
 
 /* ELIMINAR CARDS ZONA LECTURA INDIVIDUALMENTE */
 
-let eliminarLibrosUnicos = () => {
+let eliminarLibrosUnicosZonaLectura = () => {
     const butElimninarLibroUnico = document.getElementsByClassName('zonaLectura__cardsContainer__cardsLibros__div__butEliminar')
     for (const element of butElimninarLibroUnico){
     element.addEventListener('click',(e) => { /* CAPTURA ID DINAMICO */
@@ -138,6 +138,7 @@ let eliminarLibrosUnicos = () => {
                     text: "¡Libro(s) eliminado(s) del Carrito",
                     duration: 3000,
                     gravity: "top",
+                    position: "left",
                     style: {
                         background: "linear-gradient(147deg, #FFE53B 0%, #FF2525 38%)"},
                     stopOnFocus: true,
@@ -180,6 +181,7 @@ let eliminarLibrosUnicosCarrito = () => {
                 text: "¡Libro(s) eliminado(s) del Carrito",
                 duration: 3000,
                 gravity: "top",
+                position: "left",
                 style: {
                     background: "linear-gradient(147deg, #FFE53B 0%, #FF2525 38%)"},
                 stopOnFocus: true,
@@ -244,7 +246,7 @@ let idDinamicoA = ''
 
 const dropZonaLectura = (e) => {
     borrarCardsAnterioresListaLectura()
-    borrarCardsAnterioresCarrito()
+
     library.forEach((element) => { 
         if (idDinamicoB === element.book.title + ' B ') {
             if(!seleccionLectura.find(item => item.book.title === idDinamicoA))
@@ -254,6 +256,7 @@ const dropZonaLectura = (e) => {
                         text: "¡Libro(s) añadido(s) a Zona de Lectura!",
                         duration: 3000,
                         gravity: "top",
+                        position: "left",
                         style: {
                             background: "linear-gradient(132deg, #F4D03F 0%, #16A085 100%)"},
                         stopOnFocus: true,
@@ -307,6 +310,7 @@ let agregarLibrosCarritoArrastre = () => {
                     text: "¡Libro(s) añadido(s) a Carrito!",
                     duration: 3000,
                     gravity: "top",
+                    position: "left",
                     style: {
                         background: "linear-gradient(132deg, #F4D03F 0%, #16A085 100%)"
                     },
@@ -529,6 +533,7 @@ eliminarSeleccionLectura.addEventListener('click', () =>{
             text: "¡Libro(s) eliminado(s) de Zona de Lectura",
             duration: 3000,
             gravity: "top",
+            position: "left",
             style: {
                 background: "linear-gradient(147deg, #FFE53B 0%, #FF2525 38%)"},
             stopOnFocus: true,
@@ -557,6 +562,7 @@ eliminarSeleccionCarrito.addEventListener('click', (e) =>{
             text: "¡Libro(s) eliminado(s) de Zona de Lectura",
             duration: 3000,
             gravity: "top",
+            position: "left",
             style: {
                 background: "linear-gradient(147deg, #FFE53B 0%, #FF2525 38%)"},
             stopOnFocus: true,
@@ -570,25 +576,58 @@ eliminarSeleccionCarrito.addEventListener('click', (e) =>{
 })
 }
 
-/* Toastify({
-    text: "¡Libro(s) eliminado(s) de Zona de Lectura",
-    duration: 3000,
-    gravity: "top",
-    style: {
-        background: "linear-gradient(147deg, #FFE53B 0%, #FF2525 38%)"},
-    stopOnFocus: true,
-}).showToast() */
+/* ALERT CUANDO SE SELECCIONA EL BOTON DE CARRITO PARA CERRAR COMPRA */
+  
+const butCerrarCompraCarrito = () => { 
+    const carritoComprasCerrarCompra = document.getElementById('butCarritoCerrarCompra') 
+    console.log(carritoComprasCerrarCompra)
+    carritoComprasCerrarCompra.addEventListener('click',() => { 
+        borrarCardsAnterioresCarrito()
+        actualizarContadorLibrosCarrito()
+        localStorage.setItem('seleccionCarrito', JSON.stringify(seleccionCarrito = []))
+        seleccionCarrito = JSON.parse(localStorage.getItem('seleccionCarrito'))
+        carritoComprasContadorNumerico.innerText = seleccionCarrito.length 
+        displayBooksCarrito() 
+    
+    
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
+          
+          Toast.fire({
+            icon: 'success',
+            title: 'Procesando Compra'
+          })
+    
+    
+    
+        })
+    
+    }
+    
+    
+    
 
 
-
-/* NO AGREGA DE ZONA LECTURA A CARRITO */
 
 /* 
 
-7) Sino es complicado que los libros tengan el dedito de clickeable
-10) Agregar titulo y favicon
-11) Completar etiquetas alt
-11) Pasar imagenes por un optimizador de peso
-12) Ver si puedo eficientizar codigo
+
+
+
+
+12) hacer una verificacion en las eliminacion de libro que si el array esta vacio, indique que esta vacio
 13) Hacer Responsive (sencillo)     
+12) Ver si puedo eficientizar codigo y emprolijar
+13) Ver si puedo agregar algun evento touch para el mouse (probar con el celu)
+
+11) Pasar imagenes por un optimizador de peso
 14) Agregar eventos tuch para las mismas interacciones*/

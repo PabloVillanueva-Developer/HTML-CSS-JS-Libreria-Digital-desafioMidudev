@@ -3,18 +3,23 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Libreria Digital</title>
     <link rel="stylesheet" href="./styles/styles.css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="icon" href="./assets/imgs/favicon.ico" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
 </head>
 <body id="body" class="body">
      <!-- ZONA DE LECTURA -->
      
     <section  class="zonaLectura--container" id='zonaLectura--container'>
         <div id="zonaLectura" class='zonaLectura--hidden'>
-            <div class="zonaLectura--menu">
-                <a id="cierreX" class="cierreX" href="#"> X </a>
-            </div>
+              
+                <a class="zonaLectura--menu" href="#"> 
+                    <img id="cierreX" class="cierreX" href="#" src="./assets/imgs/cierreX.png" alt="Cierre Zona Lectura">    
+                </a>
+          
 
             <div id="zonaLecturaCards">
                 <div class="zonaLectura__cardsContainer">
@@ -22,7 +27,7 @@
                     
                     </div>
                     <a class="zonaLecturaCards__Container__flex__a--invisible" href="#">
-                        <img id='eliminarSeleccionLectura'  class="zonaLecturaCards__Container__flex__a__img" src="./assets/imgs/eliminarSeleccionLectura.png" alt="">
+                        <img id='eliminarSeleccionLectura'  class="zonaLecturaCards__Container__flex__a__img" src="./assets/imgs/eliminarSeleccionLectura.png" alt="Boton Eliminar">
                     </a>
                   
                     
@@ -55,13 +60,13 @@
                 <a class="header__nav__u__a" href="#">Catalogo</a>
                 <a class="header__nav__u__a" href="#">Nosotros</a>
                 <a class="header__nav__u__a" href="#" id="botonAbrirZonaLectura">Zona lectura</a>
-                <a class="header__nav__u__a" href="#">Filtro</a>
+                <a class="header__nav__u__a" href="#" id="comoOperar">Ayuda</a>
             </ul>
         </nav>
 
         <section >
             <label  class="filtroLibros__contenedor" for="filtro">
-                <select class="filtroLibros__contenedor__select" name="Filtro por Genero" id="filtrosDinamicos">
+                <select class="filtroLibros__contenedor__select" name="Filtro por Genero" id="filtrosDinamicos" alt="Filtro de Libros">
                     <option id='eliminarFiltros' value="eliminarFiltros">Sin Filtro Genero </option>
                     <option value='Fantasía'value="">Fantasía </option>
                     <option value="Ciencia ficción" value="">Ciencia Ficción </option>
@@ -95,7 +100,7 @@
         <section class="sectionBotonZonaLectura">
             <p class="sectionBotonZonaLecturaContador" id="sectionBotonZonaLecturaContador">0</p>
             <a id="contenedorDragZonaLectura" class="sectionBotonZonaLectura--a" id="botonAbrirZonaLectura2" href="#">
-                <img class="sectionBotonZonaLectura--img" src="./assets/imgs/botonZonaLectura.png" alt="">
+                <img class="sectionBotonZonaLectura--img" src="./assets/imgs/botonZonaLectura.png" alt="Arrastre Aqui para Detalle de Libro">
             </a>
 
         </section>
@@ -104,12 +109,12 @@
             <div class="carritoCompras--grillaButtons">
               
                 <a class="carritoCompras--buttonCestaEliminar" href="#">
-                    <img id='eliminarSeleccionCarrito'  class="carritoCompras--cestaEliminar" src="./assets/imgs/eliminarSeleccionLectura.png" alt="">
+                    <img id='eliminarSeleccionCarrito'  class="carritoCompras--cestaEliminar" src="./assets/imgs/eliminarSeleccionLectura.png" alt="Elimnar del Carrito">
                 </a>
 
                 <a class="carritoCompras--buttonComprar" href="#">
                     <p class="carritoCompras--contadorNumerico" id="carritoComprasContadorNumerico">0</p>
-                    <img id=''  class="carritoCompras--buttonComprar-img" src="./assets/imgs/carritoComprasNumerico.png" alt="">
+                    <img id='butCarritoCerrarCompra'  class="carritoCompras--buttonComprar-img" src="./assets/imgs/carritoComprasNumerico.png" alt="Boton Comprar Carrito">
                 </a>
                 
             </div>
@@ -126,8 +131,13 @@
     <script src="./funciones.js"></script>
     <script src="./main.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-  
+   
    
 </body>
+
+<footer class="footer">
+    <p class="footer--firma">&copy; 2023 Pablo Villanueva. pablo.villanueva.dev@gmail.com</p>
+</footer>
+
 </html>
 

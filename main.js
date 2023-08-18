@@ -49,13 +49,15 @@ eliminarSeleccionLecturaCompleto()
 
 eliminarLibrosUnicosCarrito()
 
-eliminarLibrosUnicos()
+eliminarLibrosUnicosZonaLectura()
 
 borrarCardsAnterioresCarrito()
 
 borrarCardsAnterioresListaLectura()
 
 displayBooksCarrito()
+
+butCerrarCompraCarrito()
 
 
 
@@ -143,12 +145,22 @@ for (const coleccionHTML of infoLibrosDinamica) {
     })  
 }
 
+/* ALERT CON EXPLICACION DE FUNCIONAMIENTO DEL SITIO */
+const comoOperar = document.getElementById('comoOperar')
+const mensajeComoOperar = "Utiliza los filtros para acotar tu busqueada. \nPuedes arrastrar los libros a la Zona de lectura en el contenedor circular o directamente en la Zona de Lectura desplegada.\nSi clickeas en Zona Lectura en el menu superior o si clickeas sobre el circulo de lectura, podras desplegar la Zona de Lectura \nPuedes arrastra al carrito los libros que te interesen."
+    comoOperar.addEventListener('click',() => {
+        Toastify({
+            text: mensajeComoOperar,
+            duration: 6000,
+            gravity: "top",
+            style: {
+                background: "linear-gradient(147deg, #039BE5 0%, #8E24AA 38%)"},
+            stopOnFocus: true,
+        }).showToast()
 
 
+    }
+    )
 
-
-
-
-
-
+ 
 

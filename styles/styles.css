@@ -14,649 +14,750 @@
 }
 
 
-.body {
-    background-image: url(../assets/imgs/Sin\ título-1.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 0.1fr 0.1fr;
-    width: 100vw;
-    height: 100vh; 
 
- 
-}
+    .body {
+        background-image: url(../assets/imgs/Sin\ título-1.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 0.1fr 0.1fr 0.1fr;
+        width: 100vw;
+        height: 100vh; 
 
-.header {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 3rem 0.01fr;
-    background-color: rgba(142, 142, 143, 0.707);
-    width: 100vw;
-   
-}
-
-.header__nav__ul {
-    display: flex;
-    gap: 3rem;
-    font-family: fuente1;
-  
-}
-
-.header__nav__u__a {
-    color: aliceblue;
-    position: relative;
-}
-
-.header__sectionFilter {
-    position: absolute;
-    left: 1rem;
-    top: 4rem;
-    background-color: rgba(0, 0, 0, 0.863);
-    width: 9rem;
-    height: 2rem;
-    display: flex;
-    justify-content: center;
-  
-}
-
-.header__sectionFilter__ul {
-    width: 9rem;
-    height: 14rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    flex-direction: column;
-    background-color: rgba(0, 0, 0, 0.737);
-    position: absolute;
-    left: 0.5rem;
-    top: 4rem;
     
-}
+    }
 
-.header__sectionFilter__ul__a {
+    .header {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 3rem 0.01fr;
+        background-color: rgba(142, 142, 143, 0.707);
+        width: 100vw;
+    
+    }
+
+    .header__nav__ul {
+        display: flex;
+        gap: 3rem;
+        font-family: fuente1;
+    
+    }
+
+    .header__nav__u__a {
+        color: aliceblue;
+        position: relative;
+    }
+
+    .header__sectionFilter {
+        position: absolute;
+        left: 1rem;
+        top: 4rem;
+        background-color: rgba(0, 0, 0, 0.863);
+        width: 9rem;
+        height: 2rem;
+        display: flex;
+        justify-content: center;
+    
+    }
+
+    .header__sectionFilter__ul {
+        width: 9rem;
+        height: 14rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        flex-direction: column;
+        background-color: rgba(0, 0, 0, 0.737);
+        position: absolute;
+        left: 0.5rem;
+        top: 4rem;
+    }
+
+    .header__sectionFilter__ul__a {
+        text-decoration: none;
+        color: aliceblue;
+        padding-top: 0.5rem;
+        
+    }
+
+    .header__sectionFilter__ul__div {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        flex-direction: column;
+    }
+
+    .header__sectionFilter__ul__div__a {
     text-decoration: none;
     color: aliceblue;
-    padding-top: 0.5rem;
+    }
+
+    .nav {
+        justify-self: center;
+        align-self: center;
+    }
+
+    .main {
+        display: grid;
+        grid-template-columns: 3fr 1fr 2fr;
+        grid-template-rows: 1fr;
+        width: 100vw;
+        margin: 0 auto;
     
-}
+        
+    }
 
-.header__sectionFilter__ul__div {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    flex-direction: column;
-}
-
-.header__sectionFilter__ul__div__a {
-   text-decoration: none;
-   color: aliceblue;
-}
-
-.nav {
-    justify-self: center;
-    align-self: center;
-}
-
- .main {
-    display: grid;
-    grid-template-columns: 3fr 1fr 2fr;
-    grid-template-rows: 1fr;
-    width: 100vw;
-    margin: 0 auto;
-  
     
- }
-
- 
- .main__section { 
-   
-    overflow-x: hidden;
-    padding: 1rem;
-    margin: 1rem;
-    justify-self: center;
- }
-
- .main__section::-webkit-scrollbar {
-    width: 0.5rem;
- }
-
- 
-
- .main__section__carrouselContainer {
+    .main__section { 
     height: 30rem;
-    gap:0.5rem;
-    display: grid;
-    grid-template-columns: repeat(5,1fr);
-    grid-template-rows: 1fr;
-    justify-items: center;
-  
- }
+        overflow-x: hidden;
+        padding: 1rem;
+        margin: 1rem;
+        justify-self: center;
+    }
 
- .main__section__carrouselContainerTranlate {
-    transform: translateX(0); 
- }
+    .main__section::-webkit-scrollbar {
+        width: 0.5rem;
+    }
 
- 
+    
 
- .main__section__div {
-    height: 13rem;
-   
- }
+    .main__section__carrouselContainer {
+        height: 30rem;
+        gap:0.5rem;
+        display: grid;
+        grid-template-columns: repeat(5,1fr);
+        grid-template-rows: 1fr;
+        justify-items: center;
+    
+    }
 
- .main__section__div__card {
-   position: relative;
- }
+    .main__section__carrouselContainerTranlate {
+        transform: translateX(0); 
+    }
 
- .main__section__div__card__a {
-    display: flex;
-    justify-content: center;
-    background-color: rgb(179, 179, 179);
-    border-radius: 1rem;
- }
+    
 
-.main__section__div__card__img {
+    .main__section__div {
+        height: 13rem;
+    
+    }
+
+    .main__section__div__card {
     position: relative;
-    height: 10rem;
-    border-radius: 1rem;
-  
-}
+    }
 
-.main__section__div__card__img:hover {
+    .main__section__div__card__a {
+        display: flex;
+        justify-content: center;
+        background-color: rgb(179, 179, 179);
+        border-radius: 1rem;
+    }
+
+    .main__section__div__card__img {
+        position: relative;
+        height: 10rem;
+        border-radius: 1rem;
+    
+    }
+
+    .main__section__div__card__img:hover {
+        filter: brightness(0.7);
+    
+    }
+
+    .main__section__div__card__img--botonAgregarLibro {
+        position: absolute;
+        height: 3rem;
+        z-index: 10;
+        bottom: -1.5rem;
+        border-radius: 1rem;
+        background-color: rgba(220, 220, 220, 0.49);
+        border-radius: 1rem;
+    }
+
+    .main__section__div__card__img--botonAgregarLibro:hover {
+        transform: scale(1.1);
+        filter: brightness(1.2);
+    }
+
+
+    .main__section__div__card__back {
+        background-color: rgba(41, 37, 37, 0.384);
+        z-index: 2;
+        position: absolute;
+        height: 17rem;
+        width: 11.3rem;
+        transform: scale(0.5);
+        opacity: 0;
+        color: aliceblue;
+        font-family: fuente1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        padding: 0.8rem;
+        text-align: center;
+        border-radius: 1rem;
+        transition: all 0.5s;
+    }
+
+
+    .main__section__div__card__button {
+        position: absolute;
+        border-radius: 50%;
+        z-index: 3;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center; 
+        text-decoration: none; 
+        color: black;
+    }
+
+
+
+    .main__section__div__card__container {
+        display: flex;
+        justify-content: center;
+    }
+
+
+
+
+
+
+    .main__section__div__card__button__a__carritoCompras{
+        
+        width: 3rem;
+        border-radius: 1rem;
+        position: relative;
+        bottom: 0.7rem;
+    }
+
+    .main__section__div__card__button__a__carritoCompras:hover {
+        transform: scale(1.2);
+        filter: brightness(1.1);
+    }
+
+    .main__section__buttons {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+    }
+
+
+
+    .main__section__buttons__a__img {
+        width: 3rem;
+        border-radius: 70%;
+    
+    }
+
+    .main__section__buttons__a__img:hover {
     filter: brightness(0.7);
-   
-}
+    }
 
-.main__section__div__card__img--botonAgregarLibro {
-    position: absolute;
-    height: 3rem;
-    z-index: 10;
-    bottom: -1.5rem;
-    border-radius: 1rem;
-    background-color: rgba(220, 220, 220, 0.49);
-    border-radius: 1rem;
-}
+    .sectionBotonZonaLectura {
+        position: relative;
+        justify-self: center;
+        align-self: center;
+        transition: all 1s;
+    
+    }
 
-.main__section__div__card__img--botonAgregarLibro:hover {
-    transform: scale(1.1);
-    filter: brightness(1.2);
-}
+    .sectionBotonZonaLectura:hover {
+        transform: scale(1.1);
+        filter: brightness(1.2);
+        transition: all 1s;
+    }
+
+    .sectionBotonZonaLecturaContador {
+        position: absolute;
+        font-size: 2rem;
+        z-index: 100;
+        bottom: 1rem;
+        left: 5.5rem;
+    }
 
 
-.main__section__div__card__back {
-    background-color: rgba(41, 37, 37, 0.384);
-    z-index: 2;
-    position: absolute;
-    height: 17rem;
-    width: 11.3rem;
-    transform: scale(0.5);
-    opacity: 0;
-    color: aliceblue;
-    font-family: fuente1;
+
+    .sectionBotonZonaLectura--a {
+        width: 7rem;
+        
+    }
+
+    .sectionBotonZonaLectura--img{
+        width:12rem;
+        background-color: rgba(176, 181, 185, 0.883);
+        border-radius: 50%;
+        border-style: dashed;
+        border-color: rgb(128, 123, 123);
+    }
+
+
+
+
+
+    .zonaLectura--container {
+        z-index: 50;
+        height: 100vh;
+        width: 30vw;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        overflow: hidden;
+        pointer-events: none;
+        
+    }
+
+    .zonaLectura--hidden {
+        height: 100vh;
+        width: 30vw;
+        background-color:rgba(175, 180, 184, 0.761);
+        position: absolute;
+        z-index: 6;
+        right: 0;
+        bottom: 0;
+        transform: translateX(100%);
+        transition: all 2s;
+    
+    }
+
+    .zonaLectura--desplegado {
+        height: 100vh;
+        width: 30vw;
+        background-color:rgba(218, 225, 231, 0.9);
+        position: absolute;
+        z-index: 6;
+        right: 0;
+        bottom: 0;
+        transform: translateX(0);
+        transition: all 2s;
+        pointer-events: auto;
+        
+    }
+
+    .zonaLectura--menu {
+        position: relative;
+        width: 30rem;
+        height: 30rem;
+    }
+
+    .cierreX {
+        position: absolute;
+        color:rgb(0, 0, 0);
+        padding-left: 1rem;
+        padding-top: 1rem;
+        z-index: 20; 
+        font-family: fuente1;
+        width: 3rem;
+        transition: all 1s;
+    }
+
+    .cierreX:hover {
+        transform: scale(1.5);
+        filter: hue-rotate(200deg);
+        transition: all 1s;
+    }
+
+    .zonaLectura__cardsContainer {
+        height: 100vh;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 2fr 0.01fr 1fr;
+        align-items: center;
+        justify-items: center;
+        z-index: 60;
+    
+        
+    }
+
+    .zonaLecturaCards__Container__flex {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        overflow: hidden;
+    }
+
+    .zonaLecturaCards__Container__flex__a--invisible {
+        border-radius: 50%;
+        pointer-events: none;
+        opacity: 0;
+        transition: all 2s;
+        pointer-events: none;
+    }
+
+    .zonaLecturaCards__Container__flex__a--visible {
+        border-radius: 50%;
+        pointer-events: none;
+        opacity: 100%;
+        transition: all 2s;
+        pointer-events: all;
+    }
+
+
+
+
+    .zonaLecturaCards__Container__flex__a__img {
+        width: 4rem;
+        border-radius: 50%;
+    
+    }
+
+
+
+    .zonaLectura__cardsContainer__div {
+    
+        flex-direction: row;
+        justify-items: center;
+        align-items: center;
+    }
+
+    .zonaLectura__cardsContainer__cardsLibros {
+
+    width: 2rem;
+    overflow: hidden;
+    transition: all 1s;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    padding: 0.8rem;
-    text-align: center;
-    border-radius: 1rem;
-    transition: all 0.5s;
-}
-
-
-.main__section__div__card__button {
-    position: absolute;
-    border-radius: 50%;
-    z-index: 3;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center; 
-    text-decoration: none; 
-    color: black;
-}
-
-
-
-.main__section__div__card__container {
-    display: flex;
     justify-content: center;
-}
-
-
-
-
-
-
-.main__section__div__card__button__a__carritoCompras{
-    
-    width: 3rem;
+    align-items: center;
     border-radius: 1rem;
     position: relative;
-    bottom: 0.7rem;
-}
-
-.main__section__div__card__button__a__carritoCompras:hover {
-    transform: scale(1.2);
-    filter: brightness(1.1);
-}
-
-.main__section__buttons {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-   }
-
-
-
-.main__section__buttons__a__img {
-    width: 3rem;
-    border-radius: 70%;
-   
-}
-
-.main__section__buttons__a__img:hover {
-filter: brightness(0.7);
-}
-
-.sectionBotonZonaLectura {
-    position: relative;
-    justify-self: center;
-    align-self: center;
-    transition: all 1s;
-  
-}
-
-.sectionBotonZonaLectura:hover {
-    transform: scale(1.1);
-    filter: brightness(1.2);
-    transition: all 1s;
-}
-
-.sectionBotonZonaLecturaContador {
-    position: absolute;
-    font-size: 2rem;
-    z-index: 100;
-    bottom: 1rem;
-    left: 5.5rem;
-}
-
-
-
-.sectionBotonZonaLectura--a {
-    width: 7rem;
-    
-}
-
-.sectionBotonZonaLectura--img{
-    width:12rem;
-    background-color: rgba(176, 181, 185, 0.883);
-    border-radius: 50%;
-    border-style: dashed;
-    border-color: rgb(128, 123, 123);
-}
-
-
-
-
-
-.zonaLectura--container {
-    z-index: 50;
-    height: 100vh;
-    width: 30vw;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    overflow: hidden;
-    pointer-events: none;
-    
-}
-
-.zonaLectura--hidden {
-    height: 100vh;
-    width: 30vw;
-    background-color:rgba(175, 180, 184, 0.761);
-    position: absolute;
-    z-index: 6;
-    right: 0;
-    bottom: 0;
-    transform: translateX(100%);
-    transition: all 2s;
-   
-}
-
-.zonaLectura--desplegado {
-    height: 100vh;
-    width: 30vw;
-    background-color:rgba(218, 225, 231, 0.9);
-    position: absolute;
-    z-index: 6;
-    right: 0;
-    bottom: 0;
-    transform: translateX(0);
-    transition: all 2s;
-    pointer-events: auto;
-    
-}
-
-.zonaLectura--menu {
-    position: relative;
-}
-
-.cierreX {
-    position: absolute;
-    color:rgb(0, 0, 0);
-    padding-left: 1rem;
-    padding-top: 1rem;
-    z-index: 20; 
-    font-family: fuente1;
-}
-
-.zonaLectura__cardsContainer {
-    height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 2fr 0.01fr 1fr;
-    align-items: center;
-    justify-items: center;
-    z-index: 60;
-   
-    
-}
-
-.zonaLecturaCards__Container__flex {
-    display: flex;
-    align-items: center;
     gap: 1rem;
-     overflow: hidden;
-}
+    }
 
-.zonaLecturaCards__Container__flex__a--invisible {
-    border-radius: 50%;
-    pointer-events: none;
-    opacity: 0;
-    transition: all 2s;
-    pointer-events: none;
-}
+    .zonaLectura__cardsContainer__cardsLibros__div {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 4rem;
+        transition: all 1.5s;
+        z-index: 100; 
+        
+    }
 
-.zonaLecturaCards__Container__flex__a--visible {
-    border-radius: 50%;
-    pointer-events: none;
-    opacity: 100%;
-    transition: all 2s;
-    pointer-events: all;
-}
-
-
-
-
-.zonaLecturaCards__Container__flex__a__img {
-    width: 4rem;
-    border-radius: 50%;
-   
-}
+    .zonaLectura__cardsContainer__cardsLibros__div--visible {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        transition: all 1.5s;
+        z-index: 100; 
+        opacity: 100%;
+        position: absolute;
+        pointer-events: none;
+    }
 
 
 
-.zonaLectura__cardsContainer__div {
-  
-    flex-direction: row;
-    justify-items: center;
-    align-items: center;
-}
 
-.zonaLectura__cardsContainer__cardsLibros {
+    .zonaLectura__cardsContainer__cardsLibros__div__carritoCompras {
+        height: 3rem;
+        border-radius: 50%;
+        transition: all 1s;
+    }
 
-  width: 2rem;
-  overflow: hidden;
-  transition: all 1s;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-radius: 1rem;
-  position: relative;
-  gap: 1rem;
-}
+    .zonaLectura__cardsContainer__cardsLibros__div__carritoCompras:hover {
+        transform: scale(1.3);
+        filter: brightness(1.2);
+        transition: all 1s;
+    }   
 
-.zonaLectura__cardsContainer__cardsLibros__div {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 4rem;
-    transition: all 1.5s;
-    z-index: 100; 
+    .zonaLectura__cardsContainer__cardsLibros__div__butEliminar {
+        height: 2rem;
+        border-radius: 50%;
+        transition: all 1s;
+    }
+
+    .zonaLectura__cardsContainer__cardsLibros__div__butEliminar:hover {
+        transform: scale(1.3);
+        filter: brightness(1.2);
+        transition: all 1s;
+    }
+
+    .zonaLectura__cardsContainer__cardsLibros:hover {
+        width: 15rem;
+        border-radius: 1rem;
+        transition: all 1s;
+    }
     
-}
 
-.zonaLectura__cardsContainer__cardsLibros__div--visible {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    transition: all 1.5s;
-    z-index: 100; 
-    opacity: 100%;
-    position: absolute;
-    pointer-events: none;
-}
+    .zonaLectura__cardsContainer__cardsLibros__img {
+        width: 12.5rem;
+        border-radius: 1rem;
+    }
+
+    .zonaLectura__cardsContainer__cardsLibros__info {
+        order: 2;
+        justify-self: start;
+    }
 
 
-
-
-.zonaLectura__cardsContainer__cardsLibros__div__carritoCompras {
-    height: 3rem;
-    border-radius: 50%;
-    transition: all 1s;
-}
-
-.zonaLectura__cardsContainer__cardsLibros__div__carritoCompras:hover {
-    transform: scale(1.3);
-    filter: brightness(1.2);
-    transition: all 1s;
-}   
-
-.zonaLectura__cardsContainer__cardsLibros__div__butEliminar {
-    height: 2rem;
-    border-radius: 50%;
-    transition: all 1s;
-}
-
-.zonaLectura__cardsContainer__cardsLibros__div__butEliminar:hover {
-    transform: scale(1.3);
-    filter: brightness(1.2);
-    transition: all 1s;
-}
-
-.zonaLectura__cardsContainer__cardsLibros:hover {
-    width: 15rem;
-    border-radius: 1rem;
-    transition: all 1s;
-  }
-  
-
-.zonaLectura__cardsContainer__cardsLibros__img {
-    width: 12.5rem;
-    border-radius: 1rem;
-}
-
-.zonaLectura__cardsContainer__cardsLibros__info {
-    order: 2;
-    justify-self: start;
-}
-
-
-.zonaLectura__cardsContainer__cardsLibros__info__ul{
-    margin: 0 1rem;
-
-}
-
-.zonaLectura__cardsContainer__cardsLibros__info__ul li {
-    font-family: fuente1;
-    font-size: 0.9rem;
-}
-
-.zonaLectura__cardsContainer__cardsLibros__info__ul li p {
-    display: inline;
-    font-family: fuente1;
-    font-size: 0.8rem;
-}
-
-
-.filtroLibros__contenedor {
-    display: flex;
-    justify-content: center;
-}
-
-.filtroLibros__contenedor__select {
-    background-color: rgba(32, 30, 30, 0.807);
-    color: aliceblue;
-    width: 10rem;
-    border-radius: 1rem;
-    justify-self: center;
-    margin-bottom: 0.5rem;
-    display: flex;
-    justify-content: center;
-}
-
-
-.carritoCompras { 
-    width: 20rem;
-    margin: 1rem;
-    justify-self: center;
-    background:
-         url(../assets/imgs/carritoComprasGrande.png),
-         rgba(172, 169, 169, 0.705);
-    background-position: 
-        center, center;
-    background-size: 
-        50%, 
-        auto 20%;
-    background-repeat: 
-        no-repeat;
-    opacity: 100%;
-    border-radius: 1rem;
-    border-style: dashed;
-    border-color: rgb(128, 123, 123);
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 4fr;
-    overflow-x: hidden; 
-    height: 30rem;
-  
- }
-
-
-
-
-.carritoCompras--grillaButtons{
-    height: 5rem;
-    width: 12rem;
-    margin-top: 1rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
-    justify-items: center;
-    justify-self: center;
-    align-items: center;
-    position: sticky;
-    top: 0.01rem;
-    background-color: rgb(231, 234, 237);
-    border-radius: 1rem;
-    z-index: 5;
+    .zonaLectura__cardsContainer__cardsLibros__info__ul{
+        margin: 0 1rem;
 
     }
 
-.carritoCompras::-webkit-scrollbar {
-    width: 0.05rem;
- }
+    .zonaLectura__cardsContainer__cardsLibros__info__ul li {
+        font-family: fuente1;
+        font-size: 0.9rem;
+    }
 
- .carritoCompras--buttonComprar {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    width: 100%;
+    .zonaLectura__cardsContainer__cardsLibros__info__ul li p {
+        display: inline;
+        font-family: fuente1;
+        font-size: 0.8rem;
+    }
 
- }
 
- .carritoCompras--contadorNumerico {
-    position: absolute;
-    
-    top: 0.4rem;
-    font-weight: 1000;
-    z-index: 100;
-    font-size: 1.3rem;
-    text-decoration: none;
-    color: black;
-    transition: all 1s;
-   
-   
+    .filtroLibros__contenedor {
+        display: flex;
+        justify-content: center;
+    }
+
+    .filtroLibros__contenedor__select {
+        background-color: rgba(32, 30, 30, 0.807);
+        color: aliceblue;
+        width: 10rem;
+        border-radius: 1rem;
+        justify-self: center;
+        margin-bottom: 0.5rem;
+        display: flex;
+        justify-content: center;
+    }
+
+
+    .carritoCompras { 
+        width: 20rem;
+        margin: 1rem;
+        justify-self: center;
+        background:
+            url(../assets/imgs/carritoComprasGrande.png),
+            rgba(172, 169, 169, 0.705);
+        background-position: 
+            center, center;
+        background-size: 
+            50%, 
+            auto 20%;
+        background-repeat: 
+            no-repeat;
+        opacity: 100%;
+        border-radius: 1rem;
+        border-style: dashed;
+        border-color: rgb(128, 123, 123);
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 4fr;
+        overflow-x: hidden; 
+        height: 30rem;
     
     }
 
+
+
+
+    .carritoCompras--grillaButtons{
+        height: 5rem;
+        width: 12rem;
+        margin-top: 1rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+        justify-items: center;
+        justify-self: center;
+        align-items: center;
+        position: sticky;
+        top: 0.01rem;
+        background-color: rgb(231, 234, 237);
+        border-radius: 1rem;
+        z-index: 5;
+
+        }
+
+    .carritoCompras::-webkit-scrollbar {
+        width: 0.05rem;
+    }
+
+    .carritoCompras--buttonComprar {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+
+    }
+
+    .carritoCompras--contadorNumerico {
+        position: absolute;
+        
+        top: 0.4rem;
+        font-weight: 1000;
+        z-index: 100;
+        font-size: 1.3rem;
+        text-decoration: none;
+        color: black;
+        transition: all 1s;
+    
+    
+        
+        }
+
+    
+        
+
+
+    .carritoCompras--buttonComprar-img {
+        position: relative;
+        right: 0.3rem;
+        width: 6rem;
+        transition: all 1s;
+        z-index: 40;
+        transition: all 0.5s;
+    
+    }
+
+    .carritoCompras--buttonComprar-img:hover {
+        filter: brightness(0.8);
+        transition: all 0.5s;
+    }
+
+
+    .carritoCompras--cestaEliminar {
+        width: 3rem;
+        opacity: 65%;
+        transition: all 1s;
+    }
+
+    .carritoCompras--cestaEliminar:hover {
+        transform: scale(1.1);
+        filter: brightness(1.1);
+        transition: all 1s;
+    }
+
+    .carritoCompras__grillaLibros {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(5, 1fr);
+    }
+
+
+    .carritoCompras_divs--imgContainer {
+        display: flex;
+        justify-self: center;
+        padding: 1rem;
+        
+    }
+
+    .carritoCompras__divs__img {
+        width: 4.8rem;
+        border-radius: 1rem;
+        opacity: 100%;
+    }
+
+    .carritoCompras__divs__imgContainer__butEliminar{
+        position: relative;
+    
+    }
+
+    .carritoCompras__divs__imgContainer__butEliminar--img {
+        width: 2rem;
+        position: absolute;
+    }
+
+    .footer {
+        display: flex;
+        justify-content: center;
+    }
+
+    .footer--firma{
+        color: aliceblue;
+        font-size: fuente1;
+    }
+
+
+
+
+@media (max-width: 1199px) {
+
+    .body {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 0.01fr 5fr 0.3fr ;
+        height: 100vh;
+        width: 100vw;
+    }
+
+    .main {
+        display: grid;
+        grid-template-columns: 0.1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+
+    }
+
+   
+
+    .main__section {
+        height: 10rem;
+    }
+
+    .sectionBotonZonaLectura {
+        order: 2;
+        align-self: center;
+        justify-self: start;
+        padding-top: 1rem;
+        margin:1rem;
+        
+       
+    }
+
+    .sectionBotonZonaLectura--img {
+        width: 9rem;
+    }
+
+    .sectionBotonZonaLecturaContador {
+        left: 4.2rem;
+        top: 7.9rem;
+        font-size: 1.5rem;
+
+    }
+
+    .carritoCompras {
+        order:1;
+        grid-column: span 2;
+        height: 30rem;
+        width: 50rem;
+        background-size: 
+            30%, 
+            auto 20%;
+            background-position: 
+            bottom, center;
+       
+    }
+
+
+    .main__section {
+        order: 3;
+        height: 30rem;
+        
+      
+    }
+
+    .carritoCompras__grillaLibros {
+        grid-template-columns: repeat(6, 1fr);
+    }
+
+    .main__section__carrouselContainer {
+       grid-template-columns: repeat(4, 1fr);
+    }
    
     
 
+   
 
-.carritoCompras--buttonComprar-img {
-    position: relative;
-    right: 0.3rem;
-    width: 6rem;
-    transition: all 1s;
-    z-index: 40;
-    transition: all 0.5s;
   
+
+
 }
-
-.carritoCompras--buttonComprar-img:hover {
-    filter: brightness(0.8);
-    transition: all 0.5s;
-}
-
-
-.carritoCompras--cestaEliminar {
-    width: 3rem;
-    opacity: 65%;
-    transition: all 1s;
-}
-
-.carritoCompras--cestaEliminar:hover {
-    transform: scale(1.1);
-    filter: brightness(1.1);
-    transition: all 1s;
-}
-
-.carritoCompras__grillaLibros {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(5, 1fr);
-}
-
-
-.carritoCompras_divs--imgContainer {
-    display: flex;
-    justify-self: center;
-    padding: 1rem;
-    
-}
-
-.carritoCompras__divs__img {
-    width: 4.8rem;
-    border-radius: 1rem;
-    opacity: 100%;
-}
-
-.carritoCompras__divs__imgContainer__butEliminar{
-    position: relative;
-   
-}
-
-.carritoCompras__divs__imgContainer__butEliminar--img {
-    width: 2rem;
-    position: absolute;
-}
-
-
-
-
