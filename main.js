@@ -11,78 +11,107 @@ let seleccionLectura = []
 let seleccionCarrito = []
 
 
-/* SOLICITUD INFO A API (.JSON LOCAL) */
 
+
+/* REVISION EN LOCAL STORAGE AL CARGAR PAGINA PARA DESPLIEGUE INICIAL CON DATOS GUARDADOS SELECCION LECTURA */
 pushSeleccionLecturaVerificaNoRepetido()
-
+/* REVISION EN LOCAL STORAGE AL CARGAR PAGINA PARA DESPLIEGUE INICIAL CON DATOS GUARDADOS CARRITO */
 pushSeleccionCarritoVerificaNoRepetido()
 
+
+
+/* ASINCRONIA */
+/* SOLICITUD INFO A API (.JSON LOCAL) / SIMULADO CON ARCHIVO .JSON ALOJADO EN REPO PUBLICO DE GITHUB*/
 const fetchData = async () => {
-try {const response = await fetch('https://raw.githubusercontent.com/PabloVillanueva-Developer/simuladorAPIsRepoJSONs/main/books.json')
+    try {const response = await fetch('https://raw.githubusercontent.com/PabloVillanueva-Developer/simuladorAPIsRepoJSONs/main/books.json')
 
+        library = await response.json()
+                    //EJECUCION DE FUNCIONES DEPENDIENTES DE REQUEST FETCH
+        /* DESPLIEGUE INICIAL: CREAR CARDS EN ZONA PRINCIPAL CON EL TOTAL DE LIBROS OBTENIDOS DEL .JSON FETCH */
+        displayBooks (library)
+        
+        /* EJECUCION FUNCION:  CREAR CARDS ZONA PRINCIPAL SEGUN SELECCION FILTRO */
+        displayBooks (seleccionFiltro)
 
+        /* EJECUCION FUNCION: CREAR CARDS DE ZONA DE LECTURA*/
+        displayBooksZonaLectura()
 
+        /* EJECUCION FUNCION: CREAR LIBROS CARRITO COMPRAS */
+        displayBooksCarrito()
 
-    library = await response.json()
-   /* EJECUCION INICIAL DE CARDS EN BASE A ARRAY LIBRARY ORIGINAL */
-    displayBooks (library)
-/* EJECUCION INICIAL DE CARDS EN BASE A ARRAY LIBRARY ORIGINAL */
-    displayBooks (seleccionFiltro)
+         /* EJECUCION FUNCION: DISPLAY DE CARDS EN SECTION PRINCIPAL SEGUN SELECCION DE FILTRO */
+        displayCardsSegunFilto()
+        
+        /* EJECUCION FUNCION: ACTIVAR BOTON CESTA LECTURA */
+        activarButEliminarZonaLectura()
 
-/* EJECUCION DE FUNCION QUE AGREGA LIBROS AL CARRITO */
-agregarLibrosCarritoArrastre()
- 
+        /* EJECUCION FUNCION: DESACTIVAR BOTON CESTA LECTURA */
+        desactivarButEliminarZonaLectura()
 
-/* EJECUCION INICIAL DE ENVIO LIBROS DE ZONA LECTURA A CARRITO */
-agregarLibrosZonaCarritodeZonaLectura()
+        /* EJECUCION FUNCION: LOGICA DE ACCIONES PARA EVENTOS CLICK Y MOUSE AL SOLTAR EN SELECCION LECTURA   */
+        dropZonaLectura() 
 
-agregarLibrosSeleccionLectura()
+        /* EJECUCION FUNCION: AGREGAR LIBROS A CARRITO POR CLICK Y MOUSE */
+        agregarLibrosCarritoArrastre()
 
-displayCardsSegunFilto()
+        /* EJECUCION FUNCION: AGREGAR LIBRO A CARRITO DESDE ZONA LECTURA POR BOTON CARRITO ASIGNADO */
+        agregarLibrosZonaCarritodeZonaLectura()
 
-eliminarFiltros()
+        /* EJECUCUIN FUNCION: EVENTOS ARRASTRE LIBROS A ZONA LECTURA */
+        agregarLibrosSeleccionLectura()
+    
+        /* EJECUCION FUNCION: CONTADOR ELEMENTOS EN CARRITO */
+        actualizarContadorLibrosCarrito()
 
-eliminarSeleccionCarritoCompleto()
+        /* EJECUCION FUNCION: CONTADOR ELEMENTOS EN ZONA LECTURA */
+        actualizarContadorLibrosZonaLectura()
 
-eliminarSeleccionLecturaCompleto()
+        /* EJECUCION FUNCION: RESET/BORRADO DE CARDS LIBROS ZONA LECTURA */
+        borrarCardsAnterioresListaLectura()
 
-eliminarLibrosUnicosCarrito()
+        /* EJECUCION FUNCION: RESET/BORRADO DE CARDS LIBROS CARRITO */
+        borrarCardsAnterioresCarrito()
+    
+        /* EJECUCION FUNCION: RESETA FILTROS DE ZONA PRINCIPAL Y PERMITE VISUALIZAR LA TOTALIDAD DE LOS LIBROS  */
+        eliminarFiltros()
 
-eliminarLibrosUnicosZonaLectura()
+        /* EJECUCION FUNCION: ELIMINAR SELECCION DE CARRITO EN SU TOTALIDAD */
+        eliminarSeleccionCarritoCompleto()
 
-borrarCardsAnterioresCarrito()
+         /* EJECUCION FUNCION: ELIMINAR CARDS LIBROS CARRITO INDIVDUAL (BOTON X) */
+        eliminarLibrosUnicosCarrito()
 
-borrarCardsAnterioresListaLectura()
+         /* EJECUCION FUNCION: ELIMINAR SELECCION DE LECTURA EN SU TOTALIDAD */
+         eliminarSeleccionLecturaCompleto()
 
-displayBooksCarrito()
+        /* EJECUCION FUNCION: ELIMINAR CARDS LIBROS ZONA LECTURA INDIVDUAL (BOTON X) */
+        eliminarLibrosUnicosZonaLectura()
 
-displayBooksZonaLectura()
+        /* EJECUCION FUNCION: RESET/BORRAR DESCRIPCIONES ZONA LECTURA */
+         resetDescripcionesZonaLectura()
 
-butCerrarCompraCarrito()
+        /* EJECUCION FUNCION: ALERT CUANDO SE SELECCIONA EL BOTON DE CARRITO PARA CERRAR COMPRA   */
+        butCerrarCompraCarrito()
+    }
 
-
-
-
-
-
-
-
-
+    catch (error) {
+        console.error('Error al cargar los datos:', error);
+    }
 }
-
-catch (error) {
-    console.error('Error al cargar los datos:', error);
-  }
-
-}
+/* EJECUCION FETCH SOLICITUD .JSON CATALOGO LIBROS */
 fetchData()
 
 
 
+/* SINCRONIA / FUNCIONALIDADES NO DEPENDIENTES DE FETCH */
+
+ /* EJECUCION FUNCION: RESET/BORRADO DE CARDS LIBROS ZONA PRINCIPAL */
+ borrarCardsAnteriores()
+
 /* DESPLIEGUE DE ZONA DE LECTURA */
 
     let abrirZonaLectura = document.getElementById('botonAbrirZonaLectura') /* APERTURA ZONA LECTURA DESDE MENU HEADER */
-    let contenedorDragZonaLectura = document.getElementById('contenedorDragZonaLectura') /* APERTURA ZONA LECTURA DESDE BOTON GRANDE*/
+    let contenedorDragZonaLectura = document.getElementById('sectionBotonZonaLectura') /* APERTURA ZONA LECTURA DESDE BOTON GRANDE*/
     let sectionZonaLectura = document.getElementById('zonaLectura') /* ELEMENTO DEL DOM QUE SE MODIFICA */
     let botonCierreXSection = document.getElementById('cierreX') /* BOTON DESACTIVA EVENTO */
 
@@ -92,7 +121,6 @@ fetchData()
             sectionZonaLectura.classList.add('zonaLectura--desplegado')} 
         else {sectionZonaLectura.classList.add('zonaLectura--hidden'),
             sectionZonaLectura.classList.remove('zonaLectura--desplegado')} 
-        
     })
 
     contenedorDragZonaLectura.addEventListener('click', () => {
@@ -115,10 +143,7 @@ fetchData()
 
     
 
-
-
-
-/* GENERACION INFO DINAMICA DE LIBROS ZONA LECTURA */
+/* GENERACION DESCRIPCIONES INFO DINAMICA DE LIBROS ZONA LECTURA */
 const zonaLecturaGenero = document.getElementById('zonaLecturaGenero')
 const zonaLecturaPaginas = document.getElementById('zonaLecturaPaginas')
 const zonaLecturaSynopsis = document.getElementById('zonaLecturaSynopsis')
@@ -127,7 +152,6 @@ const zonaLecturaAutor = document.getElementById('zonaLecturaAutor')
 const zonaLecturaObras = document.getElementById('zonaLecturaObras')
 const zonaLecturaISBN = document.getElementById('zonaLecturaISBN')
 const infoLibrosDinamica = document.getElementsByClassName('zonaLecturaCards__Container__flex')
-
 
 for (const coleccionHTML of infoLibrosDinamica) {
     coleccionHTML.addEventListener('mouseover', (e) => {
