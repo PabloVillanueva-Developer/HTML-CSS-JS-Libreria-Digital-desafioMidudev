@@ -287,6 +287,7 @@ let agregarLibrosCarritoArrastre = () => {
             idDinamicoB = e.target.id + ' B ';
             idDinamicoA = e.target.id;
         });
+        
     }
 
     contenedorCarrito.addEventListener('dragover', (e) => {
@@ -381,7 +382,6 @@ let agregarLibrosSeleccionLectura = () => {
             element.addEventListener('touchstart', (e) => {
                 idDinamicoB = e.target.id + ' B '
                 idDinamicoA = e.target.id
-                console.log('hola')
    
             });
 

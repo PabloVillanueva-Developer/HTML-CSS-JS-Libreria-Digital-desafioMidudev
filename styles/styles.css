@@ -761,6 +761,7 @@
         order: 3;
         grid-column: span 2;
         height: 30rem;
+        overflow-x:visible ;
         
       
     }
