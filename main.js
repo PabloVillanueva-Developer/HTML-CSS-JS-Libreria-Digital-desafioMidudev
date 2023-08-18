@@ -57,6 +57,8 @@ borrarCardsAnterioresListaLectura()
 
 displayBooksCarrito()
 
+displayBooksZonaLectura()
+
 butCerrarCompraCarrito()
 
 
