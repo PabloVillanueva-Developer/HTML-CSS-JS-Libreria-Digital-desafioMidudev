@@ -723,9 +723,7 @@
         border-style: dashed;
         border-color: rgb(128, 123, 123);
        
-       
-        
-       
+
     }
 
     .sectionBotonZonaLectura--img {
@@ -795,8 +793,6 @@
 
 
 @media (max-width: 550px) {
-
-    
 
 .main__section__carrouselContainer {
     grid-template-columns: repeat(3, 1fr);

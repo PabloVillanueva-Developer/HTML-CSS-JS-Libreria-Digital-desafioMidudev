@@ -11,7 +11,7 @@ let displayBooks = (array) => {
             <a href='#' id='${iterator.book.genre}' class="main__section__div__card"
      
                 <a href="#"> 
-                    <img class="main__section__div__card__img" id='${iterator.book.title}' src="${iterator.book.cover}" alt='Tapa Libro'>
+                    <img class="main__section__div__card__img" id='${iterator.book.title}' src="${iterator.book.cover}" alt='Tapa Libro' draggable="true">
                 </a>
                 
             </a>
@@ -378,7 +378,7 @@ let agregarLibrosSeleccionLectura = () => {
                 idDinamicoA = e.target.id
             })
 
-
+    
             element.addEventListener('touchstart', (e) => {
                 idDinamicoB = e.target.id + ' B '
                 idDinamicoA = e.target.id
@@ -388,20 +388,23 @@ let agregarLibrosSeleccionLectura = () => {
 
              // ARRASTRE A CONTENEDOR DE ENVIO PARA ZONA LECTURA (Evento de ratón)
             contenedorDragZonaLectura.addEventListener ('drop', dropZonaLectura) 
+            contenedorDragZonaLectura.addEventListener ('tuchend', dropZonaLectura) 
         
                // Permitir soltar en el área (Evento de ratón)
-            contenedorDragZonaLectura.addEventListener ('dragover', (e) => { e.preventDefault()}) 
+            contenedorDragZonaLectura.addEventListener ('dragover', (e) => { e.preventDefault()})
+            contenedorDragZonaLectura.addEventListener ('touchmove', (e) => { e.preventDefault()})  
           
 
 
 
             // ARRASTRE DIRECTO A ZONA LECTURA (Evento de ratón)
             contenedorDragZonaLecturaDirecto.addEventListener('drop', dropZonaLectura);
+            contenedorDragZonaLecturaDirecto.addEventListener('touchend', dropZonaLectura);
      
             
             // Permitir soltar en el área (Evento de ratón)
              contenedorDragZonaLecturaDirecto.addEventListener('dragover', (e) => {e.preventDefault();});
-           
+             ontenedorDragZonaLecturaDirecto.addEventListener('touchmove', (e) => {e.preventDefault();});
         }   
 
       
@@ -625,7 +628,7 @@ const butCerrarCompraCarrito = () => {
 
 
 12) hacer una verificacion en las eliminacion de libro que si el array esta vacio, indique que esta vacio
-13) Hacer Responsive (sencillo)     
+   
 12) Ver si puedo eficientizar codigo y emprolijar
 13) Ver si puedo agregar algun evento touch para el mouse (probar con el celu)
 
