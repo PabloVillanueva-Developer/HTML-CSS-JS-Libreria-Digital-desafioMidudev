@@ -404,7 +404,7 @@ let agregarLibrosSeleccionLectura = () => {
             
             // Permitir soltar en el área (Evento de ratón)
              contenedorDragZonaLecturaDirecto.addEventListener('dragover', (e) => {e.preventDefault();});
-             ontenedorDragZonaLecturaDirecto.addEventListener('touchmove', (e) => {e.preventDefault();});
+             contenedorDragZonaLecturaDirecto.addEventListener('touchmove', (e) => {e.preventDefault();});
         }   
 
       
