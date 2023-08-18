@@ -744,7 +744,7 @@
 
     .carritoCompras {
         order:1;
-    
+        
         height: 20rem;
         width: 95%;
         padding-left: 0;
@@ -774,7 +774,19 @@
        grid-template-columns: repeat(4, 1fr);
     }
    
+
+    .zonaLectura__cardsContainer {
+        width: 60%;
+    }
     
+    .zonaLectura--desplegado {
+        width: 60%;
+    }
+
+    .zonaLectura--hidden {
+        width: 60%;
+    }
+
 
    
 
@@ -791,8 +803,8 @@
     grid-template-columns: repeat(3, 1fr);
  }
 
- .header__nav__ul {
-    gap: 1rem;
- }
+.carritoCompras__grillaLibros {
+    grid-template-columns: repeat(2, 1fr)
+}
 
 }
