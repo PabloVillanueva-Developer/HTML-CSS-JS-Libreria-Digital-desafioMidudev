@@ -775,23 +775,18 @@
     }
    
 
-    .zonaLectura__cardsContainer {
-        width: 60%;
+    .zonaLectura--container {
+        width: 60vw;
     }
     
     .zonaLectura--desplegado {
-        width: 60%;
+        width: 60vw;
+        z-index: 100;
     }
 
     .zonaLectura--hidden {
-        width: 60%;
+        width: 60vw;
     }
-
-
-   
-
-  
-
 
 }
 
