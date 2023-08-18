@@ -170,9 +170,7 @@ let eliminarLibrosUnicosCarrito = () => {
  
     for (const element of butElimninarLibroUnico){
     element.addEventListener('click',(e) => { /* CAPTURA ID DINAMICO */
-    e.stopPropagation();
-
-     
+        
 
         const idDinamico = e.target.id  
         const libroAEliminar = seleccionCarrito.find((element) => element.book.title === idDinamico);
@@ -376,19 +374,21 @@ let agregarLibrosSeleccionLectura = () => {
             element.addEventListener('dragstart', (e) => {
                 idDinamicoB = e.target.id + ' B '
                 idDinamicoA = e.target.id
+              
             })
 
     
             element.addEventListener('touchstart', (e) => {
                 idDinamicoB = e.target.id + ' B '
                 idDinamicoA = e.target.id
+                console.log('hola')
    
             });
 
 
              // ARRASTRE A CONTENEDOR DE ENVIO PARA ZONA LECTURA (Evento de ratón)
             contenedorDragZonaLectura.addEventListener ('drop', dropZonaLectura) 
-            contenedorDragZonaLectura.addEventListener ('tuchstart', dropZonaLectura) 
+            contenedorDragZonaLectura.addEventListener ('touchend', dropZonaLectura) 
       
         
                // Permitir soltar en el área (Evento de ratón)
