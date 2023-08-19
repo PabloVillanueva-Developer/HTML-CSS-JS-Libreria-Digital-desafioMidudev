@@ -193,7 +193,7 @@ const dropZonaLectura = () => {
         
             agregarLibrosCarritoArrastre()
             
-            agregarLibrosZonaCarritodeZonaLectura()
+          /*   agregarLibrosZonaCarritodeZonaLectura() */
             if(seleccionLectura.length > 0) 
                 activarButEliminarZonaLectura()  
         }
@@ -275,21 +275,22 @@ let agregarLibrosCarritoArrastre = () => {
 const agregarLibrosZonaCarritodeZonaLectura = () => {
   
 const carritoComprasZonaLectura = document.querySelectorAll('.zonaLectura__cardsContainer__cardsLibros__div__carritoCompras')
-
+    
     for (const element of carritoComprasZonaLectura) {
         element.addEventListener('click', (e) => {
         const idDinamico = e.target.id
             library.forEach((element) => {
                 if (idDinamico === element.book.ISBN)
-                    if(!seleccionCarrito.find(item => item.book.ISBN === idDinamico))
                 
-                                seleccionCarrito.push(element)
+                    if(!seleccionCarrito.find(item => item.book.ISBN === idDinamico))
+                               { seleccionCarrito.push(element)
                                 localStorage.setItem('seleccionCarrito', JSON.stringify(seleccionCarrito))
                                 borrarCardsAnterioresCarrito()
-                                displayBooksCarrito() 
+                                displayBooksCarrito() }
             })
         })
     }
+    
 }
 
 
@@ -328,7 +329,7 @@ let agregarLibrosSeleccionLectura = () => {
                     seleccionLectura.push(elementToAdd);
                     
                     Toastify({
-                        text: "¡Libro(s) añadido(s) a Carrito!",
+                        text: "¡Libro(s) añadido(s) a Zona de Lectura!",
                         duration: 3000,
                         gravity: "top",
                         position: "left",
@@ -341,7 +342,8 @@ let agregarLibrosSeleccionLectura = () => {
                     localStorage.setItem('seleccionLectura', JSON.stringify(seleccionLectura));
                     
                     borrarCardsAnterioresListaLectura();
-                    displayBooksZonaLectura(seleccionLectura);                
+                    displayBooksZonaLectura(seleccionLectura);     
+                    agregarLibrosZonaCarritodeZonaLectura()           
                     if (seleccionLectura.length > 0) {
                         activarButEliminarZonaLectura();
                     }
@@ -363,8 +365,12 @@ let agregarLibrosSeleccionLectura = () => {
     
         contenedorDragZonaLectura.addEventListener('dragover', (e) => {e.preventDefault();});
         contenedorDragZonaLectura.addEventListener('touchmove', (e) => { e.preventDefault()})  
+        
         displayBooksZonaLectura(seleccionLectura);
         agregarLibrosZonaCarritodeZonaLectura()
+
+      
+      
      
     }, 1);
   
@@ -662,3 +668,7 @@ const ajusteResponsiveZonaReversion = () => {
   }
 }
 
+
+// Arreglar responsive Menu emergente y largo de pantalla.
+// Agregar scroll a carrito para mobile
+// Ver funcionalidades que faltan de Mobile para corregir
