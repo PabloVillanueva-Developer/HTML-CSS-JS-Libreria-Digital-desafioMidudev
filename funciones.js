@@ -672,3 +672,6 @@ const ajusteResponsiveZonaReversion = () => {
 // Arreglar responsive Menu emergente y largo de pantalla.
 // Agregar scroll a carrito para mobile
 // Ver funcionalidades que faltan de Mobile para corregir
+// Ver filtros en modo Mobile, que se activa solo con click
+// Agregar efecto agrandamiento y color sobre imangen de seleccion a las imagnes para mobile para que se entienda mejor
+// Agregar a Zona Lectura fondo de arrastre aqui
