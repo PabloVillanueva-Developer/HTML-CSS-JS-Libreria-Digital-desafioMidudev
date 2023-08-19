@@ -19,11 +19,13 @@
         background-image: url(../assets/imgs/Sin\ título-1.png);
         background-repeat: no-repeat;
         background-size: cover;
+        background-attachment: fixed;
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: 0.1fr 0.1fr 0.1fr;
         width: 100vw;
         height: 100vh; 
+   
 
     
     }
@@ -110,7 +112,7 @@
 
     
     .main__section { 
-    height: 30rem;
+        height: 30rem;
         overflow-x: hidden;
         padding: 1rem;
         margin: 1rem;
@@ -369,6 +371,7 @@
         align-items: center;
         justify-items: center;
         z-index: 60;
+      
     
         
     }
@@ -761,7 +764,8 @@
         order: 3;
         grid-column: span 2;
         height: 30rem;
-        overflow-x:visible ;
+        overflow-x:hidden ;
+        justify-self: start;
         
       
     }
@@ -777,16 +781,16 @@
    
 
     .zonaLectura--container {
-        width: 60vw;
+        width: 50vw;
     }
     
     .zonaLectura--desplegado {
-        width: 60vw;
+        width: 50vw;
         z-index: 100;
     }
 
     .zonaLectura--hidden {
-        width: 60vw;
+        width: 50vw;
     }
 
 }
@@ -795,9 +799,44 @@
 
 @media (max-width: 550px) {
 
-.main__section__carrouselContainer {
-    grid-template-columns: repeat(3, 1fr);
+
+
+/* CON MENU DESPLEGADO */
+    
+
+ .main__section__carrouselContainer--menuDesplegado {
+
+        gap:0.5rem;
+        display: grid;
+        grid-template-rows: 1fr;
+    grid-template-columns: 1fr;
+   justify-self: start;
  }
+
+ .main__section--menuDesplegado {
+  
+        overflow-x: hidden;
+        padding: 1rem;
+        margin: 1rem;
+        order: 3; 
+        height: 40rem;
+        justify-self: start;    
+}
+
+.main__section--menuDesplegado::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+ /* SIN MENU DESPLEGADO */
+
+ .main__section__carrouselContainer {
+    grid-template-columns: 1fr 1fr 1fr;
+   justify-self: center;
+ }
+
+ .main__section{
+    justify-self: center;
+}
 
 .carritoCompras__grillaLibros {
     grid-template-columns: repeat(2, 1fr)
@@ -806,5 +845,4 @@
 .header__nav__ul {
     gap: 1rem;
 }
-
 }

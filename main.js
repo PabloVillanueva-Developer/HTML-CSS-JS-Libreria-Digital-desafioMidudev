@@ -92,6 +92,11 @@ const fetchData = async () => {
 
         /* EJECUCION FUNCION: ALERT CUANDO SE SELECCIONA EL BOTON DE CARRITO PARA CERRAR COMPRA   */
         butCerrarCompraCarrito()
+
+        /* EJECUCION FUNCION: FUNCION PARA CAMBIAR VISUAL RESPONSIVE DEL MENU EN @MEDIA <550px   */
+        ajusteResponsiveZonaLectura()
+        /* FUNCION DE REVERSION PARA CAMBIAR VISUAL RESPONSIVE DEL MENU EN @MEDIA <550px */
+        ajusteResponsiveZonaReversion()
     }
 
     catch (error) {

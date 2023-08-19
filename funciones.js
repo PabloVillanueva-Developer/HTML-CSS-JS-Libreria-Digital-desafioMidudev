@@ -417,7 +417,7 @@ const eliminarSeleccionCarritoCompleto = () => {
     }
 
     eliminarSeleccionCarrito.addEventListener('click', eliminarSeleccionCarritoEvento)
-    eliminarSeleccionCarrito.addEventListener('touchstart', eliminarSeleccionCarritoEvento)
+   /*  eliminarSeleccionCarrito.addEventListener('touchstart', eliminarSeleccionCarritoEvento) */
 }
 
 
@@ -483,7 +483,7 @@ const eliminarSeleccionLecturaCompleto = () => {
                 stopOnFocus: true,
             }).showToast()
         }
-    
+     
         localStorage.setItem('seleccionLectura', JSON.stringify(seleccionLectura = []))
         seleccionLectura = JSON.parse(localStorage.getItem('seleccionLectura'))
         resetDescripcionesZonaLectura()
@@ -586,6 +586,51 @@ const butCerrarCompraCarrito = () => {
     
 }
 
+
+/* FUNCION PARA CAMBIAR VISUAL RESPONSIVE DEL MENU EN @MEDIA <550px */
+const ajusteResponsiveZonaLectura = () => {
+const elementoObservado = document.getElementById('zonaLectura')
+const cambiosEsperados = {attributes: true}
+
+const observador = new MutationObserver((mutationsList) => {
+    for (const mutation of mutationsList) {
+        if (mutation.type === 'attributes' && window.innerWidth <= 550 ) {
+            const carrouselContainer = document.getElementById('carrouselContainer')
+                carrouselContainer.classList.add('main__section__carrouselContainer--menuDesplegado')
+                carrouselContainer.classList.remove('main__section__carrouselContainer')
+            const main__section = document.getElementById('main__section')
+                main__section.classList.add('main__section--menuDesplegado')
+                main__section.classList.remove('main__section')
+
+
+            console.log('El elemento observado ha cambiado en algún atributo.');
+        }
+    }
+});
+observador.observe(elementoObservado, cambiosEsperados);
+
+}
+
+
+/* FUNCION DE REVERSION PARA CAMBIAR VISUAL RESPONSIVE DEL MENU EN @MEDIA <550px */
+const ajusteResponsiveZonaReversion = () => {
+    const cierreX = document.getElementById('cierreX')
+            if (window.innerWidth <= 550 ) {
+                cierreX.addEventListener('click', () => {
+
+                const carrouselContainer = document.getElementById('carrouselContainer')
+                    carrouselContainer.classList.remove('main__section__carrouselContainer--menuDesplegado')
+                    carrouselContainer.classList.add('main__section__carrouselContainer')
+                
+                    const main__section = document.getElementById('main__section')
+                    main__section.classList.remove('main__section--menuDesplegado')
+                    main__section.classList.add('main__section')
+            })
+        
+  }
+}
+
+
 /* 
 
 
@@ -596,6 +641,5 @@ VIERNES NO (SE VE EL LUNES)
 /* TOUCH FALTA ARREGLAR LA CARGA INDIVIDUAL DE LIBROS AL CARRITO */
 /* TOUCH FALTA ARREGLAR LA ELIMINACION DE LIBROS INDIVIDUAL EN ZONA LECTURA (sigue cargandose uno cuando se elimina)*/
 /* AL APRETAR LOS FILTROS EN MOBILE SE EJEUTAN CON UN SEGUNDO TOUCH SOBRE EL FILTRO
-/* AJUSTAR FONDO PARA QUE SIEMPRE ESTE ESTIRADO */
 /* AJUSTAR ZONA LECTURA EN MOBILE PORQUE PISA LOS LIBROS (haria cambio de clase para que el grid de libros se ajuste a una fila + rehabilitar el scroll de los libros en mobile porque estan fijos) */
 /* ARREGLA TOASTI DE AYUDA CON EXPLICACION MEJORADA */
