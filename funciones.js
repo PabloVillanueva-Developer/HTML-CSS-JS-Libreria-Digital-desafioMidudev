@@ -158,7 +158,7 @@ ES UTILIZADA POR LOS EVENTOS DE DESPLAZAMIENTO PARA EJECUTRA UNA VEZ QUE EL ARRA
 let idDinamicoB = '' 
 let idDinamicoA = '' 
 
-const dropZonaLectura = (e) => {
+const dropZonaLectura = () => {
     borrarCardsAnterioresListaLectura()
 
     library.forEach((element) => { 
@@ -201,19 +201,21 @@ let agregarLibrosCarritoArrastre = () => {
             idDinamicoB = e.target.id + ' B ';
             idDinamicoA = e.target.id;
         });
-        
+
+        element.addEventListener('touchstart', (e) => {
+            idDinamicoB = e.target.id + ' B ';
+            idDinamicoA = e.target.id;
+        });  
     }
 
-    contenedorCarrito.addEventListener('dragover', (e) => {
-        e.preventDefault();
+    contenedorCarrito.addEventListener('dragover', (e) => {e.preventDefault();
     });
 
     contenedorCarrito.addEventListener('touchstart', (e) => {
-
     });
 
                         /* ACA HAY ALGO RAROR CON ZONA LECTURA / VER */
-    const dropLibroZonaLectura = (e) => {
+    const dropLibroZonaCarrito = (e) => {
 
         if (idDinamicoB && idDinamicoA) {
             const elementToAdd = library.find(element => idDinamicoB === element.book.title + ' B ');
@@ -245,14 +247,11 @@ let agregarLibrosCarritoArrastre = () => {
     idDinamicoA = '';
     };
                 
-    contenedorCarrito.addEventListener('drop', dropLibroZonaLectura)
-    contenedorCarrito.addEventListener('touchend', dropLibroZonaLectura)
+    contenedorCarrito.addEventListener('drop', dropLibroZonaCarrito)
+    contenedorCarrito.addEventListener('touchend', dropLibroZonaCarrito)
 
     contenedorCarrito.addEventListener('dragover', (e) => {e.preventDefault();});
     contenedorCarrito.addEventListener('touchmove', (e) => { e.preventDefault()})  
-
-     
-
     agregarLibrosZonaCarritodeZonaLectura();
 }
     
@@ -262,7 +261,6 @@ let agregarLibrosCarritoArrastre = () => {
 
 const agregarLibrosZonaCarritodeZonaLectura = () => {
   
-
 const carritoComprasZonaLectura = document.querySelectorAll('.zonaLectura__cardsContainer__cardsLibros__div__carritoCompras')
 
     for (const element of carritoComprasZonaLectura) {
@@ -293,37 +291,62 @@ let agregarLibrosSeleccionLectura = () => {
 
         for (const element of coleccionLibros) {
             element.addEventListener('dragstart', (e) => {
-                idDinamicoB = e.target.id + ' B '
-                idDinamicoA = e.target.id
-            })
-
-            element.addEventListener('touchstart', (e) => {
-                idDinamicoB = e.target.id + ' B '
-                idDinamicoA = e.target.id
+                idDinamicoB = e.target.id + ' B ';
+                idDinamicoA = e.target.id;
             });
-
-
-             // ARRASTRE A CONTENEDOR DE ENVIO PARA ZONA LECTURA (Evento de ratón)
-            contenedorDragZonaLectura.addEventListener ('drop', dropZonaLectura) 
-            contenedorDragZonaLectura.addEventListener ('touchend', dropZonaLectura) 
-      
-        
-               // Permitir soltar en el área (Evento de ratón)
-            contenedorDragZonaLectura.addEventListener ('dragover', (e) => { e.preventDefault()})
-            contenedorDragZonaLectura.addEventListener ('touchmove', (e) => { e.preventDefault()})  
-          
-
-
-
-            // ARRASTRE DIRECTO A ZONA LECTURA (Evento de ratón)
-            contenedorDragZonaLecturaDirecto.addEventListener('drop', dropZonaLectura);
-            contenedorDragZonaLecturaDirecto.addEventListener('touchend', dropZonaLectura);
-     
-            
-            // Permitir soltar en el área (Evento de ratón)
-             contenedorDragZonaLecturaDirecto.addEventListener('dragover', (e) => {e.preventDefault();});
-             contenedorDragZonaLecturaDirecto.addEventListener('touchmove', (e) => {e.preventDefault();});
-        }   
+    
+            element.addEventListener('touchstart', (e) => {
+                idDinamicoB = e.target.id + ' B ';
+                idDinamicoA = e.target.id;
+            });  
+        }
+    
+        contenedorDragZonaLecturaDirecto.addEventListener('dragover', (e) => {e.preventDefault();
+        });
+    
+        contenedorDragZonaLecturaDirecto.addEventListener('touchstart', (e) => {
+        });
+    
+                            /* ACA HAY ALGO RAROR CON ZONA LECTURA / VER */
+        const dropZonaLectura = (e) => {
+    
+            if (idDinamicoB && idDinamicoA) {
+                const elementToAdd = library.find(element => idDinamicoB === element.book.title + ' B ');
+    
+                if (elementToAdd && !seleccionLectura.some(item => item.book.title === idDinamicoA)) {
+                    seleccionLectura.push(elementToAdd);
+                    
+                    Toastify({
+                        text: "¡Libro(s) añadido(s) a Carrito!",
+                        duration: 3000,
+                        gravity: "top",
+                        position: "left",
+                        style: {
+                            background: "linear-gradient(132deg, #F4D03F 0%, #16A085 100%)"
+                        },
+                        stopOnFocus: true,
+                    }).showToast();
+                    
+                    localStorage.setItem('seleccionLectura', JSON.stringify(seleccionLectura));
+                    
+                    borrarCardsAnterioresListaLectura();
+                    displayBooksZonaLectura(seleccionLectura);                
+                    if (seleccionLectura.length > 0) {
+                        activarButEliminarZonaLectura();
+                    }
+                }
+            }
+    
+        idDinamicoB = '';
+        idDinamicoA = '';
+        };
+                    
+        contenedorDragZonaLecturaDirecto.addEventListener('drop', dropZonaLectura)
+        contenedorDragZonaLecturaDirecto.addEventListener('touchend', dropZonaLectura)
+    
+        contenedorDragZonaLecturaDirecto.addEventListener('dragover', (e) => {e.preventDefault();});
+        contenedorDragZonaLecturaDirecto.addEventListener('touchmove', (e) => { e.preventDefault()})  
+        displayBooksZonaLectura(seleccionLectura);
     }, 1);
 }
     
@@ -638,8 +661,7 @@ const ajusteResponsiveZonaReversion = () => {
 Y ENVIAR (NO MAS POR FAVOR
 
 VIERNES NO (SE VE EL LUNES)
-/* TOUCH FALTA ARREGLAR LA CARGA INDIVIDUAL DE LIBROS AL CARRITO */
 /* TOUCH FALTA ARREGLAR LA ELIMINACION DE LIBROS INDIVIDUAL EN ZONA LECTURA (sigue cargandose uno cuando se elimina)*/
 /* AL APRETAR LOS FILTROS EN MOBILE SE EJEUTAN CON UN SEGUNDO TOUCH SOBRE EL FILTRO
-/* AJUSTAR ZONA LECTURA EN MOBILE PORQUE PISA LOS LIBROS (haria cambio de clase para que el grid de libros se ajuste a una fila + rehabilitar el scroll de los libros en mobile porque estan fijos) */
+
 /* ARREGLA TOASTI DE AYUDA CON EXPLICACION MEJORADA */
