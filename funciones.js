@@ -120,7 +120,7 @@ let displayBooksCarrito = () => {
 
 /* DISPLAY DE CARDS EN SECTION PRINCIPAL SEGUN SELECCION DE FILTRO */
 const displayCardsSegunFilto = () => {ejecutarFiltro = document.getElementById('filtrosDinamicos')
-    ejecutarFiltro.addEventListener('click', (e) => {
+    ejecutarFiltro.addEventListener('change', (e) => {
         
         /* CREACION DE ARRAY CON SELECCION = seleccionFiltro */
          /* RESET DEL ARRAY PARA CADA CLICK INDIVIDUAL */
