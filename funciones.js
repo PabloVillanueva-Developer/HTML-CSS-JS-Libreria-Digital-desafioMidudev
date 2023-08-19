@@ -10,10 +10,11 @@ const pushSeleccionLecturaVerificaNoRepetido = () => {
             displayBooksZonaLectura(seleccionLectura)
         if(seleccionLectura.length > 0) 
             activarButEliminarZonaLectura()       
-
+   
         agregarLibrosSeleccionLectura()
         agregarLibrosCarritoArrastre()
         agregarLibrosZonaCarritodeZonaLectura()
+  
     })
 }
 
@@ -22,8 +23,7 @@ const pushSeleccionLecturaVerificaNoRepetido = () => {
 const pushSeleccionCarritoVerificaNoRepetido = () => { document.addEventListener('DOMContentLoaded', () => {
     seleccionCarrito = JSON.parse(localStorage.getItem('seleccionCarrito'))
     if(seleccionCarrito === null) {seleccionCarrito = []} /* MANEJA ERROR SI NO ENCUENTRA ARCHIVO EN LOCAL*/
-    if(seleccionCarrito)
-        displayBooksCarrito()  
+   
     })
 }
 
@@ -60,6 +60,7 @@ let displayBooksZonaLectura = () => {
 const cardsZonaLectura = document.getElementById('zonaLecturaCardsContainer')
 
     for (const element of seleccionLectura) {
+        
         
         const card = document.createElement('div');
         card.classList.add('zonaLectura__cardsContainer__div')
@@ -121,16 +122,37 @@ let displayBooksCarrito = () => {
 /* DISPLAY DE CARDS EN SECTION PRINCIPAL SEGUN SELECCION DE FILTRO */
 const displayCardsSegunFilto = () => {ejecutarFiltro = document.getElementById('filtrosDinamicos')
     ejecutarFiltro.addEventListener('change', (e) => {
-        
+       
         /* CREACION DE ARRAY CON SELECCION = seleccionFiltro */
          /* RESET DEL ARRAY PARA CADA CLICK INDIVIDUAL */
         seleccionFiltro = library.filter((objeto) => e.target.value === objeto.book.genre)
-   
         borrarCardsAnteriores ()
         displayBooks(seleccionFiltro)
-        agregarLibrosCarritoArrastre()
+
+        borrarCardsAnterioresListaLectura()
+        agregarLibrosSeleccionLectura()
+              agregarLibrosZonaCarritodeZonaLectura()
+     
+       
+       
+      
+               
+
+     
+    
     }) 
+   /*  agregarLibrosSeleccionLectura(seleccionLectura) */
 }
+
+const rehablitarDisplayBooksZonaLectura = () => {
+    const filtrosDinamicos = document.getElementById('filtrosDinamicos')
+    filtrosDinamicos.addEventListener('change', () => {
+        console.log('filtrosDinamicos')
+        agregarLibrosSeleccionLectura()
+    
+    })
+ }
+
 
 
 
@@ -176,6 +198,7 @@ const dropZonaLectura = () => {
                         stopOnFocus: true,
                     }).showToast();}
             localStorage.setItem('seleccionLectura', JSON.stringify(seleccionLectura))
+            agregarLibrosSeleccionLectura() 
             displayBooksZonaLectura(seleccionLectura) 
         
             agregarLibrosCarritoArrastre()
@@ -270,12 +293,10 @@ const carritoComprasZonaLectura = document.querySelectorAll('.zonaLectura__cards
                 if (idDinamico === element.book.ISBN)
                     if(!seleccionCarrito.find(item => item.book.ISBN === idDinamico))
                 
-                                
                                 seleccionCarrito.push(element)
                                 localStorage.setItem('seleccionCarrito', JSON.stringify(seleccionCarrito))
                                 borrarCardsAnterioresCarrito()
-                                displayBooksCarrito(seleccionCarrito) 
-                        
+                                displayBooksCarrito() 
             })
         })
     }
@@ -307,7 +328,7 @@ let agregarLibrosSeleccionLectura = () => {
         contenedorDragZonaLecturaDirecto.addEventListener('touchstart', (e) => {
         });
     
-                            /* ACA HAY ALGO RAROR CON ZONA LECTURA / VER */
+
         const dropZonaLectura = (e) => {
     
             if (idDinamicoB && idDinamicoA) {
@@ -346,8 +367,17 @@ let agregarLibrosSeleccionLectura = () => {
     
         contenedorDragZonaLecturaDirecto.addEventListener('dragover', (e) => {e.preventDefault();});
         contenedorDragZonaLecturaDirecto.addEventListener('touchmove', (e) => { e.preventDefault()})  
+
+        contenedorDragZonaLectura.addEventListener('drop', dropZonaLectura)
+        contenedorDragZonaLectura.addEventListener('touchend', dropZonaLectura)
+    
+        contenedorDragZonaLectura.addEventListener('dragover', (e) => {e.preventDefault();});
+        contenedorDragZonaLectura.addEventListener('touchmove', (e) => { e.preventDefault()})  
         displayBooksZonaLectura(seleccionLectura);
+        agregarLibrosZonaCarritodeZonaLectura()
+     
     }, 1);
+  
 }
     
 
@@ -395,7 +425,7 @@ const eliminarFiltros = () => {resetFiltros = document.getElementById('filtrosDi
             seleccionFiltro = library.map((objetosInternos) => {return objetosInternos}) 
             borrarCardsAnteriores()
             displayBooks(seleccionFiltro) 
-            agregarLibrosSeleccionLectura() 
+           
             agregarLibrosCarritoArrastre() 
     })
 }
@@ -657,11 +687,5 @@ const ajusteResponsiveZonaReversion = () => {
 /* 
 
 
-12) Ver si puedo eficientizar codigo y emprolijar
-Y ENVIAR (NO MAS POR FAVOR
-
-VIERNES NO (SE VE EL LUNES)
-/* TOUCH FALTA ARREGLAR LA ELIMINACION DE LIBROS INDIVIDUAL EN ZONA LECTURA (sigue cargandose uno cuando se elimina)*/
-/* AL APRETAR LOS FILTROS EN MOBILE SE EJEUTAN CON UN SEGUNDO TOUCH SOBRE EL FILTRO
 
 /* ARREGLA TOASTI DE AYUDA CON EXPLICACION MEJORADA */

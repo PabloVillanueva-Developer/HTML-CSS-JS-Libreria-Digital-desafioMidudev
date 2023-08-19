@@ -34,10 +34,10 @@ const fetchData = async () => {
         displayBooks (seleccionFiltro)
 
         /* EJECUCION FUNCION: CREAR CARDS DE ZONA DE LECTURA*/
-        displayBooksZonaLectura()
+        displayBooksZonaLectura(seleccionLectura)
 
         /* EJECUCION FUNCION: CREAR LIBROS CARRITO COMPRAS */
-        displayBooksCarrito()
+        displayBooksCarrito(seleccionCarrito)
 
          /* EJECUCION FUNCION: DISPLAY DE CARDS EN SECTION PRINCIPAL SEGUN SELECCION DE FILTRO */
         displayCardsSegunFilto()
@@ -59,7 +59,7 @@ const fetchData = async () => {
 
         /* EJECUCUIN FUNCION: EVENTOS ARRASTRE LIBROS A ZONA LECTURA */
         agregarLibrosSeleccionLectura()
-    
+
         /* EJECUCION FUNCION: CONTADOR ELEMENTOS EN CARRITO */
         actualizarContadorLibrosCarrito()
 
@@ -70,7 +70,7 @@ const fetchData = async () => {
         borrarCardsAnterioresListaLectura()
 
         /* EJECUCION FUNCION: RESET/BORRADO DE CARDS LIBROS CARRITO */
-        borrarCardsAnterioresCarrito()
+       /*  borrarCardsAnterioresCarrito() */
     
         /* EJECUCION FUNCION: RESETA FILTROS DE ZONA PRINCIPAL Y PERMITE VISUALIZAR LA TOTALIDAD DE LOS LIBROS  */
         eliminarFiltros()
@@ -97,6 +97,8 @@ const fetchData = async () => {
         ajusteResponsiveZonaLectura()
         /* FUNCION DE REVERSION PARA CAMBIAR VISUAL RESPONSIVE DEL MENU EN @MEDIA <550px */
         ajusteResponsiveZonaReversion()
+
+    
     }
 
     catch (error) {
@@ -177,7 +179,7 @@ for (const coleccionHTML of infoLibrosDinamica) {
 
 /* ALERT CON EXPLICACION DE FUNCIONAMIENTO DEL SITIO */
 const comoOperar = document.getElementById('comoOperar')
-const mensajeComoOperar = "Utiliza los filtros para acotar tu busqueada. \nPuedes arrastrar los libros a la Zona de lectura en el contenedor circular o directamente en la Zona de Lectura desplegada.\nSi clickeas en Zona Lectura en el menu superior o si clickeas sobre el circulo de lectura, podras desplegar la Zona de Lectura \nPuedes arrastra al carrito los libros que te interesen."
+const mensajeComoOperar = "Utiliza los filtros para acotar tu busqueada. \nPuedes arrastrar los libros a la Zona de lectura en el contenedor con la silueta de lectura o puedes seleccionar Zona de Lectura en el menu principal y arrastrar tus libros alli.\nPuedes arrastra al carrito los libros que te interesen.\nEn la version para celularas, en lugar de arrastra un libro debers hacer touch sobre el y luego touch sobre el contenedor donde lo quieras incluir."
     comoOperar.addEventListener('click',() => {
         Toastify({
             text: mensajeComoOperar,
@@ -191,6 +193,7 @@ const mensajeComoOperar = "Utiliza los filtros para acotar tu busqueada. \nPuede
 
     }
     )
+    
 
- 
+
 
