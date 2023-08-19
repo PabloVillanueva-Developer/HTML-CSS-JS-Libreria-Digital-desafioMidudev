@@ -11,8 +11,6 @@ let seleccionLectura = []
 let seleccionCarrito = []
 
 
-
-
 /* REVISION EN LOCAL STORAGE AL CARGAR PAGINA PARA DESPLIEGUE INICIAL CON DATOS GUARDADOS SELECCION LECTURA */
 pushSeleccionLecturaVerificaNoRepetido()
 /* REVISION EN LOCAL STORAGE AL CARGAR PAGINA PARA DESPLIEGUE INICIAL CON DATOS GUARDADOS CARRITO */
@@ -68,9 +66,6 @@ const fetchData = async () => {
 
         /* EJECUCION FUNCION: RESET/BORRADO DE CARDS LIBROS ZONA LECTURA */
         borrarCardsAnterioresListaLectura()
-
-        /* EJECUCION FUNCION: RESET/BORRADO DE CARDS LIBROS CARRITO */
-       /*  borrarCardsAnterioresCarrito() */
     
         /* EJECUCION FUNCION: RESETA FILTROS DE ZONA PRINCIPAL Y PERMITE VISUALIZAR LA TOTALIDAD DE LOS LIBROS  */
         eliminarFiltros()
@@ -97,8 +92,6 @@ const fetchData = async () => {
         ajusteResponsiveZonaLectura()
         /* FUNCION DE REVERSION PARA CAMBIAR VISUAL RESPONSIVE DEL MENU EN @MEDIA <550px */
         ajusteResponsiveZonaReversion()
-
-    
     }
 
     catch (error) {
@@ -110,7 +103,7 @@ fetchData()
 
 
 
-/* SINCRONIA / FUNCIONALIDADES NO DEPENDIENTES DE FETCH */
+            /* SINCRONIA / FUNCIONALIDADES NO DEPENDIENTES DE FETCH */
 
  /* EJECUCION FUNCION: RESET/BORRADO DE CARDS LIBROS ZONA PRINCIPAL */
  borrarCardsAnteriores()
@@ -189,10 +182,8 @@ const mensajeComoOperar = "Utiliza los filtros para acotar tu busqueada. \nPuede
                 background: "linear-gradient(147deg, #039BE5 0%, #8E24AA 38%)"},
             stopOnFocus: true,
         }).showToast()
-
-
     }
-    )
+)
     
 
 

@@ -14,7 +14,6 @@ const pushSeleccionLecturaVerificaNoRepetido = () => {
         agregarLibrosSeleccionLectura()
         agregarLibrosCarritoArrastre()
         agregarLibrosZonaCarritodeZonaLectura()
-  
     })
 }
 
@@ -26,8 +25,6 @@ const pushSeleccionCarritoVerificaNoRepetido = () => { document.addEventListener
    
     })
 }
-
-
 
 
 /* FUNCION CREAR CARDS EN ZONA PRINCIPAL */
@@ -131,15 +128,8 @@ const displayCardsSegunFilto = () => {ejecutarFiltro = document.getElementById('
 
         borrarCardsAnterioresListaLectura()
         agregarLibrosSeleccionLectura()
-              agregarLibrosZonaCarritodeZonaLectura()
+        agregarLibrosZonaCarritodeZonaLectura()
      
-       
-       
-      
-               
-
-     
-    
     }) 
    /*  agregarLibrosSeleccionLectura(seleccionLectura) */
 }
@@ -379,7 +369,7 @@ let agregarLibrosSeleccionLectura = () => {
     }, 1);
   
 }
-    
+
 
     /* CONTADOR DE CARRITO */
 const actualizarContadorLibrosCarrito = () => {
@@ -393,8 +383,6 @@ const actualizarContadorLibrosZonaLectura = () => {
     sectionBotonZonaLecturaContador.innerText = seleccionLectura.length  
 }
 
-
-    
 
 /* FUNCION RESET/BORRADO DE CARDS LIBROS ZONA PRINCIPAL */
 
@@ -550,9 +538,6 @@ const eliminarSeleccionLecturaCompleto = () => {
 }
 
 
-
-
-
     /* ELIMINAR CARDS LIBROS ZONA LECTURA INDIVDUAL (BOTON X)  */
 
 let eliminarLibrosUnicosZonaLectura = () => {
@@ -582,10 +567,9 @@ let eliminarLibrosUnicosZonaLectura = () => {
                if(seleccionLectura.length == 0)
                    desactivarButEliminarZonaLectura()}
             }
-        
-          
+                 
             element.addEventListener('touchstart', (e) => { eliminarLibrosZLecturaIndividual(e); e.preventDefault(); })
-             element.addEventListener('click', eliminarLibrosZLecturaIndividual)
+            element.addEventListener('click', eliminarLibrosZLecturaIndividual)
     }
 }
   
@@ -601,13 +585,10 @@ const resetDescripcionesZonaLectura = () => {
     zonaLecturaAutor.innerText = ``
     zonaLecturaObras.innerText = ``
     zonaLecturaISBN.innerText = ``
-
 }
 
- 
 
 /* ALERT CUANDO SE SELECCIONA EL BOTON DE CARRITO PARA CERRAR COMPRA */
-  
 const butCerrarCompraCarrito = () => { 
     const carritoComprasCerrarCompra = document.getElementById('butCarritoCerrarCompra') 
     carritoComprasCerrarCompra.addEventListener('click',() => { 
@@ -640,28 +621,27 @@ const butCerrarCompraCarrito = () => {
 }
 
 
-/* FUNCION PARA CAMBIAR VISUAL RESPONSIVE DEL MENU EN @MEDIA <550px */
+/* FUNCION OBJETO OBSREVADOR PARA CAMBIAR VISUAL RESPONSIVE DEL MENU EN @MEDIA <550px */
 const ajusteResponsiveZonaLectura = () => {
-const elementoObservado = document.getElementById('zonaLectura')
-const cambiosEsperados = {attributes: true}
+    const elementoObservado = document.getElementById('zonaLectura')
+    const cambiosEsperados = {attributes: true}
 
-const observador = new MutationObserver((mutationsList) => {
-    for (const mutation of mutationsList) {
-        if (mutation.type === 'attributes' && window.innerWidth <= 550 ) {
-            const carrouselContainer = document.getElementById('carrouselContainer')
-                carrouselContainer.classList.add('main__section__carrouselContainer--menuDesplegado')
-                carrouselContainer.classList.remove('main__section__carrouselContainer')
-            const main__section = document.getElementById('main__section')
-                main__section.classList.add('main__section--menuDesplegado')
-                main__section.classList.remove('main__section')
+    const observador = new MutationObserver((mutationsList) => {
+        for (const mutation of mutationsList) {
+            if (mutation.type === 'attributes' && window.innerWidth <= 550 ) {
+                const carrouselContainer = document.getElementById('carrouselContainer')
+                    carrouselContainer.classList.add('main__section__carrouselContainer--menuDesplegado')
+                    carrouselContainer.classList.remove('main__section__carrouselContainer')
+                const main__section = document.getElementById('main__section')
+                    main__section.classList.add('main__section--menuDesplegado')
+                    main__section.classList.remove('main__section')
 
 
-            console.log('El elemento observado ha cambiado en algún atributo.');
+                console.log('El elemento observado ha cambiado en algún atributo.');
+            }
         }
-    }
-});
-observador.observe(elementoObservado, cambiosEsperados);
-
+    });
+    observador.observe(elementoObservado, cambiosEsperados);
 }
 
 
@@ -679,13 +659,6 @@ const ajusteResponsiveZonaReversion = () => {
                     main__section.classList.remove('main__section--menuDesplegado')
                     main__section.classList.add('main__section')
             })
-        
   }
 }
 
-
-/* 
-
-
-
-/* ARREGLA TOASTI DE AYUDA CON EXPLICACION MEJORADA */
